@@ -164,48 +164,4 @@ require('lualine').setup {
   },
   inactive_sections = {
   },
-  tabline = {
-    lualine_a = {
-      {
-        function()
-          return '   ';
-        end,
-        on_click = function(n, but, mod)
-          telescope_buffers()
-        end,
-      },
-    },
-    lualine_b = {
-      {
-        'buffers',
-        show_filename_only = false,
-        padding = { left = 1, right = 1 },
-        symbols = {
-          modified = ' ✎',      -- Text to show when the buffer is modified
-          alternate_file = '⬌', -- Text to show to identify the alternate file
-        },
-        buffers_color = {
-          active = { fg = colors.fg, bg = colors.bg_inner },
-          inactive = { fg = colors.darkfg }
-        },
-      },
-      {
-        function()
-          return ' ';
-        end,
-      },
-    },
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {
-      {
-        function()
-          return vim.loop.cwd()
-        end,
-      }
-    },
-    lualine_z = {
-      'hostname',
-    },
-  },
 }
