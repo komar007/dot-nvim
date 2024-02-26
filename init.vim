@@ -77,6 +77,7 @@ let g:gruvbox_underline=1
 let g:gruvbox_italic=1
 colorscheme gruvbox
 set background=dark
+highlight Normal ctermbg=16 guibg=#000000
 highlight Comment ctermfg=243 guifg=#7f7f7f
 set cursorline
 set number
@@ -159,8 +160,9 @@ let g:gitgutter_sign_modified_removed = "▍"
 let g:gitgutter_sign_removed_first_line = "◥"
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
-highlight SignColumn guibg=#1d2021 ctermbg=234
+highlight SignColumn guibg=#1d2021 ctermbg=16
 highlight GitGutterAdd ctermfg=71 guifg=#5FAF5F
+highlight GitGutterDelete ctermbg=16 guibg='#000000'
 highlight GitGutterChange ctermfg=214 guifg=#FABD2F
 highlight GitGutterChangeDelete ctermfg=202 guifg=#ff5f00
 

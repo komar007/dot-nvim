@@ -68,7 +68,7 @@ require('lualine').setup {
   options = {
     theme = theme,
     component_separators = '',
-    section_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
   },
   sections = {
     lualine_a = {
@@ -141,15 +141,19 @@ require('lualine').setup {
       },
     },
     lualine_y = {
-      'filetype',
       {
-        'o:encoding', -- option component same as &encoding in viml
+        'filetype',
+      },
+      {
+        'o:encoding',
         cond = conditions.hide_in_width,
+        padding = 0,
       },
       {
         'fileformat',
-        icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
+        icons_enabled = true,
         cond = conditions.hide_in_width,
+        padding = 1,
       },
     },
     lualine_z = {
