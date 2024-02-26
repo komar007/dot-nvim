@@ -245,4 +245,6 @@ let g:EnhancedJumps_no_mappings = 1
 nmap <Leader><C-o> <Plug>EnhancedJumpsRemoteOlder
 nmap <Leader><C-i> <Plug>EnhancedJumpsRemoteNewer
 
+set scrolloff=10
+
 :command Fmt lua vim.lsp.buf.format()
