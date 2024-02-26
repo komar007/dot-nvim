@@ -2,6 +2,7 @@ set nocompatible
 filetype off
 
 call plug#begin()
+Plug 'ryvnf/readline.vim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'elzr/vim-json'
