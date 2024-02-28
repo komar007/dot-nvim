@@ -23,7 +23,6 @@ Plug 'mzlogin/vim-markdown-toc'
 "Plug 'maxmellon/vim-jsx-pretty'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync'}
-Plug 'HiPhish/nvim-ts-rainbow2'
 Plug 'nvim-lua/plenary.nvim' " for telescope
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
