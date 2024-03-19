@@ -253,7 +253,7 @@ noremap <silent> <C-w>h :<C-U>TmuxNavigateLeft<cr>
 noremap <silent> <C-w>j :<C-U>TmuxNavigateDown<cr>
 noremap <silent> <C-w>k :<C-U>TmuxNavigateUp<cr>
 noremap <silent> <C-w>l :<C-U>TmuxNavigateRight<cr>
-noremap <silent> <C-w>\ :<C-U>TmuxNavigatePrevious<cr>
+noremap <silent> <C-w><BS> :<C-U>TmuxNavigatePrevious<cr>
 
 set scrolloff=10
 
