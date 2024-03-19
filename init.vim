@@ -41,6 +41,7 @@ Plug 'inkarkat/vim-ingo-library' " required by inkarkat/vim-EnhancedJumps
 Plug 'inkarkat/vim-EnhancedJumps'
 Plug 'Yggdroot/indentLine'
 Plug 'sotte/presenting.vim'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 " -- neovide
@@ -246,6 +247,13 @@ nnoremap <silent> gl :lua vim.diagnostic.open_float()<CR>
 let g:EnhancedJumps_no_mappings = 1
 nmap <Leader><C-o> <Plug>EnhancedJumpsRemoteOlder
 nmap <Leader><C-i> <Plug>EnhancedJumpsRemoteNewer
+
+let g:tmux_navigator_no_mappings = 1
+noremap <silent> <C-w>h :<C-U>TmuxNavigateLeft<cr>
+noremap <silent> <C-w>j :<C-U>TmuxNavigateDown<cr>
+noremap <silent> <C-w>k :<C-U>TmuxNavigateUp<cr>
+noremap <silent> <C-w>l :<C-U>TmuxNavigateRight<cr>
+noremap <silent> <C-w>\ :<C-U>TmuxNavigatePrevious<cr>
 
 set scrolloff=10
 
