@@ -11,4 +11,44 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true,
   },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["aa"] = "@parameter.outer",
+        ["ia"] = "@parameter.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        ["]f"] = "@function.outer",
+        ["]a"] = "@parameter.inner",
+      },
+      goto_next_end = {
+        ["]F"] = "@function.outer",
+        ["]b"] = "@function.inner",
+        ["]A"] = "@parameter.inner",
+      },
+      goto_previous_start = {
+        ["[f"] = "@function.outer",
+        ["[b"] = "@function.inner",
+        ["[a"] = "@parameter.inner",
+      },
+      goto_previous_end = {
+        ["[F"] = "@function.outer",
+        ["[A"] = "@parameter.inner",
+      },
+    },
+  },
 }
+
+local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)

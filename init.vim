@@ -11,8 +11,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'vim-scripts/cscope_macros.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'PeterRincker/vim-argumentative'
-Plug 'wellle/targets.vim'
 Plug 'cloudhead/neovim-fuzzy'
 Plug 'tpope/vim-sleuth'
 Plug 'vim-scripts/a.vim'
@@ -23,6 +21,7 @@ Plug 'mzlogin/vim-markdown-toc'
 "Plug 'maxmellon/vim-jsx-pretty'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-lua/plenary.nvim' " for telescope
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
