@@ -59,6 +59,9 @@ end
 telescope_grep_string = function(config)
   require('telescope.builtin').grep_string(fullscreen_horizontal_theme)
 end
+telescope_live_grep = function(config)
+  require('telescope.builtin').live_grep(fullscreen_horizontal_theme)
+end
 telescope_definitions = function(config)
   require('telescope.builtin').lsp_definitions(fullscreen_horizontal_theme)
 end

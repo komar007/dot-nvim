@@ -218,7 +218,8 @@ runtime indentline.lua
 runtime telescope.lua
 nnoremap <C-p> :lua telescope_buffers()<CR>
 nnoremap <Leader><C-p> :lua telescope_findfiles()<CR>
-nnoremap <C-*> :lua telescope_grep_string()<CR>
+nnoremap <Leader>* :lua telescope_grep_string()<CR>
+nnoremap <Leader>/ :lua telescope_live_grep()<CR>
 
 runtime treesitter.lua
 runtime lsp.lua
