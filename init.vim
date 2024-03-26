@@ -5,7 +5,6 @@ call plug#begin()
 Plug 'ryvnf/readline.vim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'gruvbox-community/gruvbox'
-Plug 'elzr/vim-json'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/conflict-marker.vim'
