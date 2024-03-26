@@ -37,7 +37,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'inkarkat/vim-ingo-library' " required by inkarkat/vim-EnhancedJumps
 Plug 'inkarkat/vim-EnhancedJumps'
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'sotte/presenting.vim'
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
@@ -63,8 +63,6 @@ set autoindent smartindent
 set hlsearch incsearch
 set grepprg=grep\ -nH\ $*
 set cinoptions=:0,l1,t0,g0,N-s
-
-let g:indentLine_char = '⎸'
 
 autocmd BufEnter * let &titlestring = "vim - " . expand("%:t")
 set title
@@ -93,7 +91,7 @@ hi! link StatusLineNC Normal
 setlocal spelllang=pl
 
 map <F2> :set cursorcolumn!<CR>
-map <F3> :IndentLinesToggle<CR>
+map <F3> :IBLToggle<CR>
 
 " -- filetype customs
 autocmd FileType latex                setlocal spell
@@ -212,6 +210,10 @@ set updatetime=500
 if exists('+nocscopeverbose')
   set nocscopeverbose
 endif
+
+hi IblIndent ctermfg=235
+" indent line
+runtime indentline.lua
 
 " telescope
 runtime telescope.lua
