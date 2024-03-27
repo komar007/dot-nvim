@@ -66,6 +66,8 @@ set cinoptions=:0,l1,t0,g0,N-s
 autocmd BufEnter * let &titlestring = "vim - " . expand("%:t")
 set title
 
+set termguicolors
+
 " -- look and feel
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_italicize_comments=1
@@ -156,7 +158,7 @@ let g:gitgutter_sign_modified_removed = "▍"
 let g:gitgutter_sign_removed_first_line = "◥"
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
-highlight SignColumn guibg=#1d2021 ctermbg=16
+highlight SignColumn guibg='#000000' ctermbg=16
 highlight GitGutterAdd ctermfg=71 guifg=#5FAF5F
 highlight GitGutterDelete ctermbg=16 guibg='#000000'
 highlight GitGutterChange ctermfg=214 guifg=#FABD2F
