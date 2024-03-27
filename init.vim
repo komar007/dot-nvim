@@ -210,8 +210,6 @@ if exists('+nocscopeverbose')
   set nocscopeverbose
 endif
 
-hi IblIndent ctermfg=235
-" indent line
 runtime indentline.lua
 
 " telescope
