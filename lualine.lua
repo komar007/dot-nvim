@@ -5,8 +5,6 @@ local colors = {
   bg_inner = '#1d2021',
   fg       = '#bbc2cf',
   darkfg   = '#6b727f',
-  yellow   = '#ECBE7B',
-  cyan     = '#008080',
   green    = '#98be65',
   green_i  = '#587e45',
   orange   = '#fe8019',
@@ -120,11 +118,12 @@ require('lualine').setup {
       {
         'diagnostics',
         sources = { 'nvim_diagnostic' },
-        symbols = { error = '🌑', warn = '🌑', info = '🌑', hint='🌑' },
+        symbols = { error = '󰧞 ', warn = '󰧞 ', info = '󰧞 ', hint='󰧞 ' },
         diagnostics_color = {
-          error = { fg = colors.red },
-          warn = { fg = colors.yellow },
-          info = { fg = colors.cyan },
+          -- TODO: extract the colors below, they should be the same as those used in respective diagnostics
+          error = { fg = '#d75f5f' },
+          warn = { fg = '#ca8462' },
+          info = { fg = '#83a598' },
         },
         on_click = function(n, but, mod)
           if but == 'l' then

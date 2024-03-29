@@ -165,10 +165,15 @@ highlight GitGutterDelete ctermbg=16 guibg='#000000'
 highlight GitGutterChange ctermfg=214 guifg=#FABD2F
 highlight GitGutterChangeDelete ctermfg=202 guifg=#ff5f00
 
-highlight DiagnosticSignError guifg='#3c3836' guibg='#fb4934' ctermfg=237 ctermbg=167 gui=bold
+highlight DiagnosticSignError guifg='#000000' guibg='#d75f5f' ctermfg=237 ctermbg=167 gui=bold
 highlight DiagnosticSignHint guifg='#3c3836' guibg='#8ec07c' ctermfg=237 ctermbg=108
 highlight DiagnosticSignInfo guifg='#3c3836' guibg='#83a598' ctermfg=237 ctermbg=109
-highlight DiagnosticSignWarn guifg='#3c3836' guibg='#fabd2f' ctermfg=237 ctermbg=214 gui=bold
+highlight DiagnosticSignWarn guifg='#000000' guibg='#ca8462' ctermfg=16 ctermbg=136 gui=bold
+
+highlight DiagnosticError guifg='#d75f5f' ctermfg=167
+highlight DiagnosticHint guifg='#8ec07c' ctermfg=108
+highlight DiagnosticInfo guifg='#83a598' ctermfg=109
+highlight DiagnosticWarn guifg='#ca8462' ctermfg=136
 
 highlight DiagnosticSignErrorLine guibg='#331106'
 highlight DiagnosticSignHintLine guibg='#062201'
@@ -182,7 +187,7 @@ highlight LspReferenceRead guifg='#acaf26' ctermfg=green gui=reverse,bold cterm=
 lua <<END
 vim.diagnostic.config({
   virtual_text = {
-    prefix = '●',
+    prefix = '󰧞',
   },
   signs = true,
   underline = true,
