@@ -183,6 +183,8 @@ highlight LspReferenceText gui=reverse,bold cterm=reverse,bold
 highlight LspReferenceWrite guifg='#df4432' ctermfg=red gui=reverse,bold cterm=reverse,bold
 highlight LspReferenceRead guifg='#acaf26' ctermfg=green gui=reverse,bold cterm=reverse,bold
 
+highlight InlayHint guibg='#171717' guifg='#666666'
+
 " diagnostics
 lua <<END
 vim.diagnostic.config({

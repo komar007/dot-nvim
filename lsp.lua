@@ -50,6 +50,11 @@ require('lspconfig').dockerls.setup(defcfg)
 require('lspconfig').kotlin_language_server.setup(defcfg)
 
 require('rust-tools').setup({
+  tools = {
+    inlay_hints = {
+      highlight = "InlayHint",
+    },
+  },
   server = {
     capabilities = capabilities,
     on_attach = on_lsp_attach,
