@@ -37,6 +37,7 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'inkarkat/vim-ingo-library' " required by inkarkat/vim-EnhancedJumps
 Plug 'inkarkat/vim-EnhancedJumps'
 Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'HiPhish/rainbow-delimiters.nvim'
 Plug 'sotte/presenting.vim'
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
