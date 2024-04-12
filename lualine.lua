@@ -53,14 +53,30 @@ local function search_result()
   return ' ' .. last_search .. ' (' .. searchcount.current .. '/' .. searchcount.total .. ')'
 end
 
-local function modified()
-  if vim.bo.modified then
-    return '✎'
-  elseif vim.bo.modifiable == false or vim.bo.readonly == true then
-    return ''
-  end
-  return ''
+-- https://github.com/nvim-lualine/lualine.nvim/wiki/Component-snippets#changing-filename-color-based-on--modified-status (modified)
+local colored_filename = require('lualine.components.filename'):extend()
+local highlight = require'lualine.highlight'
+local default_status_colors = { modified = '#d75f5f' }
+
+function colored_filename:init(options)
+  colored_filename.super.init(self, options)
+  self.status_colors = {
+    saved = highlight.create_component_highlight_group(
+      {}, 'filename_status_saved', self.options),
+    modified = highlight.create_component_highlight_group(
+      {fg = default_status_colors.modified}, 'filename_status_modified', self.options),
+  }
+  if self.options.color == nil then self.options.color = '' end
 end
+
+function colored_filename:update_status()
+  local data = colored_filename.super.update_status(self)
+  data = highlight.component_format_highlight(vim.bo.modified
+                                              and self.status_colors.modified
+                                              or self.status_colors.saved) .. data
+  return data
+end
+-- // https://github.com/nvim-lualine/lualine.nvim/wiki/Component-snippets#changing-filename-color-based-on--modified-status
 
 require('lualine').setup {
   options = {
@@ -93,13 +109,9 @@ require('lualine').setup {
     },
     lualine_b = {
       {
-        'filename',
-        file_status = false,
-        path = 1
-      },
-      {
-        modified,
-        color = { fg = colors.red }
+        colored_filename,
+        file_status = true,
+        path = 1,
       },
       {
         '%w',
