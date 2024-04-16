@@ -109,7 +109,7 @@ return {
           {
             'diagnostics',
             sources = { 'nvim_diagnostic' },
-            symbols = { error = '󰧞 ', warn = '󰧞 ', info = '󰧞 ', hint='󰧞 ' },
+            symbols = { error = '󰧞', warn = '󰧞', info = '󰧞', hint='󰧞' },
             diagnostics_color = {
               -- TODO: extract the colors below, they should be the same as those used in respective diagnostics
               error = { fg = '#d75f5f' },
