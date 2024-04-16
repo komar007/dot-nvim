@@ -5,14 +5,15 @@ return {
     'stevearc/dressing.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+      build =
+      'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
     }
   },
   keys = {
-    {"<C-p>", ":lua telescope_buffers()<CR>"},
-    {"<Leader><C-p>", ":lua telescope_findfiles()<CR>"},
-    {"<Leader>*", ":lua telescope_grep_string()<CR>"},
-    {"<Leader>/", ":lua telescope_live_grep()<CR>"},
+    { "<C-p>",         ":lua telescope_buffers()<CR>" },
+    { "<Leader><C-p>", ":lua telescope_findfiles()<CR>" },
+    { "<Leader>*",     ":lua telescope_grep_string()<CR>" },
+    { "<Leader>/",     ":lua telescope_live_grep()<CR>" },
   },
   config = function()
     local telescope = require('telescope')
@@ -20,7 +21,7 @@ return {
 
     telescope.setup {
       defaults = {
-        path_display={"truncate"},
+        path_display = { "truncate" },
         mappings = {
           n = {
             ['<c-d>'] = require('telescope.actions').delete_buffer

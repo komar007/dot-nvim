@@ -9,7 +9,7 @@ return {
     'hrsh7th/vim-vsnip',
   },
   config = function()
-    local cmp = require'cmp'
+    local cmp = require('cmp')
 
     local kind_icons = {
       Text = "",
@@ -110,6 +110,5 @@ return {
     vim.cmd [[ smap <expr> <Tab> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>' ]]
     vim.cmd [[ imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>' ]]
     vim.cmd [[ smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>' ]]
-
   end
 }

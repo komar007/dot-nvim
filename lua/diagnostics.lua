@@ -16,8 +16,8 @@ vim.diagnostic.config({
   },
 })
 
-local types = {"Error", "Warn", "Hint", "Info"}
-for _ ,type in pairs(types) do
+local types = { "Error", "Warn", "Hint", "Info" }
+for _, type in pairs(types) do
   local hl = "DiagnosticSign" .. type
   local lhl = "DiagnosticSign" .. type .. "Line"
   vim.fn.sign_define(hl, { text = '', numhl = hl, linehl = lhl })

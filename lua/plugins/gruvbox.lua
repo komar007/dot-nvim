@@ -49,7 +49,7 @@ return {
 
     vim.cmd [[ hi! link Pmenu Normal ]]
 
-    utils.autocmd_all({ "ColorScheme" }, [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]] )
+    utils.autocmd_all({ "ColorScheme" }, [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]])
     local match_extrawhitespace = [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
     utils.autocmd_all({ "BufWinEnter" }, match_extrawhitespace)
     vim.cmd(match_extrawhitespace)

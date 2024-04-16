@@ -8,35 +8,35 @@ return {
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     local on_lsp_attach = function(client)
+      local keymap_opts = { noremap = true, silent = true }
       -- code navigation shortcuts
-      vim.api.nvim_buf_set_keymap(0, 'n', 'gd', ':lua telescope_definitions()<CR>', {noremap = true, silent = true})
-      vim.api.nvim_buf_set_keymap(0, 'n', 'gD', ':lua vim.lsp.buf.declaration()<CR>', {noremap = true, silent = true})
-      vim.api.nvim_buf_set_keymap(0, 'n', 'gr', ':lua telescope_references()<CR>', {noremap = true, silent = true})
-      vim.api.nvim_buf_set_keymap(0, 'n', 'gi', ':lua telescope_implementations()<CR>', {noremap = true, silent = true})
+      vim.keymap.set('n', 'gd', telescope_definitions, keymap_opts)
+      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, keymap_opts)
+      vim.keymap.set('n', 'gr', telescope_references, keymap_opts)
+      vim.keymap.set('n', 'gi', telescope_implementations, keymap_opts)
       -- docs and info
-      vim.api.nvim_buf_set_keymap(0, 'n', 'K', ':lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
-      vim.api.nvim_buf_set_keymap(0, 'n', 'gt', ':lua telescope_type_definitions()<CR>', {noremap = true, silent = true})
-      vim.api.nvim_buf_set_keymap(0, 'n', '<c-k>', ':lua vim.lsp.buf.signature_help()<CR>', {noremap = true, silent = true})
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, keymap_opts)
+      vim.keymap.set('n', 'gt', telescope_type_definitions, keymap_opts)
+      vim.keymap.set('n', '<c-k>', vim.lsp.buf.signature_help, keymap_opts)
       -- action shortcuts
-      vim.api.nvim_buf_set_keymap(0, 'n', 'ga', ':lua vim.lsp.buf.code_action()<CR>', {noremap = true, silent = true})
-      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>r', ':lua vim.lsp.buf.rename()<CR>', {noremap = true, silent = true})
+      vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, keymap_opts)
+      vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, keymap_opts)
 
       if client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-          vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
-          vim.api.nvim_create_autocmd("CursorHold", {
-              callback = vim.lsp.buf.document_highlight,
-              buffer = bufnr,
-              group = "lsp_document_highlight",
-              desc = "Document Highlight",
-          })
-          vim.api.nvim_create_autocmd("CursorMoved", {
-              callback = vim.lsp.buf.clear_references,
-              buffer = bufnr,
-              group = "lsp_document_highlight",
-              desc = "Clear All the References",
-          })
+        vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+        vim.api.nvim_clear_autocmds { buffer = bufnr, group = "lsp_document_highlight" }
+        vim.api.nvim_create_autocmd("CursorHold", {
+          callback = vim.lsp.buf.document_highlight,
+          group = "lsp_document_highlight",
+          desc = "Document Highlight",
+        })
+        vim.api.nvim_create_autocmd("CursorMoved", {
+          callback = vim.lsp.buf.clear_references,
+          group = "lsp_document_highlight",
+          desc = "Clear All the References",
+        })
       end
+
       vim.api.nvim_create_user_command('Fmt', function()
         vim.lsp.buf.format()
       end, {})
@@ -72,7 +72,7 @@ return {
           ['rust-analyzer'] = {
             diagnostics = {
               enable = true,
-              disabled = {"unresolved-proc-macro"},
+              disabled = { "unresolved-proc-macro" },
               enableExperimental = true,
             },
             check = {
@@ -90,7 +90,7 @@ return {
       on_attach = on_lsp_attach,
       on_init = function(client)
         local path = client.workspace_folders[1].name
-        if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+        if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
           return
         end
 
