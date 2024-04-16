@@ -1,6 +1,3 @@
-set nocompatible
-filetype off
-
 " -- neovide
 set gfn=Jetbrains\ Mono\ Light:h9
 set linespace=-4
@@ -8,20 +5,12 @@ let g:neovide_cursor_animation_length=0.07
 let g:neovide_cursor_trail_size=0.05
 let g:neovide_scroll_animation_length=0
 
-filetype plugin indent on
-
 " -- basic behaviour
-set hidden
-syntax on             " Enable syntax highlighting
-filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 set sessionoptions=buffers,curdir,folds,tabpages
 set ignorecase smartcase
 set autoindent smartindent
-set hlsearch incsearch
-set grepprg=grep\ -nH\ $*
-set cinoptions=:0,l1,t0,g0,N-s
 
 autocmd BufEnter * let &titlestring = "vim - " . expand("%:t")
 set title
@@ -34,8 +23,6 @@ set wildmode=longest,list,list,full
 set mouse=a
 set mousemodel=extend
 set timeoutlen=500
-
-setlocal spelllang=pl
 
 map <F2> :set cursorcolumn!<CR>
 map <F3> :IBLToggle<CR>
@@ -59,17 +46,8 @@ autocmd BufNewFile,BufRead *.h,*.c set filetype=c
 
 nnoremap <Leader>y mY"*yiw`Y
 
-nmap <F7> :wall<cr>:make %< <cr>
-nmap <F8> :wall<cr>:make <cr>
-nmap <F4> :cprev <cr>
-nmap <F5> :cnext <cr>
-
-let g:Tex_DefaultTargetFormat = 'pdf'
-
 :command SanitizeXML :%s/>/>\r/g | :%s/</\r</g | :%g/^\s*$/d | :normal gg=G
 :command FixStrays :%s/\(^\| \)\([auiwzoAUIWZO]\) /\1\2\~/g
-
-set laststatus=2
 
 let g:netrw_browsex_viewer = "chromium-browser"
 
@@ -78,11 +56,7 @@ set tags=./tags;/
 " easier combo than ctrl+shift+6
 nnoremap <silent> <C-6> <C-^>
 
-if has("nvim")
-    set inccommand=split
-endif
-
-set fillchars=vert:┆
+set inccommand=split
 
 set updatetime=500
 if exists('+nocscopeverbose')
