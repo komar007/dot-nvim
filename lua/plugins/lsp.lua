@@ -37,6 +37,9 @@ return {
               desc = "Clear All the References",
           })
       end
+      vim.api.nvim_create_user_command('Fmt', function()
+        vim.lsp.buf.format()
+      end, {})
     end
 
     local defcfg = { capabilities = capabilities, on_attach = on_lsp_attach }

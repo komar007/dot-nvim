@@ -1,6 +1,8 @@
 return {
   'gruvbox-community/gruvbox',
   init = function()
+    local utils = require('utils')
+
     vim.opt.termguicolors = true
     vim.g.gruvbox_contrast_dark = 'hard'
     vim.g.gruvbox_italicize_comments = 1
@@ -47,23 +49,11 @@ return {
 
     vim.cmd [[ hi! link Pmenu Normal ]]
 
-    vim.api.nvim_create_autocmd({ "ColorScheme" }, {
-      pattern = "*",
-      command = "highlight ExtraWhitespace ctermbg=red guibg=#902020"
-    })
+    utils.autocmd_all({ "ColorScheme" }, [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]] )
     local match_extrawhitespace = [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
-    vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-      pattern = "*",
-      command = match_extrawhitespace,
-    })
+    utils.autocmd_all({ "BufWinEnter" }, match_extrawhitespace)
     vim.cmd(match_extrawhitespace)
-    vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
-      pattern = "*",
-      command = [[ highlight clear ExtraWhitespace ]],
-    })
-    vim.api.nvim_create_autocmd({ "TermLeave", "TermClose" }, {
-      pattern = "*",
-      command = [[highlight ExtraWhitespace ctermbg=red guibg=#902020 ]],
-    })
+    utils.autocmd_all({ "TermOpen", "TermEnter" }, [[ highlight clear ExtraWhitespace ]])
+    utils.autocmd_all({ "TermLeave", "TermClose" }, [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]])
   end,
 }

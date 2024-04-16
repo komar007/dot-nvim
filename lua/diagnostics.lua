@@ -22,3 +22,7 @@ for _ ,type in pairs(types) do
   local lhl = "DiagnosticSign" .. type .. "Line"
   vim.fn.sign_define(hl, { text = '', numhl = hl, linehl = lhl })
 end
+
+vim.keymap.set('n', ']l', vim.diagnostic.goto_next)
+vim.keymap.set('n', '[l', vim.diagnostic.goto_prev)
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float)

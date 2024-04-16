@@ -12,21 +12,6 @@ set sessionoptions=buffers,curdir,folds,tabpages
 set ignorecase smartcase
 set autoindent smartindent
 
-autocmd BufEnter * let &titlestring = "vim - " . expand("%:t")
-set title
-
-" -- look and feel
-set cursorline
-set number
-set wildmenu
-set wildmode=longest,list,list,full
-set mouse=a
-set mousemodel=extend
-set timeoutlen=500
-
-map <F2> :set cursorcolumn!<CR>
-map <F3> :IBLToggle<CR>
-
 " -- filetype customs
 autocmd FileType latex                setlocal spell
 autocmd FileType c,cpp                compiler gcc
@@ -52,22 +37,3 @@ nnoremap <Leader>y mY"*yiw`Y
 let g:netrw_browsex_viewer = "chromium-browser"
 
 set tags=./tags;/
-
-" easier combo than ctrl+shift+6
-nnoremap <silent> <C-6> <C-^>
-
-set inccommand=split
-
-set updatetime=500
-if exists('+nocscopeverbose')
-  set nocscopeverbose
-endif
-
-" next/prev problem
-nnoremap <silent> ]l :lua vim.diagnostic.goto_next()<CR>
-nnoremap <silent> [l :lua vim.diagnostic.goto_prev()<CR>
-nnoremap <silent> gl :lua vim.diagnostic.open_float()<CR>
-
-set scrolloff=10
-
-:command Fmt lua vim.lsp.buf.format()
