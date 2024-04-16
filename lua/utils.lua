@@ -187,4 +187,18 @@ function M.lsp_roots(bufnr)
   return workspace_dirs
 end
 
+function M.require_if_exists(modname)
+  local ok, result = pcall(require, modname)
+  if ok then
+    return result
+  end
+
+  local err = tostring(result)
+  if err:find("module '" .. modname .. "' not found", 1, true) then
+    return nil
+  end
+
+  error(result)
+end
+
 return M

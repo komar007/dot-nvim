@@ -80,6 +80,8 @@ return {
   },
   config = function()
     local colored_filename = require('lualine_colored_filename').colored_filename
+    local quirks = require('utils').require_if_exists('quirks');
+    local git_branch_symbol = quirks and quirks.git_branch_symbol or nil
     require('lualine').setup {
       options = {
         theme = theme,
@@ -134,7 +136,7 @@ return {
           },
           {
             'branch',
-            icon = '⎇',
+            icon = git_branch_symbol or '⎇',
             padding = { left = 1, right = 1 },
           },
           {

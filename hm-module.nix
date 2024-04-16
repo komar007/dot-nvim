@@ -1,4 +1,9 @@
-{ lib, nvim, ... }:
+{
+  config,
+  lib,
+  nvim,
+  ...
+}:
 let
   relPath = base: lib.strings.removePrefix (toString base + "/");
   filteredPath =
@@ -18,6 +23,12 @@ let
     };
 in
 {
+  options.dot-nvim.quirks.gitBranchSymbol = lib.mkOption {
+    type = lib.types.str;
+    description = "the symbol used to represent a git branch";
+    default = "⎇";
+  };
+
   config.home.packages = [ nvim ];
 
   config.home.file.".config/nvim" = {
@@ -28,5 +39,12 @@ in
       "snippets/"
       "lua/"
     ];
+    recursive = true;
   };
+
+  config.home.file.".config/nvim/lua/quirks.lua".text = ''
+    return {
+      git_branch_symbol = '${config.dot-nvim.quirks.gitBranchSymbol}',
+    }
+  '';
 }
