@@ -54,21 +54,18 @@ return {
       },
       snippet = {
         expand = function(args)
-          vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-          -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-          -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-          -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+          vim.fn["vsnip#anonymous"](args.body)
         end,
       },
       mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+        ['<C-y>'] = cmp.config.disable,
         ['<C-e>'] = cmp.mapping({
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
         }),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
       }),
       sorting = {
         priority_weight = 100,
@@ -96,19 +93,27 @@ return {
       },
     })
 
-    vim.cmd([[
-      augroup CmpDebounceAuGroup
-        au!
-        au TextChangedI * lua require("debounce").debounce()
-      augroup end
-    ]])
+    local debounce_group = vim.api.nvim_create_augroup("CmpDebounceAuGroup", {})
+    vim.api.nvim_create_autocmd("TextChangedI", {
+      pattern = "*",
+      callback = function() require("debounce").debounce() end,
+      group = debounce_group
+    })
 
     vim.opt.completeopt = "menu,menuone,noselect"
 
     -- vsnip is only used in cmp, so it's configured here...
-    vim.cmd [[ imap <expr> <Tab> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>' ]]
-    vim.cmd [[ smap <expr> <Tab> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>' ]]
-    vim.cmd [[ imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>' ]]
-    vim.cmd [[ smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>' ]]
+    local function cmp_jump(direction, otherwise)
+      local action = direction == 1 and 'vsnip-jump-next' or 'vsnip-jump-prev'
+      return function()
+        if vim.fn['vsnip#jumpable'](direction) > 0 then
+          return '<Plug>(' .. action .. ')'
+        else
+          return otherwise
+        end
+      end
+    end
+    vim.keymap.set({"i", "s"}, "<Tab>", cmp_jump(1, '<Tab>'), {silent = true, expr = true})
+    vim.keymap.set({"i", "s"}, "<S-Tab>", cmp_jump(-1, '<S-Tab>'), {silent = true, expr = true})
   end
 }
