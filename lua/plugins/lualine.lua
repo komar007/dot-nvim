@@ -36,9 +36,9 @@ local theme = {
     y = { fg = colors.darkfg, bg = colors.bg_mid },
     z = { fg = colors.darkfg, bg = colors.bg_outer },
   },
-  insert = { c = { fg = colors.black, bg = colors.green_i } },
-  visual = { c = { fg = colors.black, bg = colors.marine } },
-  replace = { c = { fg = colors.black, bg = colors.violet } },
+  insert = { a = { fg = colors.black, bg = colors.green_i } },
+  visual = { a = { fg = colors.black, bg = colors.marine } },
+  replace = { a = { fg = colors.black, bg = colors.violet } },
 }
 
 local function search_result()
@@ -66,6 +66,12 @@ return {
       sections = {
         lualine_a = {
           {
+            function ()
+              return ' '
+            end,
+            padding = 0,
+          },
+          {
             'branch',
             icon = '⎇',
           },
@@ -91,6 +97,10 @@ return {
             colored_filename,
             file_status = true,
             path = 1,
+            symbols = {
+              modified = '󰧞',
+              readonly = '',
+            },
           },
           {
             '%w',
@@ -104,6 +114,10 @@ return {
               return vim.bo.buftype == 'quickfix'
             end,
           },
+          {
+            '%l:%c',
+            color = { fg = colors.fg },
+          },
         },
         lualine_c = {
           {
@@ -114,7 +128,8 @@ return {
               -- TODO: extract the colors below, they should be the same as those used in respective diagnostics
               error = { fg = '#d75f5f' },
               warn = { fg = '#ca8462' },
-              info = { fg = '#83a598' },
+              info = { fg = '#ecbe7b' },
+              hint = { fg = '#83a598' },
             },
             on_click = function(_, but, _)
               if but == 'l' then
@@ -150,10 +165,6 @@ return {
           {
             '%p%%/%L',
           },
-          {
-            '%l:%c',
-            color = { fg = colors.fg },
-          }
         },
       },
       inactive_sections = {

@@ -20,9 +20,11 @@ end
 
 function M.colored_filename:update_status()
   local data = M.colored_filename.super.update_status(self)
-  data = highlight.component_format_highlight(vim.bo.modified
-    and self.status_colors.modified
-    or (vim.bo.readonly and self.status_colors.readonly or self.status_colors.saved)) .. data
+    -- fix ugliness...
+    :gsub("󰧞$", " 󰧞")
+  data = highlight.component_format_highlight(vim.bo.readonly
+    and self.status_colors.readonly
+    or (vim.bo.modified and self.status_colors.modified or self.status_colors.saved)) .. data
   return data
 end
 
