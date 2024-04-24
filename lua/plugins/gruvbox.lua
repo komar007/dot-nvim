@@ -20,6 +20,7 @@ return {
 
     vim.cmd [[ hi ExtraWhitespace ctermbg=red guibg=#902020 ]]
     vim.cmd [[ hi PmenuSel guifg=#ffffff ctermfg=236 ]]
+    vim.cmd [[ hi FloatBorder guibg=none ]]
 
     vim.cmd [[ hi SignColumn guibg='#000000' ctermbg=16 ]]
     vim.cmd [[ hi GitGutterAdd ctermfg=71 guifg=#5FAF5F ]]
