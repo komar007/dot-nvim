@@ -1,5 +1,6 @@
-return {
+local gruvbox = {
   'gruvbox-community/gruvbox',
+  enabled = true,
   init = function()
     local utils = require('utils')
 
@@ -58,3 +59,16 @@ return {
     utils.autocmd_all({ "TermLeave", "TermClose" }, [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]])
   end,
 }
+
+-- test
+local osaka = {
+  "craftzdog/solarized-osaka.nvim",
+  enabled = false,
+  lazy = false,
+  opts = {},
+  init = function()
+    vim.cmd 'colorscheme solarized-osaka'
+  end,
+}
+
+return { gruvbox, osaka }
