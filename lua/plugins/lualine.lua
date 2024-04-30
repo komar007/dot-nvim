@@ -1,8 +1,8 @@
 local colors = {
   black    = '#111111',
-  bg_outer = '#3a3430',
-  bg_mid   = '#2a2420',
-  bg_inner = '#1d2021',
+  bg_outer = '#222242',
+  bg_mid   = '#171737',
+  bg_inner = '#0a0a1a',
   fg       = '#bbc2cf',
   darkfg   = '#6b727f',
   green    = '#98be65',
@@ -67,7 +67,7 @@ return {
         lualine_a = {
           {
             function ()
-              return ' '
+              return '  '
             end,
             padding = 0,
           },
@@ -77,7 +77,7 @@ return {
           },
           {
             'diff',
-            symbols = { added = ' ', modified = '󱗜 ', removed = ' ' },
+            symbols = { added = '󰐖 ', modified = '󱗜 ', removed = '󰍵 ' },
             diff_color = {
               added = { fg = colors.green },
               modified = { fg = colors.orange },
@@ -152,7 +152,6 @@ return {
           {
             'o:encoding',
             cond = conditions.hide_in_width,
-            padding = 0,
           },
           {
             'fileformat',
