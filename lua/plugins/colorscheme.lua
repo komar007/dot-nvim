@@ -1,5 +1,6 @@
 local gruvbox = {
   'gruvbox-community/gruvbox',
+
   enabled = true,
   init = function()
     local utils = require('utils')
@@ -51,6 +52,9 @@ local gruvbox = {
 
     vim.cmd [[ hi! link Pmenu Normal ]]
 
+    vim.cmd [[ hi TreesitterContext guibg=#171737 ]]
+    vim.cmd [[ hi TreesitterContextLineNumber guibg=#171737 ]]
+
     utils.autocmd_all({ "ColorScheme" }, [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]])
     local match_extrawhitespace = [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
     utils.autocmd_all({ "BufWinEnter" }, match_extrawhitespace)
@@ -63,6 +67,7 @@ local gruvbox = {
 -- test
 local osaka = {
   "craftzdog/solarized-osaka.nvim",
+
   enabled = false,
   lazy = false,
   opts = {},
