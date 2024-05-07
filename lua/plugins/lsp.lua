@@ -18,8 +18,7 @@ return {
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, keymap_opts)
       vim.keymap.set('n', 'gt', telescope_type_definitions, keymap_opts)
       vim.keymap.set('n', '<c-k>', vim.lsp.buf.signature_help, keymap_opts)
-      -- action shortcuts
-      vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, keymap_opts)
+      -- action shortcuts (code actions are implemented in actions_preview.lua
       vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, keymap_opts)
 
       if client.server_capabilities.documentHighlightProvider then
