@@ -17,8 +17,9 @@ local gruvbox = {
     vim.cmd [[ hi Comment ctermfg=243 guifg=#7f7f7f ]]
     vim.cmd [[ hi CursorLine ctermbg=237 guibg=#2c2826 ]]
     vim.cmd [[ hi CursorColumn ctermbg=237 guibg=#2c2826 ]]
-    vim.cmd [[ hi! link StatusLine Normal ]]
-    vim.cmd [[ hi! link StatusLineNC Normal ]]
+    vim.cmd [[ hi StatusLine gui=none guibg=#0a0a1a ]]
+    vim.cmd [[ hi StatusLineNC gui=none guibg=#0a0a1a ]]
+    vim.cmd [[ hi WinSeparator guifg=#222242 guibg=none ]]
 
     vim.cmd [[ hi ExtraWhitespace ctermbg=red guibg=#902020 ]]
     vim.cmd [[ hi PmenuSel guifg=#ffffff ctermfg=236 ]]
@@ -53,7 +54,8 @@ local gruvbox = {
     vim.cmd [[ hi! link Pmenu Normal ]]
 
     vim.cmd [[ hi TreesitterContext guibg=#171737 ]]
-    vim.cmd [[ hi TreesitterContextLineNumber guibg=#171737 ]]
+    vim.cmd [[ hi TreesitterContextLineNumber guibg=#171737 guifg=#5555aa ]]
+    vim.cmd [[ hi TreesitterContextBottom gui=undercurl guisp=#5555aa ]]
 
     utils.autocmd_all({ "ColorScheme" }, [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]])
     local match_extrawhitespace = [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
