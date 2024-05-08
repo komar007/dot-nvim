@@ -21,6 +21,8 @@ local gruvbox = {
     vim.cmd [[ hi StatusLineNC gui=none guibg=#0a0a1a ]]
     vim.cmd [[ hi WinSeparator guifg=#222242 guibg=none ]]
 
+    vim.cmd [[ hi Visual guibg=#3333aa guifg=none gui=none ]]
+
     vim.cmd [[ hi ExtraWhitespace ctermbg=red guibg=#902020 ]]
     vim.cmd [[ hi PmenuSel guifg=#ffffff ctermfg=236 ]]
     vim.cmd [[ hi FloatBorder guibg=none ]]

@@ -9,7 +9,8 @@ local colors = {
   green_i  = '#587e45',
   orange   = '#fe8019',
   violet   = '#8981c1',
-  marine   = '#318fcf',
+  visual   = '#3333aa',
+  visual_f = '#bbbbff',
   red      = '#fb4934',
 }
 
@@ -37,7 +38,7 @@ local theme = {
     z = { fg = colors.darkfg, bg = colors.bg_outer },
   },
   insert = { a = { fg = colors.black, bg = colors.green_i } },
-  visual = { a = { fg = colors.black, bg = colors.marine } },
+  visual = { a = { fg = colors.visual_f, bg = colors.visual } },
   replace = { a = { fg = colors.black, bg = colors.violet } },
 }
 
