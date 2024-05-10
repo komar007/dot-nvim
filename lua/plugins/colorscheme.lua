@@ -51,7 +51,9 @@ local gruvbox = {
     vim.cmd [[ hi LspReferenceWrite guifg='#df4432' ctermfg=red gui=reverse,bold cterm=reverse,bold ]]
     vim.cmd [[ hi LspReferenceRead guifg='#acaf26' ctermfg=green gui=reverse,bold cterm=reverse,bold ]]
 
-    vim.cmd [[ hi InlayHint guibg='#171717' guifg='#666666' ]]
+    vim.cmd [[ hi InlayHint guibg='#171717' guifg='#888888' ]]
+    vim.cmd [[ hi LspCodeLens guifg='#555555' gui=italic ]]
+    vim.cmd [[ hi LspCodeLensSeparator guifg='#555555' gui=italic ]]
 
     vim.cmd [[ hi! link Pmenu Normal ]]
 
