@@ -45,4 +45,11 @@ vim.keymap.set('i', '<C-e>', '<C-o>$')
 vim.keymap.set('i', '<C-b>', '<C-o>h')
 vim.keymap.set('i', '<C-f>', '<C-o>l')
 
+vim.api.nvim_create_user_command('EditConfig', function()
+  local config_dir = vim.fn.stdpath('config')
+  assert(type(config_dir) == 'string', 'Expected string')
+  vim.fn.chdir(config_dir)
+  vim.api.nvim_cmd({ cmd = "edit", args = { "init.lua" } }, { output = false })
+end, {})
+
 vim.cmd 'source ~/.config/nvim/legacy.vim'
