@@ -44,6 +44,7 @@ vim.keymap.set('i', '<C-a>', '<C-o>^')
 vim.keymap.set('i', '<C-e>', '<C-o>$')
 vim.keymap.set('i', '<C-b>', '<C-o>h')
 vim.keymap.set('i', '<C-f>', '<C-o>l')
+vim.keymap.set('i', '<C-d>', '<Delete>')
 
 -- Remove both the character under the cursor and its match
 vim.keymap.set('n', '<leader>x', function()
