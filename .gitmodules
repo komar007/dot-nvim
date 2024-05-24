@@ -1,0 +1,3 @@
+[submodule "00f775b30f70ef51fca66cc883ca265e"]
+	path = nvim_cold_reload
+	url = https://gist.github.com/00f775b30f70ef51fca66cc883ca265e.git
