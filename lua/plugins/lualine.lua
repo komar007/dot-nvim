@@ -71,6 +71,7 @@ return {
               return '  '
             end,
             padding = 0,
+            color = { fg = '#67a23e' },
           },
           {
             'branch',
