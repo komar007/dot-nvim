@@ -68,7 +68,7 @@ return {
       sections = {
         lualine_a = {
           {
-            function ()
+            function()
               return '  '
             end,
             padding = 1,
@@ -100,6 +100,19 @@ return {
         },
         lualine_c = {
           {
+            function()
+              return ' '
+            end,
+            padding = { left = 0, right = 0 },
+          },
+          {
+            'filetype',
+            colored = true,   -- Displays filetype icon in color if set to true
+            icon_only = true, -- Display only an icon for filetype
+            icon = { align = 'right' },
+            padding = { left = 0, right = 0 },
+          },
+          {
             colored_filename,
             color = { fg = colors.fg },
             file_status = true,
@@ -108,7 +121,7 @@ return {
               modified = '󰧞',
               readonly = '',
             },
-            padding = { left = 1, right = 1 },
+            padding = { left = 0, right = 1 },
           },
           {
             '%w',
