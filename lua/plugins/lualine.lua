@@ -57,6 +57,10 @@ end
 
 return {
   'nvim-lualine/lualine.nvim',
+
+  dependencies = {
+    'arkav/lualine-lsp-progress',
+  },
   config = function()
     local colored_filename = require('lualine_colored_filename').colored_filename
     require('lualine').setup {
@@ -162,6 +166,10 @@ return {
                 vim.diagnostic.goto_prev();
               end
             end,
+          },
+          {
+            'lsp_progress',
+            display_components = { 'spinner', { 'title', 'percentage' } },
           },
         },
         lualine_x = {
