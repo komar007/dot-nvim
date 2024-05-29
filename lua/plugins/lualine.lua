@@ -1,6 +1,7 @@
 local colors = {
+  logo     = '#67a23e',
   black    = '#111111',
-  bg_outer = '#222242',
+  bg_outer = '#333352',
   bg_mid   = '#171737',
   bg_inner = '#0a0a1a',
   fg       = '#bbc2cf',
@@ -30,7 +31,7 @@ local conditions = {
 
 local theme = {
   normal = {
-    a = { fg = colors.fg, bg = colors.bg_outer },
+    a = { fg = colors.logo, bg = colors.bg_outer },
     b = { fg = colors.fg, bg = colors.bg_mid },
     c = { fg = colors.darkfg, bg = colors.bg_inner },
     x = { fg = colors.darkfg, bg = colors.bg_inner },
@@ -61,7 +62,7 @@ return {
     require('lualine').setup {
       options = {
         theme = theme,
-        component_separators = '',
+        component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
       },
       sections = {
@@ -70,12 +71,14 @@ return {
             function ()
               return '  '
             end,
-            padding = 0,
-            color = { fg = '#67a23e' },
+            padding = 1,
           },
+        },
+        lualine_b = {
           {
             'branch',
             icon = '⎇',
+            padding = { left = 1, right = 1 },
           },
           {
             'diff',
@@ -92,40 +95,46 @@ return {
                 vim.api.nvim_command('GitGutterPrevHunk')
               end
             end,
+            padding = { left = 0, right = 1 },
           },
         },
-        lualine_b = {
+        lualine_c = {
           {
             colored_filename,
+            color = { fg = colors.fg },
             file_status = true,
             path = 1,
             symbols = {
               modified = '󰧞',
               readonly = '',
             },
+            padding = { left = 1, right = 1 },
           },
           {
             '%w',
             cond = function()
               return vim.wo.previewwindow
             end,
+            padding = { left = 0, right = 1 },
           },
           {
             '%q',
             cond = function()
               return vim.bo.buftype == 'quickfix'
             end,
+            padding = { left = 0, right = 1 },
           },
           {
             '%l:%c',
-            color = { fg = colors.fg },
+            color = { fg = colors.fg, gui = "bold" },
+            separator = '│',
+            padding = { left = 0, right = 1 },
           },
-        },
-        lualine_c = {
           {
             'diagnostics',
             sources = { 'nvim_diagnostic' },
             symbols = { error = '󰧞', warn = '󰧞', info = '󰧞', hint = '󰧞' },
+            padding = { left = 1, right = 1 },
             diagnostics_color = {
               -- TODO: extract the colors below, they should be the same as those used in respective diagnostics
               error = { fg = '#d75f5f' },
@@ -150,16 +159,19 @@ return {
         lualine_y = {
           {
             'filetype',
+            padding = { left = 1, right = 1 },
+            separator = '│'
           },
           {
             'o:encoding',
             cond = conditions.hide_in_width,
+            padding = { left = 1, right = 1 },
           },
           {
             'fileformat',
             icons_enabled = true,
             cond = conditions.hide_in_width,
-            padding = 1,
+            padding = { left = 0, right = 1 },
           },
         },
         lualine_z = {
