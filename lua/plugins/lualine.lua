@@ -55,6 +55,15 @@ local function search_result()
   return ' ' .. last_search .. ' (' .. searchcount.current .. '/' .. searchcount.total .. ')'
 end
 
+local function duplicate(inputTable)
+  local outputTable = {}
+  for i = 1, #inputTable do
+    table.insert(outputTable, inputTable[i])
+    table.insert(outputTable, inputTable[i])
+  end
+  return outputTable
+end
+
 return {
   'nvim-lualine/lualine.nvim',
 
@@ -76,6 +85,21 @@ return {
               return '  '
             end,
             padding = 1,
+          },
+          {
+            'lsp_progress',
+            display_components = { 'spinner', {} },
+            separators = {
+              component = '',
+              progress = '',
+              message = { pre = '', post = '' },
+              percentage = { pre = '', post = '' },
+              title = { pre = '', post = '' },
+              lsp_client_name = { pre = '', post = '' },
+              spinner = { pre = '', post = '' },
+            },
+            spinner_symbols = duplicate({ "▱▱▱", "▰▱▱", "▰▰▱", "▰▰▰", "▱▰▰", "▱▱▰" }),
+            padding = { left = 0, right = 2 },
           },
         },
         lualine_b = {
@@ -166,10 +190,6 @@ return {
                 vim.diagnostic.goto_prev();
               end
             end,
-          },
-          {
-            'lsp_progress',
-            display_components = { 'spinner', { 'title', 'percentage' } },
           },
         },
         lualine_x = {
