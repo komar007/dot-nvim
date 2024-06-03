@@ -64,4 +64,16 @@ vim.api.nvim_create_user_command('EditConfig', function()
   vim.api.nvim_cmd({ cmd = "edit", args = { "init.lua" } }, { output = false })
 end, {})
 
+vim.api.nvim_create_user_command('RustPlayground', function(opts)
+  local name = opts.args
+  if name == "" then
+    name = os.date("pg%Y%m%d")
+  end
+  local dir = vim.fn.expand('~/temp/rust/' .. name);
+  vim.fn.system({ "mkdir", "-p", dir })
+  vim.fn.chdir(dir)
+  vim.fn.system({ 'cargo', 'init', '.' })
+  vim.api.nvim_cmd({ cmd = "edit", args = { "src/main.rs" } }, { output = false })
+end, { nargs = '?' })
+
 vim.cmd 'source ~/.config/nvim/legacy.vim'
