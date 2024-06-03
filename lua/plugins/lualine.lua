@@ -201,6 +201,7 @@ return {
           {
             'filetype',
             padding = { left = 1, right = 1 },
+            icons_enabled = false,
             separator = '│'
           },
           {
