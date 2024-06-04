@@ -8,6 +8,7 @@ return {
     'hrsh7th/cmp-vsnip',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/vim-vsnip',
+    'zjp-CN/nvim-cmp-lsp-rs'
   },
   config = function()
     local cmp = require('cmp')
@@ -70,6 +71,10 @@ return {
       }),
       sorting = {
         priority_weight = 100,
+        comparators = {
+          require('cmp_lsp_rs').comparators.inscope_inherent_import,
+          cmp.config.compare.score,
+        },
       },
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
