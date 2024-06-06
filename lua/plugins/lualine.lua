@@ -5,6 +5,7 @@ local colors = {
   bg_mid   = '#171737',
   bg_inner = '#0a0a1a',
   fg       = '#bbc2cf',
+  lightfg  = '#c3d5ff',
   darkfg   = '#6b727f',
   green    = '#98be65',
   green_i  = '#587e45',
@@ -167,7 +168,7 @@ return {
           },
           {
             '%l:%c',
-            color = { fg = colors.fg, gui = "bold" },
+            color = { fg = colors.lightfg, gui = "bold" },
             separator = '│',
             padding = { left = 0, right = 1 },
           },
