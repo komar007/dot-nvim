@@ -60,8 +60,8 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
         ['<C-y>'] = cmp.config.disable,
         ['<C-e>'] = cmp.mapping({
           i = cmp.mapping.abort(),
@@ -84,11 +84,11 @@ return {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
           vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-          vim_item.menu = ({
+          vim_item.menu = (({
             nvim_lsp = "[lsp]",
             vsnip = "[snip]",
             buffer = "[buf]",
-          })[entry.source.name]
+          })[entry.source.name] or "") .. " " .. (vim_item.menu or "")
           return vim_item
         end,
       },
