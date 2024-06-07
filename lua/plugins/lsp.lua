@@ -52,7 +52,29 @@ return {
     -- gentoo's sys-devel/clang should provide clangd
     require('lspconfig').clangd.setup(defcfg)
     -- pipx install 'python-lsp-server[all]'
-    require('lspconfig').pylsp.setup(defcfg)
+    require('lspconfig').pylsp.setup({
+      capabilities = capabilities,
+      on_attach = on_lsp_attach,
+      settings = {
+        pylsp = {
+          configurationSources = {'flake8'},
+          plugins = {
+            flake8 = {
+              enabled = true,
+            },
+            pycodestyle = {
+              enabled = false,
+            },
+            mccabe = {
+              enabled = false,
+            },
+            pyflakes = {
+              enabled = false,
+            },
+          }
+        }
+      }
+    })
     -- npm install -g dockerfile-language-server-nodejs
     require('lspconfig').dockerls.setup(defcfg)
     -- npm install -g vim-language-server
@@ -82,7 +104,7 @@ return {
             },
             check = {
               command = "clippy",
-            }
+            },
           },
         },
       },
