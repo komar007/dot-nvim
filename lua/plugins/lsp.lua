@@ -1,7 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
-    'simrat39/rust-tools.nvim',
+    'mrcjkb/rustaceanvim',
     'nvim-telescope/telescope.nvim',
   },
   config = function()
@@ -86,7 +86,7 @@ return {
     -- npm i -g dockerfile-language-server-nodejs
     require('lspconfig').kotlin_language_server.setup(defcfg)
 
-    require('rust-tools').setup({
+    vim.g.rustaceanvim = {
       tools = {
         inlay_hints = {
           highlight = "InlayHint",
@@ -108,7 +108,7 @@ return {
           },
         },
       },
-    })
+    }
 
     require('lspconfig').gopls.setup(defcfg)
 
