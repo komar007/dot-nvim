@@ -5,6 +5,7 @@ return {
     'nvim-telescope/telescope.nvim',
   },
   config = function()
+    local border = require('border')
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     local on_lsp_attach = function(client)
@@ -88,6 +89,9 @@ return {
 
     vim.g.rustaceanvim = {
       tools = {
+        float_win_config = {
+          border = border,
+        },
         inlay_hints = {
           highlight = "InlayHint",
         },
@@ -147,11 +151,11 @@ return {
     }
 
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      border = "rounded",
+      border = border,
     })
 
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-      border = "rounded",
+      border = border,
     })
   end,
 }

@@ -25,7 +25,11 @@ local gruvbox = {
 
     vim.cmd [[ hi ExtraWhitespace ctermbg=red guibg=#902020 ]]
     vim.cmd [[ hi PmenuSel guifg=#ffffff ctermfg=236 ]]
-    vim.cmd [[ hi FloatBorder guibg=none ]]
+    vim.cmd [[ hi FloatBorder guibg=#000000 guifg=#446699 ]]
+    vim.cmd [[ hi NormalFloat guibg=#000000 guifg=#777777 ]]
+    vim.cmd [[ hi FloatVisual guibg=#4444bb guifg=none gui=none ]]
+    -- scrollbar in cmp/lsp
+    vim.cmd [[ hi PmenuThumb guibg=#446699 guifg=none gui=none ]]
 
     vim.cmd [[ hi SignColumn guibg='#000000' ctermbg=16 ]]
     vim.cmd [[ hi GitGutterAdd ctermfg=71 guifg=#5FAF5F ]]

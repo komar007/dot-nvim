@@ -12,6 +12,7 @@ return {
   },
   config = function()
     local cmp = require('cmp')
+    local border = require('border')
 
     local kind_icons = {
       Text = "",
@@ -44,11 +45,14 @@ return {
     cmp.setup({
       window = {
         completion = {
-          border = 'rounded',
-          scrollbar = '║',
+          winhighlight = 'CursorLine:FloatVisual,Search:None',
+          scrolloff = 1,
+          side_padding = 1,
+          border = border,
         },
         documentation = {
-          border = 'rounded',
+          winhighlight = 'CursorLine:FloatVisual,Search:None',
+          border = border,
         },
       },
       completion = {
