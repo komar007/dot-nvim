@@ -13,7 +13,7 @@ function M.colored_filename:init(options)
     modified = highlight.create_component_highlight_group(
       { fg = '#d75f5f' }, 'filename_status_modified', self.options),
     readonly = highlight.create_component_highlight_group(
-      { fg = 'black', bg = '#fb4934' }, 'filename_status_readonly', self.options),
+      { fg = '#444444' }, 'filename_status_readonly', self.options),
   }
   if self.options.color == nil then self.options.color = '' end
 end
