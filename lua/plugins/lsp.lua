@@ -38,10 +38,12 @@ return {
         })
       end
 
-      vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
-        callback = vim.lsp.codelens.refresh,
-        desc = "Refresh codelens",
-      })
+      if client.server_capabilities.codeLensProvider then
+        vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
+          callback = vim.lsp.codelens.refresh,
+          desc = "Refresh codelens",
+        })
+      end
 
       vim.api.nvim_create_user_command('Fmt', function()
         vim.lsp.buf.format()
