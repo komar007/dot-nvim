@@ -9,4 +9,9 @@ return {
   'tpope/vim-fugitive',
   'tpope/vim-sleuth',
   'vim-scripts/a.vim',
+  {
+    'folke/trouble.nvim',
+    opts = {},
+    cmd = "Trouble",
+  },
 }
