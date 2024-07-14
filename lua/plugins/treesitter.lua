@@ -18,6 +18,7 @@ return {
         "kotlin",
         "lua",
         "markdown",
+        "nix",
         "python",
         "rust",
         "vim",
