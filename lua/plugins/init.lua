@@ -14,4 +14,7 @@ return {
     opts = {},
     cmd = "Trouble",
   },
+  -- a very specific commit so that we cannot be compromised when someone hacks
+  -- the repo and pushes malicious code to it
+  { 'lambdalisue/vim-suda', commit = "b97fab52f9cdeabe2bbb5eb98d82356899f30829" },
 }
