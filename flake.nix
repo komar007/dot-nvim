@@ -14,17 +14,40 @@
         with pkgs; {
           devShells.default = mkShell {
             buildInputs = [
-              # basic dependencies (lazy + fzf native compilation)
+              # Basic dependencies (lazy + fzf native compilation)
+              # ==================================================
               git
               cmake
               # telescope
               ripgrep
 
+              # Neovim itself
+              # =============
               neovim
 
-              # language servers
+              # Language servers
+              # ================
+
+              # clangd
+              clang-tools
+              # dockerls
+              dockerfile-language-server-nodejs
+              # gopls
+              gopls
+              # kotlin-language-server
+              kotlin-language-server
+              # lua_ls
               lua-language-server
-              nixpkgs-fmt
+              # nixd
+              nixd nixpkgs-fmt
+              # eslint
+              nodePackages.eslint
+              # bashls
+              nodePackages_latest.bash-language-server
+              # pylsp
+              python312Packages.flake8 python312Packages.python-lsp-server
+              # vimls
+              vim-language-server
             ];
           };
         }

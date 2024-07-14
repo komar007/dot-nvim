@@ -52,9 +52,8 @@ return {
 
     local defcfg = { capabilities = capabilities, on_attach = on_lsp_attach }
 
-    -- gentoo's sys-devel/clang should provide clangd
     require('lspconfig').clangd.setup(defcfg)
-    -- pipx install 'python-lsp-server[all]'
+
     require('lspconfig').pylsp.setup({
       capabilities = capabilities,
       on_attach = on_lsp_attach,
@@ -78,17 +77,20 @@ return {
         }
       }
     })
-    -- npm install -g dockerfile-language-server-nodejs
+
     require('lspconfig').dockerls.setup(defcfg)
-    -- npm install -g vim-language-server
+
     require('lspconfig').vimls.setup(defcfg)
-    -- npm i -g vscode-langservers-extracted
+
     require('lspconfig').eslint.setup(defcfg)
-    -- npm i -g dockerfile-language-server-nodejs
-    require('lspconfig').dockerls.setup(defcfg)
-    -- npm i -g dockerfile-language-server-nodejs
+
     require('lspconfig').kotlin_language_server.setup(defcfg)
 
+    require('lspconfig').nixd.setup(defcfg)
+
+    require('lspconfig').bashls.setup(defcfg)
+
+    -- rust LSP is not managed by nix, but installed locally using rustup.
     vim.g.rustaceanvim = {
       tools = {
         float_win_config = {
