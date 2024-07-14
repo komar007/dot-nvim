@@ -54,4 +54,13 @@ function M.make_border(spec)
   return zip(b, hi)
 end
 
+function M.initialize_file(name, content)
+  if io.open(name, "r") == nil then
+    local file = io.open(name, "w")
+    assert(file ~= nil)
+    file:write(content)
+    file:close()
+  end
+end
+
 return M

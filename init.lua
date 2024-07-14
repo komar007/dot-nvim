@@ -20,6 +20,7 @@ require("lazy").setup("plugins", {
 require("diagnostics")
 
 local utils = require("utils")
+local pg = require("playground")
 
 utils.autocmd_all({ "BufEnter" }, [[ let &titlestring = "nvim - " . expand("%:t") ]])
 vim.opt.title = true
@@ -69,16 +70,24 @@ vim.api.nvim_create_user_command('EditConfig', function()
   vim.api.nvim_cmd({ cmd = "edit", args = { "init.lua" } }, { output = false })
 end, {})
 
-vim.api.nvim_create_user_command('RustPlayground', function(opts)
-  local name = opts.args
-  if name == "" then
-    name = os.date("pg%Y%m%d")
-  end
-  local dir = vim.fn.expand('~/temp/rust/' .. name);
-  vim.fn.system({ "mkdir", "-p", dir })
-  vim.fn.chdir(dir)
+pg.make_playground('rust', function()
   vim.fn.system({ 'cargo', 'init', '.' })
-  vim.api.nvim_cmd({ cmd = "edit", args = { "src/main.rs" } }, { output = false })
-end, { nargs = '?' })
+  return 'src/main.rs'
+end)
+
+local maingo = [[
+package main
+
+
+import "fmt"
+
+func main() {
+    fmt.Println("hello world")
+}
+]]
+pg.make_playground('go', function()
+  utils.initialize_file('main.go', maingo)
+  return 'main.go'
+end)
 
 vim.cmd 'source ~/.config/nvim/legacy.vim'
