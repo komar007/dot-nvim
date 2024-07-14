@@ -33,7 +33,7 @@
               # dockerls
               dockerfile-language-server-nodejs
               # gopls
-              gopls
+              go gopls
               # kotlin-language-server
               kotlin-language-server
               # lua_ls
