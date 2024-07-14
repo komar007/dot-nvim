@@ -1,1 +1,9 @@
-nvim_cold_reload/nvim_cold_reload.sh
+#!/bin/sh
+
+DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
+
+if nix --version > /dev/null 2>&1; then
+	nix develop "$DIR" -c "$DIR"/nvim_cold_reload/nvim_cold_reload.sh "$@"
+else
+	"$DIR"/nvim_cold_reload/nvim_cold_reload.sh "$@"
+fi
