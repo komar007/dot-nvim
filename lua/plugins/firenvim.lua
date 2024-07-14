@@ -26,6 +26,8 @@ return {
       callback = function(_)
         local client = vim.api.nvim_get_chan_info(vim.v.event.chan).client
         if client ~= nil and client.name == "Firenvim" then
+          vim.cmd [[ set gfn=Jetbrains\ Mono\ Light:h14 ]]
+          vim.cmd [[ command Maximize set lines=1000 columns=1000 ]]
           vim.o.laststatus = 0
         end
       end
