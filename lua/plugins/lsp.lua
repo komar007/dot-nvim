@@ -1,7 +1,7 @@
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
-    'mrcjkb/rustaceanvim',
+    { 'mrcjkb/rustaceanvim', version = '^4' },
     'nvim-telescope/telescope.nvim',
   },
   config = function()
