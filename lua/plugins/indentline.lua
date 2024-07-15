@@ -1,7 +1,7 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
   config = function()
-    vim.api.nvim_set_hl(0, 'IblIndent', { ctermfg = 237, fg = '#3a3a3a' })
+    vim.api.nvim_set_hl(0, 'IblIndent', { fg = '#1a1a1a' })
 
     local highlight = {
       "RainbowRed",
@@ -28,7 +28,7 @@ return {
     vim.g.rainbow_delimiters = { highlight = highlight }
 
     require("ibl").setup {
-      indent = { char = '┆' },
+      indent = { char = '│' },
       scope = {
         char = '│',
         show_start = false,
