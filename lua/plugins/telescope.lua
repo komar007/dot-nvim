@@ -50,12 +50,14 @@ return {
       },
     })
 
-    local fullscreen_theme = themes.get_ivy({
-      layout_config = {
-        height = 10000,
-        width = 10000,
-      },
-    })
+    local function fullscreen_theme()
+      return themes.get_ivy({
+        layout_config = {
+          height = 10000,
+          width = 10000,
+        },
+      })
+    end
 
     local fullscreen_horizontal_theme = themes.get_ivy({
       layout_config = {
@@ -66,10 +68,12 @@ return {
     })
 
     telescope_findfiles = function(config)
-      require('telescope.builtin').find_files(fullscreen_theme)
+      require('telescope.builtin').find_files(fullscreen_theme())
     end
     telescope_buffers = function(config)
-      require('telescope.builtin').buffers(fullscreen_theme)
+      local theme = fullscreen_theme()
+      theme.sort_mru = true
+      require('telescope.builtin').buffers(theme)
     end
     telescope_references = function(config)
       require('telescope.builtin').lsp_references(fullscreen_horizontal_theme)
