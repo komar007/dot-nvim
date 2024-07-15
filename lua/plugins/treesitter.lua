@@ -21,6 +21,7 @@ return {
         "nix",
         "python",
         "rust",
+        "toml",
         "vim",
         "vimdoc",
         "xml"
