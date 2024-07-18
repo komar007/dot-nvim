@@ -21,7 +21,7 @@ return {
       vim.keymap.set('n', '<c-k>', vim.lsp.buf.signature_help, keymap_opts)
       -- action shortcuts (code actions are implemented in actions_preview.lua
       vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, keymap_opts)
-      vim.keymap.set('n', 'gc', vim.lsp.codelens.run, keymap_opts)
+      vim.keymap.set('n', 'gC', vim.lsp.codelens.run, keymap_opts)
 
       if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
