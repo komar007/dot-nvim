@@ -80,6 +80,8 @@ return {
 
     require('lspconfig').dockerls.setup(defcfg)
 
+    require('lspconfig').docker_compose_language_service.setup(defcfg)
+
     require('lspconfig').vimls.setup(defcfg)
 
     require('lspconfig').eslint.setup(defcfg)

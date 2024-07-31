@@ -32,6 +32,8 @@
               clang-tools
               # dockerls
               dockerfile-language-server-nodejs
+              # docker-compose-language-service
+              docker-compose-language-service
               # gopls
               go gopls
               # kotlin-language-server
