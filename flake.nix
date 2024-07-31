@@ -36,8 +36,6 @@
               docker-compose-language-service
               # gopls
               go gopls
-              # kotlin-language-server
-              kotlin-language-server
               # lua_ls
               lua-language-server
               # nixd

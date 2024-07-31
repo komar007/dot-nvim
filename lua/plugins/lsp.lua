@@ -58,7 +58,6 @@ return {
         'dockerls',
         'eslint',
         'gopls',
-        'kotlin_language_server',
         'nixd',
         'vimls',
       },
