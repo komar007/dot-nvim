@@ -63,4 +63,11 @@ function M.initialize_file(name, content)
   end
 end
 
+function M.setup_lsps(lsps, cfg)
+  local lspconfig = require('lspconfig')
+  for _, lsp in pairs(lsps) do
+    lspconfig[lsp].setup(cfg)
+  end
+end
+
 return M

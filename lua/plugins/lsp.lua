@@ -50,9 +50,20 @@ return {
       end, {})
     end
 
-    local defcfg = { capabilities = capabilities, on_attach = on_lsp_attach }
-
-    require('lspconfig').clangd.setup(defcfg)
+    require('utils').setup_lsps(
+      {
+        'bashls',
+        'clangd',
+        'docker_compose_language_service',
+        'dockerls',
+        'eslint',
+        'gopls',
+        'kotlin_language_server',
+        'nixd',
+        'vimls',
+      },
+      { capabilities = capabilities, on_attach = on_lsp_attach }
+    )
 
     require('lspconfig').pylsp.setup({
       capabilities = capabilities,
@@ -77,20 +88,6 @@ return {
         }
       }
     })
-
-    require('lspconfig').dockerls.setup(defcfg)
-
-    require('lspconfig').docker_compose_language_service.setup(defcfg)
-
-    require('lspconfig').vimls.setup(defcfg)
-
-    require('lspconfig').eslint.setup(defcfg)
-
-    require('lspconfig').kotlin_language_server.setup(defcfg)
-
-    require('lspconfig').nixd.setup(defcfg)
-
-    require('lspconfig').bashls.setup(defcfg)
 
     -- rust LSP is not managed by nix, but installed locally using rustup.
     vim.g.rustaceanvim = {
@@ -119,8 +116,6 @@ return {
         },
       },
     }
-
-    require('lspconfig').gopls.setup(defcfg)
 
     require('lspconfig').lua_ls.setup {
       capabilities = capabilities,
