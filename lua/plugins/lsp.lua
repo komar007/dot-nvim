@@ -64,6 +64,12 @@ return {
       { capabilities = capabilities, on_attach = on_lsp_attach }
     )
 
+    local caps_for_jsonls = vim.lsp.protocol.make_client_capabilities()
+    caps_for_jsonls.textDocument.completion.completionItem.snippetSupport = true
+    require('lspconfig').jsonls.setup {
+      capabilities = caps_for_jsonls,
+    }
+
     require('lspconfig').pylsp.setup({
       capabilities = capabilities,
       on_attach = on_lsp_attach,

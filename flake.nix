@@ -36,6 +36,8 @@
               docker-compose-language-service
               # gopls
               go gopls
+              # jsonls
+              nodePackages.vscode-json-languageserver
               # lua_ls
               lua-language-server
               # nixd
