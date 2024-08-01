@@ -19,7 +19,7 @@
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
   "nvim-cmp": { "branch": "main", "commit": "a110e12d0b58eefcf5b771f533fc2cf3050680ac" },
   "nvim-cmp-lsp-rs": { "branch": "main", "commit": "d9ebeca9ea07ba2fd57f997b2d6a8bc7da51abed" },
-  "nvim-lspconfig": { "branch": "master", "commit": "bd7c76375a511994c9ca8d69441f134dc10ae3bd" },
+  "nvim-lspconfig": { "branch": "master", "commit": "e9b1c95d29ca9e479fc39896b31d24eed96b40a3" },
   "nvim-treesitter": { "branch": "master", "commit": "2e9c346aefda680bd14ebf40a50c2897fd637bc2" },
   "nvim-treesitter-context": { "branch": "master", "commit": "5efba33af0f39942e426340da7bc15d7dec16474" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "34867c69838078df7d6919b130c0541c0b400c47" },

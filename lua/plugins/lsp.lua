@@ -56,7 +56,10 @@ return {
     require('utils').setup_lsps(
       {
         'bashls',
-        'clangd',
+        {
+          'clangd',
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
+        },
         'docker_compose_language_service',
         'dockerls',
         'eslint',
@@ -67,6 +70,7 @@ return {
         },
         'marksman',
         'nixd',
+        'protols', -- not available in nixpkgs, must be installed with: cargo install protols
         'vimls',
       },
       { capabilities = capabilities, on_attach = on_lsp_attach }
