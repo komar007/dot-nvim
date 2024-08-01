@@ -52,6 +52,12 @@
               python312Packages.flake8 python312Packages.python-lsp-server
               # vimls
               vim-language-server
+
+              # Other requirements
+              # ==================
+
+              # iamcco/markdown-preview.nvim plugin
+              yarn nodePackages.npm
             ];
           };
         }
