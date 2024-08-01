@@ -30,11 +30,13 @@ return {
           callback = vim.lsp.buf.document_highlight,
           group = "lsp_document_highlight",
           desc = "Document Highlight",
+          buffer = 0,
         })
         vim.api.nvim_create_autocmd("CursorMoved", {
           callback = vim.lsp.buf.clear_references,
           group = "lsp_document_highlight",
           desc = "Clear All the References",
+          buffer = 0,
         })
       end
 
@@ -42,6 +44,7 @@ return {
         vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
           callback = vim.lsp.codelens.refresh,
           desc = "Refresh codelens",
+          buffer = 0,
         })
       end
 
