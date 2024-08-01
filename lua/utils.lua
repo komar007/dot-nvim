@@ -66,7 +66,20 @@ end
 function M.setup_lsps(lsps, cfg)
   local lspconfig = require('lspconfig')
   for _, lsp in pairs(lsps) do
-    lspconfig[lsp].setup(cfg)
+    local lsp_name
+    if type(lsp) == "table" then
+      lsp_name = lsp[1]
+      table.remove(lsp, 1)
+      for k, v in pairs(cfg) do
+        if lsp[k] ~= nil then
+          lsp[k] = v
+        end
+      end
+    else
+      lsp_name = lsp
+      lsp = cfg
+    end
+    lspconfig[lsp_name].setup(lsp)
   end
 end
 
