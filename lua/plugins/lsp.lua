@@ -58,6 +58,7 @@ return {
         'dockerls',
         'eslint',
         'gopls',
+        'marksman',
         'nixd',
         'vimls',
       },
