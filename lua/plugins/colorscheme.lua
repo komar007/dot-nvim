@@ -69,8 +69,18 @@ local gruvbox = {
     local match_extrawhitespace = [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
     utils.autocmd_all({ "BufWinEnter" }, match_extrawhitespace)
     vim.cmd(match_extrawhitespace)
+    vim.api.nvim_create_autocmd('BufWinEnter', {
+      pattern = '*',
+      callback = function()
+        local is_floating = vim.api.nvim_win_get_config(0).relative ~= ""
+        if is_floating then
+          vim.cmd([[ highlight clear ExtraWhitespace ]])
+        end
+      end,
+    })
     utils.autocmd_all({ "TermOpen", "TermEnter" }, [[ highlight clear ExtraWhitespace ]])
-    utils.autocmd_all({ "TermLeave", "TermClose" }, [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]])
+    utils.autocmd_all({ "TermLeave", "TermClose", "BufWinLeave" },
+      [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]])
   end,
 }
 
