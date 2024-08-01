@@ -83,9 +83,31 @@ return {
         lualine_a = {
           {
             function()
-              return '  '
+              local out = ''
+              if next(vim.lsp.buf_get_clients(0)) == nil then
+                out = ' ' .. out .. '  '
+              end
+              return out
             end,
-            padding = 1,
+            padding = { left = 1, right = 0 },
+          },
+          {
+            function()
+              local out = ''
+              local added = false
+              for _, client in pairs(vim.lsp.buf_get_clients(0)) do
+                if added then
+                  out = out .. ','
+                else
+                  out = out .. ' '
+                end
+                out = out .. client.name
+                added = true
+              end
+              return out
+            end,
+            padding = { left = 0, right = 1 },
+            color = { fg = colors.fg },
           },
           {
             'lsp_progress',
