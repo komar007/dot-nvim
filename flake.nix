@@ -57,7 +57,7 @@
               # ==================
 
               # iamcco/markdown-preview.nvim plugin
-              yarn nodePackages.npm
+              yarn nodejs_22 nodePackages.npm
             ];
           };
         }
