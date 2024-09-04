@@ -63,21 +63,21 @@ function M.initialize_file(name, content)
   end
 end
 
-function M.setup_lsps(lsps, cfg)
+function M.setup_lsps(base_cfg, lsps)
   local lspconfig = require('lspconfig')
   for _, lsp in pairs(lsps) do
     local lsp_name
     if type(lsp) == "table" then
       lsp_name = lsp[1]
       table.remove(lsp, 1)
-      for k, v in pairs(cfg) do
-        if lsp[k] ~= nil then
+      for k, v in pairs(base_cfg) do
+        if lsp[k] == nil then
           lsp[k] = v
         end
       end
     else
       lsp_name = lsp
-      lsp = cfg
+      lsp = base_cfg
     end
     lspconfig[lsp_name].setup(lsp)
   end

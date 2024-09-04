@@ -57,6 +57,7 @@ return {
     caps_for_jsonls.textDocument.completion.completionItem.snippetSupport = true
 
     require('utils').setup_lsps(
+      { capabilities = capabilities, on_attach = on_lsp_attach },
       {
         'bashls',
         {
@@ -75,8 +76,7 @@ return {
         'nixd',
         'protols', -- not available in nixpkgs, must be installed with: cargo install protols
         'vimls',
-      },
-      { capabilities = capabilities, on_attach = on_lsp_attach }
+      }
     )
 
     require('lspconfig').pylsp.setup({
