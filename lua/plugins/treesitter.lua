@@ -19,6 +19,7 @@ return {
         "kotlin",
         "lua",
         "markdown",
+        "markdown_inline",
         "nix",
         "python",
         "rust",
