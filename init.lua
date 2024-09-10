@@ -22,7 +22,12 @@ require("diagnostics")
 local utils = require("utils")
 local pg = require("playground")
 
-utils.autocmd_all({ "BufEnter" }, [[ let &titlestring = "nvim - " . expand("%:t") ]])
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = "*",
+  callback = function()
+    vim.o.titlestring = "nvim:  " .. utils.shorten_path(vim.loop.cwd()) .. "   " .. vim.fn.expand("%:t")
+  end
+})
 vim.opt.title = true
 
 -- look and feel
@@ -55,7 +60,7 @@ vim.keymap.set('i', '<C-d>', '<Delete>')
 -- Remove both the character under the cursor and its match
 vim.keymap.set('n', '<leader>x', function()
   local col = vim.api.nvim_win_get_cursor(0)[2]
-  local char = string.sub(vim.api.nvim_get_current_line(), col+1, col+1)
+  local char = string.sub(vim.api.nvim_get_current_line(), col + 1, col + 1)
   if string.find([[ ([< ]], char, 1, true) then
     vim.api.nvim_feedkeys("mm%x`mx", 'n', true)
   elseif string.find([[ )]> ]], char, 1, true) then

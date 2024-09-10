@@ -83,4 +83,12 @@ function M.setup_lsps(base_cfg, lsps)
   end
 end
 
+function M.shorten_path(path)
+  local home = os.getenv("HOME")
+  if path:sub(1, #home) == home then
+    path = "~" .. path:sub(#home + 1)
+  end
+  return path
+end
+
 return M
