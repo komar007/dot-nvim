@@ -25,7 +25,7 @@ local pg = require("playground")
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "*",
   callback = function()
-    vim.o.titlestring = "nvim:  " .. utils.shorten_path(vim.loop.cwd()) .. "   " .. vim.fn.expand("%:t")
+    vim.o.titlestring = "nvim:  " .. vim.fn.expand("%:t") .. " in  " .. utils.shorten_path(vim.loop.cwd())
   end
 })
 vim.opt.title = true
