@@ -48,9 +48,11 @@ return {
         })
       end
 
-      vim.api.nvim_create_user_command('Fmt', function()
-        vim.lsp.buf.format()
-      end, {})
+      if client.server_capabilities.documentFormattingProvider then
+        vim.api.nvim_buf_create_user_command(0, 'Fmt', function()
+          vim.lsp.buf.format()
+        end, {})
+      end
     end
 
     local caps_for_jsonls = vim.lsp.protocol.make_client_capabilities()

@@ -80,6 +80,8 @@ pg.make_playground('rust', function()
   return 'src/main.rs'
 end)
 
+require('filetypes')
+
 local maingo = [[
 package main
 

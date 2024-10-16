@@ -58,6 +58,8 @@
 
               # iamcco/markdown-preview.nvim plugin
               yarn nodejs_22 nodePackages.npm
+              # for markdown formatting
+              pandoc
             ];
           };
         }

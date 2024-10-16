@@ -9,7 +9,6 @@ autocmd FileType c,cpp                set formatoptions=tcqlronj textwidth=78
 autocmd FileType cpp,rust             set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 autocmd FileType c,cpp                set errorformat=%f:%l:%c:\ error:\ %m,%f:%l:%c:\ warning:\ %m
 autocmd FileType c,go                 set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
-autocmd FileType markdown             set textwidth=100
 
 autocmd BufNewFile,BufRead *.h,*.c set filetype=c
 
