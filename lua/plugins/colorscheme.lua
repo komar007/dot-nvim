@@ -5,6 +5,9 @@ local gruvbox = {
   init = function()
     local utils = require('utils')
 
+    local set_extra_whitespace = [[ highlight ExtraWhitespace ctermbg=red guibg=#ff7aa8 ]]
+    local clear_extra_whitespace = [[ highlight clear ExtraWhitespace ]]
+
     vim.opt.termguicolors = true
     vim.g.gruvbox_contrast_dark = 'hard'
     vim.g.gruvbox_italicize_comments = 1
@@ -23,7 +26,7 @@ local gruvbox = {
 
     vim.cmd [[ hi Visual guibg=#3333aa guifg=none gui=none ]]
 
-    vim.cmd [[ hi ExtraWhitespace ctermbg=red guibg=#902020 ]]
+    vim.cmd(set_extra_whitespace)
     vim.cmd [[ hi PmenuSel guifg=#ffffff ctermfg=236 ]]
     vim.cmd [[ hi FloatBorder guibg=#000000 guifg=#446699 ]]
     vim.cmd [[ hi NormalFloat guibg=#000000 guifg=#777777 ]]
@@ -65,7 +68,7 @@ local gruvbox = {
     vim.cmd [[ hi TreesitterContextLineNumber guibg=#171737 guifg=#5555aa ]]
     vim.cmd [[ hi TreesitterContextBottom gui=undercurl guisp=#5555aa ]]
 
-    utils.autocmd_all({ "ColorScheme" }, [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]])
+    utils.autocmd_all({ "ColorScheme" }, set_extra_whitespace)
     local match_extrawhitespace = [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
     utils.autocmd_all({ "BufWinEnter" }, match_extrawhitespace)
     vim.cmd(match_extrawhitespace)
@@ -74,13 +77,12 @@ local gruvbox = {
       callback = function()
         local is_floating = vim.api.nvim_win_get_config(0).relative ~= ""
         if is_floating then
-          vim.cmd([[ highlight clear ExtraWhitespace ]])
+          vim.cmd(clear_extra_whitespace)
         end
       end,
     })
-    utils.autocmd_all({ "TermOpen", "TermEnter" }, [[ highlight clear ExtraWhitespace ]])
-    utils.autocmd_all({ "TermLeave", "TermClose", "BufWinLeave" },
-      [[ highlight ExtraWhitespace ctermbg=red guibg=#902020 ]])
+    utils.autocmd_all({ "TermOpen", "TermEnter" }, clear_extra_whitespace)
+    utils.autocmd_all({ "TermLeave", "TermClose", "BufWinLeave" }, set_extra_whitespace)
   end,
 }
 
