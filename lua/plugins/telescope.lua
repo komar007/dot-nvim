@@ -10,10 +10,10 @@ return {
     }
   },
   keys = {
-    { "<C-p>",         ":lua telescope_buffers()<CR>" },
-    { "<Leader><C-p>", ":lua telescope_findfiles()<CR>" },
-    { "<Leader>*",     ":lua telescope_grep_string()<CR>" },
-    { "<Leader>/",     ":lua telescope_live_grep()<CR>" },
+    { "<C-p>",         ":lua Telescope_buffers()<CR>" },
+    { "<Leader><C-p>", ":lua Telescope_findfiles()<CR>" },
+    { "<Leader>*",     ":lua Telescope_grep_string()<CR>" },
+    { "<Leader>/",     ":lua Telescope_live_grep()<CR>" },
   },
   config = function()
     local telescope = require('telescope')
@@ -59,39 +59,41 @@ return {
       })
     end
 
-    local fullscreen_horizontal_theme = themes.get_ivy({
-      layout_config = {
-        height = 10000,
-        width = 10000,
-      },
-      layout_strategy = 'vertical',
-    })
+    local function fullscreen_horizontal_theme()
+      return themes.get_ivy({
+        layout_config = {
+          height = 10000,
+          width = 10000,
+        },
+        layout_strategy = 'vertical',
+      })
+    end
 
-    telescope_findfiles = function(config)
+    Telescope_findfiles = function()
       require('telescope.builtin').find_files(fullscreen_theme())
     end
-    telescope_buffers = function(config)
+    Telescope_buffers = function()
       local theme = fullscreen_theme()
       theme.sort_mru = true
       require('telescope.builtin').buffers(theme)
     end
-    telescope_references = function(config)
-      require('telescope.builtin').lsp_references(fullscreen_horizontal_theme)
+    Telescope_references = function()
+      require('telescope.builtin').lsp_references(fullscreen_horizontal_theme())
     end
-    telescope_implementations = function(config)
-      require('telescope.builtin').lsp_implementations(fullscreen_horizontal_theme)
+    Telescope_implementations = function()
+      require('telescope.builtin').lsp_implementations(fullscreen_horizontal_theme())
     end
-    telescope_grep_string = function(config)
-      require('telescope.builtin').grep_string(fullscreen_horizontal_theme)
+    Telescope_grep_string = function()
+      require('telescope.builtin').grep_string(fullscreen_horizontal_theme())
     end
-    telescope_live_grep = function(config)
-      require('telescope.builtin').live_grep(fullscreen_horizontal_theme)
+    Telescope_live_grep = function()
+      require('telescope.builtin').live_grep(fullscreen_horizontal_theme())
     end
-    telescope_definitions = function(config)
-      require('telescope.builtin').lsp_definitions(fullscreen_horizontal_theme)
+    Telescope_definitions = function()
+      require('telescope.builtin').lsp_definitions(fullscreen_horizontal_theme())
     end
-    telescope_type_definitions = function(config)
-      require('telescope.builtin').lsp_type_definitions(fullscreen_horizontal_theme)
+    Telescope_type_definitions = function()
+      require('telescope.builtin').lsp_type_definitions(fullscreen_horizontal_theme())
     end
   end,
 }

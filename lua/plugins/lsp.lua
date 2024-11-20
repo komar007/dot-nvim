@@ -15,13 +15,13 @@ return {
     local on_lsp_attach = function(client)
       local keymap_opts = { noremap = true, silent = true }
       -- code navigation shortcuts
-      vim.keymap.set('n', 'gd', telescope_definitions, keymap_opts)
+      vim.keymap.set('n', 'gd', Telescope_definitions, keymap_opts)
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, keymap_opts)
-      vim.keymap.set('n', 'gr', telescope_references, keymap_opts)
-      vim.keymap.set('n', 'gi', telescope_implementations, keymap_opts)
+      vim.keymap.set('n', 'gr', Telescope_references, keymap_opts)
+      vim.keymap.set('n', 'gi', Telescope_implementations, keymap_opts)
       -- docs and info
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, keymap_opts)
-      vim.keymap.set('n', 'gt', telescope_type_definitions, keymap_opts)
+      vim.keymap.set('n', 'gt', Telescope_type_definitions, keymap_opts)
       vim.keymap.set('n', '<c-k>', vim.lsp.buf.signature_help, keymap_opts)
       -- action shortcuts (code actions are implemented in actions_preview.lua
       vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, keymap_opts)
