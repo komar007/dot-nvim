@@ -68,6 +68,8 @@ local gruvbox = {
     vim.cmd [[ hi TreesitterContextLineNumber guibg=#171737 guifg=#5555aa ]]
     vim.cmd [[ hi TreesitterContextBottom gui=undercurl guisp=#5555aa ]]
 
+    vim.cmd [[ hi RenderMarkdownCode guibg=#151515 ]]
+
     utils.autocmd_all({ "ColorScheme" }, set_extra_whitespace)
     local match_extrawhitespace = [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
     utils.autocmd_all({ "BufWinEnter" }, match_extrawhitespace)
