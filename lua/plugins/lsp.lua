@@ -6,6 +6,10 @@ return {
       version = '^5',
       lazy = false,
     },
+    {
+      'saecki/crates.nvim',
+      tag = 'stable'
+    },
     'nvim-telescope/telescope.nvim',
   },
   config = function()
@@ -135,6 +139,27 @@ return {
             },
           },
         },
+      },
+    }
+
+    require('crates').setup {
+      lsp = {
+        enabled = true,
+        on_attach = on_lsp_attach,
+        actions = true,
+        hover = true,
+        completion = true,
+      },
+      completion = {
+        crates = {
+          enabled = true,
+          max_results = 20,
+          min_chars = 3,
+        }
+      },
+      null_ls = {
+        enabled = true,
+        name = "crates.nvim",
       },
     }
 
