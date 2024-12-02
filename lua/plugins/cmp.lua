@@ -7,7 +7,6 @@ return {
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-vsnip',
     'hrsh7th/cmp-nvim-lsp-signature-help',
-    'hrsh7th/vim-vsnip',
     'zjp-CN/nvim-cmp-lsp-rs'
   },
   config = function()
@@ -83,6 +82,7 @@ return {
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
+        { name = 'vsnip' },
       }),
       formatting = {
         fields = { "kind", "abbr", "menu" },
