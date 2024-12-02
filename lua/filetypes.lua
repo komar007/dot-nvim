@@ -1,3 +1,10 @@
+vim.filetype.add({
+  filename = {
+    ["docker-compose.yml"] = "yaml.docker-compose",
+    ["docker-compose.yaml"] = "yaml.docker-compose",
+  },
+})
+
 vim.api.nvim_create_augroup("FileTypeSettings", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
