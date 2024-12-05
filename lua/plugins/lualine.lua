@@ -7,13 +7,13 @@ local colors = {
   fg       = '#bbc2cf',
   lightfg  = '#c3d5ff',
   darkfg   = '#6b727f',
-  green    = '#98be65',
+  green    = '#88ae55',
   green_i  = '#587e45',
-  orange   = '#fe8019',
+  yellow   = '#ca8462',
   violet   = '#8981c1',
   visual   = '#3333aa',
   visual_f = '#bbbbff',
-  red      = '#fb4934',
+  red      = '#d75f5f',
 }
 
 local conditions = {
@@ -136,7 +136,7 @@ return {
             symbols = { added = '󰐖 ', modified = '󱗜 ', removed = '󰍵 ' },
             diff_color = {
               added = { fg = colors.green },
-              modified = { fg = colors.orange },
+              modified = { fg = colors.yellow },
               removed = { fg = colors.red },
             },
             on_click = function(_, but, _)
