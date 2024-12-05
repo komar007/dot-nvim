@@ -23,6 +23,12 @@ for _, type in pairs(types) do
   vim.fn.sign_define(hl, { text = '', numhl = hl, linehl = lhl })
 end
 
-vim.keymap.set('n', ']l', vim.diagnostic.goto_next)
-vim.keymap.set('n', '[l', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']l', function() vim.diagnostic.goto_next({ wrap = false }) end)
+vim.keymap.set('n', '[l', function() vim.diagnostic.goto_prev({ wrap = false }) end)
+vim.keymap.set('n', ']e', function()
+  vim.diagnostic.goto_next({ wrap = false, severity = vim.diagnostic.severity.ERROR })
+end)
+vim.keymap.set('n', '[e', function()
+  vim.diagnostic.goto_prev({ wrap = false, severity = vim.diagnostic.severity.ERROR })
+end)
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
