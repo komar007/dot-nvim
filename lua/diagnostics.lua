@@ -32,3 +32,7 @@ vim.keymap.set('n', '[e', function()
   vim.diagnostic.goto_prev({ wrap = false, severity = vim.diagnostic.severity.ERROR })
 end)
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
+
+vim.keymap.set('n', '<F5>', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { silent = true, noremap = true })
