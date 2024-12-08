@@ -56,21 +56,8 @@ local function search_result()
   return ' ' .. last_search .. ' (' .. searchcount.current .. '/' .. searchcount.total .. ')'
 end
 
-local function duplicate(inputTable)
-  local outputTable = {}
-  for i = 1, #inputTable do
-    table.insert(outputTable, inputTable[i])
-    table.insert(outputTable, inputTable[i])
-  end
-  return outputTable
-end
-
 return {
   'nvim-lualine/lualine.nvim',
-
-  dependencies = {
-    'arkav/lualine-lsp-progress',
-  },
   config = function()
     local colored_filename = require('lualine_colored_filename').colored_filename
     require('lualine').setup {
@@ -108,21 +95,6 @@ return {
             end,
             padding = { left = 0, right = 1 },
             color = { fg = colors.fg },
-          },
-          {
-            'lsp_progress',
-            display_components = { 'spinner', {} },
-            separators = {
-              component = '',
-              progress = '',
-              message = { pre = '', post = '' },
-              percentage = { pre = '', post = '' },
-              title = { pre = '', post = '' },
-              lsp_client_name = { pre = '', post = '' },
-              spinner = { pre = '', post = '' },
-            },
-            spinner_symbols = duplicate({ "▱▱▱", "▰▱▱", "▰▰▱", "▰▰▰", "▱▰▰", "▱▱▰" }),
-            padding = { left = 0, right = 2 },
           },
         },
         lualine_b = {
