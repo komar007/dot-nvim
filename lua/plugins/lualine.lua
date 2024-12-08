@@ -71,7 +71,7 @@ return {
           {
             function()
               local out = ''
-              if next(vim.lsp.buf_get_clients(0)) == nil then
+              if next(vim.lsp.get_clients()) == nil then
                 out = ' ' .. out .. '  '
               end
               return out
@@ -82,7 +82,7 @@ return {
             function()
               local out = ''
               local added = false
-              for _, client in pairs(vim.lsp.buf_get_clients(0)) do
+              for _, client in pairs(vim.lsp.get_clients()) do
                 if added then
                   out = out .. ','
                 else
