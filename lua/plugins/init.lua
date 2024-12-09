@@ -20,4 +20,9 @@ return {
     -- the repo and pushes malicious code to it
     commit = "b97fab52f9cdeabe2bbb5eb98d82356899f30829"
   },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {}
+  },
 }
