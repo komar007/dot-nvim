@@ -25,4 +25,10 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {}
   },
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    opts = {},
+  }
 }
