@@ -1,5 +1,9 @@
 return {
   "j-hui/fidget.nvim",
+  lazy = false,
+  keys = {
+    { "<leader>n", "<cmd>Fidget history<cr>", desc = "show Fidget notification history" },
+  },
   opts = {
     progress = {
       display = {
