@@ -88,6 +88,7 @@ return {
         'nixd',
         'protols', -- not available in nixpkgs, must be installed with: cargo install protols
         'vimls',
+        'yamlls',
       }
     )
 
