@@ -79,6 +79,7 @@ return {
         'dockerls',
         'eslint',
         'gopls',
+        'jqls', -- nixpkgs contains an old version, instead, jq-lsp is installed with: nix run nixpkgs#go install github.com/wader/jq-lsp@master
         {
           'jsonls',
           capabilities = caps_for_jsonls,
