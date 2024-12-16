@@ -54,6 +54,8 @@
               vim-language-server
               # yamlls
               yaml-language-server
+              # protols
+              protols
 
               # Other requirements
               # ==================

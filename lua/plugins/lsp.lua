@@ -86,7 +86,7 @@ return {
         'lua_ls',
         'marksman',
         'nixd',
-        'protols', -- not available in nixpkgs, must be installed with: cargo install protols
+        'protols',
         'vimls',
         'yamlls',
       }
