@@ -54,7 +54,6 @@ vim.opt.relativenumber = true
 vim.opt.showmode = false
 
 vim.keymap.set('n', '<F2>', function() vim.o.cursorcolumn = not vim.o.cursorcolumn end, { expr = true })
-vim.keymap.set('n', '<F3>', ':IBLToggle<cr>')
 
 -- A little bit of emacs can't be too sacrilegious... right?
 --

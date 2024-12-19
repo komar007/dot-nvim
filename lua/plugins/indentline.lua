@@ -1,5 +1,9 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
+  keys = {
+    { "<F3>", ":IBLToggle<CR>" },
+  },
+  lazy = false,
   config = function()
     vim.api.nvim_set_hl(0, 'IblIndent', { fg = '#1a1a1a' })
 
