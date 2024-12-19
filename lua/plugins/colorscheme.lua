@@ -16,6 +16,14 @@ local gruvbox = {
     vim.cmd 'colorscheme gruvbox'
     vim.opt.background = 'dark'
 
+    vim.cmd [[ hi DiffAdd guibg=#071c04 guifg=NONE guisp=#444444 gui=NONE ]]
+    vim.cmd [[ hi DiffDelete guibg=#150504 guifg=#221111 guisp=#444444 gui=NONE ]]
+    vim.cmd [[ hi DiffChange guibg=#221505 guifg=NONE guisp=#444444 gui=NONE ]]
+    vim.cmd [[ hi DiffText guibg=#663311 guifg=NONE guisp=#444444 gui=NONE ]]
+
+    vim.cmd [[ hi FoldColumn guibg=#000000 guifg=#444488 ]]
+    vim.cmd [[ hi Folded guibg=#171737 guifg=#888888 guisp=#5555aa gui=undercurl ]]
+
     vim.cmd [[ hi Normal ctermbg=16 guibg=#000000 ]]
     vim.cmd [[ hi Comment ctermfg=243 guifg=#7f7f7f ]]
     vim.cmd [[ hi CursorLine ctermbg=237 guibg=#2c2826 ]]

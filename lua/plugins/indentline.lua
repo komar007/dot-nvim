@@ -5,6 +5,9 @@ return {
   },
   lazy = false,
   config = function()
+    -- FIXME: Setting this (and other nvim_set_hl calls below) breaks some highlighting.
+    -- For example, when CursorLine has gui=underline, the underline is interrupted where
+    -- indentations are marked. Not sure whose fault it is yet.
     vim.api.nvim_set_hl(0, 'IblIndent', { fg = '#1a1a1a' })
 
     local highlight = {
