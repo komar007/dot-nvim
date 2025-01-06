@@ -14,9 +14,7 @@
           unstable = import nixpkgs-unstable {
             inherit system;
           };
-        in
-        with stable; {
-          devShells.default = mkShell {
+          nvimDepsShell = with stable; mkShell {
             buildInputs = [
               # Basic dependencies (lazy + fzf native compilation)
               # ==================================================
@@ -79,6 +77,9 @@
               pandoc
             ];
           };
+        in {
+          devShells.default = nvimDepsShell;
+          packages.default = nvimDepsShell;
         }
       );
 }
