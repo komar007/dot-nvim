@@ -53,9 +53,9 @@ vim.opt.scrolloff = 8
 vim.opt.relativenumber = true
 vim.opt.showmode = false
 vim.opt.fillchars = {
-  foldopen = "",
+  foldopen = "󰚕",
   foldsep = "│",
-  foldclose = "",
+  foldclose = "󰬸",
   fold = ' ',
 
   diff = "╱",
@@ -65,7 +65,7 @@ vim.opt.foldcolumn = "auto" -- Restore auto behavior
 vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "diff",
   callback = function()
-    vim.opt.foldcolumn = "auto" -- Restore auto behavior
+    vim.opt.foldcolumn = "auto"
     if vim.opt.diff:get() then
       vim.opt.foldtext = 'v:lua.FoldTextInDiff()'
     else
