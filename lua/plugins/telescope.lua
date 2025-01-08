@@ -21,6 +21,7 @@ return {
 
     telescope.setup {
       defaults = {
+        winblend = 15,
         path_display = { "truncate" },
         mappings = {
           n = {
