@@ -10,6 +10,6 @@ return {
     },
   },
   keys = {
-    { "<leader>t", "<cmd>TodoTrouble toggle<cr>", desc = "show Todo list in Trouble" }
+    { "<leader>tt", "<cmd>TodoTrouble toggle<cr>", desc = "show Todo list in Trouble" }
   },
 }

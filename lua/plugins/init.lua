@@ -10,11 +10,6 @@ return {
   'tpope/vim-sleuth',
   'vim-scripts/a.vim',
   {
-    'folke/trouble.nvim',
-    opts = {},
-    cmd = "Trouble",
-  },
-  {
     'lambdalisue/vim-suda',
     -- a very specific commit so that we cannot be compromised when someone hacks
     -- the repo and pushes malicious code to it
