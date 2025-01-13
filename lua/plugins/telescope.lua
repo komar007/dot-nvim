@@ -7,13 +7,15 @@ return {
       'nvim-telescope/telescope-fzf-native.nvim',
       build =
       'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
-    }
+    },
+    "debugloop/telescope-undo.nvim",
   },
   keys = {
     { "<C-p>",         ":lua Telescope_buffers()<CR>" },
     { "<Leader><C-p>", ":lua Telescope_findfiles()<CR>" },
     { "<Leader>*",     ":lua Telescope_grep_string()<CR>" },
     { "<Leader>/",     ":lua Telescope_live_grep()<CR>" },
+    { "<Leader>u",     "<cmd>Telescope undo<CR>" },
   },
   config = function()
     local telescope = require('telescope')
@@ -33,10 +35,18 @@ return {
         },
       },
       extensions = {
-      }
+        undo = {
+          side_by_side = false,
+          layout_strategy = "vertical",
+          layout_config = {
+            prieview_height = 0.8,
+          },
+        },
+      },
     }
 
     telescope.load_extension('fzf')
+    telescope.load_extension('undo')
 
     require('dressing').setup({
       input = {
