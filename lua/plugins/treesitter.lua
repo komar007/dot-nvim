@@ -6,6 +6,7 @@ return {
   build = ':TSUpdate',
   config = function()
     require('nvim-treesitter.configs').setup {
+      modules = {},
       ensure_installed = {
         "c",
         "css",
@@ -29,6 +30,8 @@ return {
         "vimdoc",
         "xml"
       },
+      auto_install = false,
+      ignore_install = {},
       sync_install = false,
       highlight = {
         enable = true,
