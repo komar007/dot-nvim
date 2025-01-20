@@ -1,5 +1,6 @@
 return {
   "folke/snacks.nvim",
+  priority = 1000,
   lazy = false,
   ---@type snacks.Config
   opts = {
@@ -11,15 +12,15 @@ return {
       },
     },
     picker = {
-      sources = {
-        buffers = {
-          win = {
-            input = {
-              keys = {
-                ["<c-x>"] = { "" },
-                ["<c-d>"] = { "bufdelete", mode = { "n", "i" } },
-              },
-            },
+      win = {
+        input = {
+          keys = {
+            ["<c-b>"] = { "" },
+            ["<c-f>"] = { "" },
+            ["<c-a>"] = { "" },
+            ["<c-e>"] = { "" },
+            ["<c-d>"] = { "" },
+            ["<c-u>"] = { "" },
           },
         },
       },
