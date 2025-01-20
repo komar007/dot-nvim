@@ -97,7 +97,7 @@ vim.keymap.set('n', '<F2>', function() vim.o.cursorcolumn = not vim.o.cursorcolu
 
 -- A little bit of emacs can't be too sacrilegious... right?
 --
--- These are mainly for telescope/dressing, whic use insert mode for user input.
+-- These are mainly for snacks inputs, which use insert mode for user input.
 -- It's kind of hard for my brain to distinguish it from typing in shell, so I need some basic readline shortcuts.
 -- Command line is handled by ryvnf/readline.vim.
 vim.keymap.set('i', '<C-a>', '<C-o>^')

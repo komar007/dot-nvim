@@ -10,6 +10,13 @@ return {
           winblend = 15,
         },
       },
+      input = {
+        relative = "cursor",
+        row = 1,
+        title_pos = "left",
+      },
+    },
+    input = {
     },
     picker = {
       win = {

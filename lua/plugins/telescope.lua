@@ -2,7 +2,6 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'stevearc/dressing.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build =
@@ -43,19 +42,6 @@ return {
 
     telescope.load_extension('fzf')
     telescope.load_extension('undo')
-
-    require('dressing').setup({
-      input = {
-        prompt_align = "left",
-        override = function(conf)
-          conf.anchor = "NW";
-          return conf
-        end,
-      },
-      select = {
-        telescope = telescope_themes.get_cursor(),
-      },
-    })
 
     local themes = {
       fullscreen = function()
