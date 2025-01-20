@@ -10,22 +10,22 @@ return {
       'saecki/crates.nvim',
       tag = 'stable'
     },
-    'nvim-telescope/telescope.nvim',
   },
   config = function()
     local border = require('border')
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     local on_lsp_attach = function(client)
+      local snacks = require('snacks')
       local keymap_opts = { noremap = true, silent = true }
       -- code navigation shortcuts
-      vim.keymap.set('n', 'gd', Telescope_definitions, keymap_opts)
-      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, keymap_opts)
-      vim.keymap.set('n', 'gr', Telescope_references, keymap_opts)
-      vim.keymap.set('n', 'gi', Telescope_implementations, keymap_opts)
+      vim.keymap.set('n', 'gd', snacks.picker.lsp_definitions, keymap_opts)
+      vim.keymap.set('n', 'gD', snacks.picker.lsp_declarations, keymap_opts)
+      vim.keymap.set('n', 'gr', snacks.picker.lsp_references, keymap_opts)
+      vim.keymap.set('n', 'gi', snacks.picker.lsp_implementations, keymap_opts)
       -- docs and info
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, keymap_opts)
-      vim.keymap.set('n', 'gt', Telescope_type_definitions, keymap_opts)
+      vim.keymap.set('n', 'gt', snacks.picker.lsp_type_definitions, keymap_opts)
       vim.keymap.set('n', '<c-k>', vim.lsp.buf.signature_help, keymap_opts)
       -- action shortcuts (code actions are implemented in actions_preview.lua
       vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, keymap_opts)

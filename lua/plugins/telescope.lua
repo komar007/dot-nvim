@@ -11,10 +11,6 @@ return {
     "debugloop/telescope-undo.nvim",
   },
   keys = {
-    { "<C-p>",         ":lua Telescope_buffers()<CR>" },
-    { "<Leader><C-p>", ":lua Telescope_findfiles()<CR>" },
-    { "<Leader>*",     ":lua Telescope_grep_string()<CR>" },
-    { "<Leader>/",     ":lua Telescope_live_grep()<CR>" },
     { "<Leader>u",     "<cmd>Telescope undo<CR>" },
   },
   config = function()
@@ -80,32 +76,5 @@ return {
         })
       end,
     }
-
-    Telescope_findfiles = function()
-      require('telescope.builtin').find_files(themes.fullscreen())
-    end
-    Telescope_buffers = function()
-      local theme = themes.fullscreen()
-      theme.sort_mru = true
-      require('telescope.builtin').buffers(theme)
-    end
-    Telescope_references = function()
-      require('telescope.builtin').lsp_references(themes.fullscreen_horizontal())
-    end
-    Telescope_implementations = function()
-      require('telescope.builtin').lsp_implementations(themes.fullscreen_horizontal())
-    end
-    Telescope_grep_string = function()
-      require('telescope.builtin').grep_string(themes.fullscreen_horizontal())
-    end
-    Telescope_live_grep = function()
-      require('telescope.builtin').live_grep(themes.fullscreen_horizontal())
-    end
-    Telescope_definitions = function()
-      require('telescope.builtin').lsp_definitions(themes.fullscreen_horizontal())
-    end
-    Telescope_type_definitions = function()
-      require('telescope.builtin').lsp_type_definitions(themes.fullscreen_horizontal())
-    end
   end,
 }

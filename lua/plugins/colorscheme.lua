@@ -42,6 +42,11 @@ local gruvbox = {
     -- scrollbar in cmp/lsp
     vim.cmd [[ hi PmenuThumb guibg=#446699 guifg=none gui=none ]]
 
+    vim.cmd [[ hi SnacksPickerDir guifg=#888888 ]]
+    vim.cmd [[ hi SnacksPickerFile guifg=#dddddd gui=bold ]]
+    vim.cmd [[ hi SnacksPickerBufFlags guifg=#888888 ]]
+    vim.cmd [[ hi SnacksPickerMatch guifg=#fabd2f gui=underline guisp=#fabd2f ]]
+
     vim.cmd [[ hi SignColumn guibg='#000000' ctermbg=16 ]]
     vim.cmd [[ hi GitGutterAdd ctermfg=71 guifg=#5FAF5F ]]
     vim.cmd [[ hi GitGutterDelete ctermbg=16 guibg='#000000' guifg='#fb4934']]
