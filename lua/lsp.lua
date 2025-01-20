@@ -70,6 +70,7 @@ require('utils').setup_lsps(
       'eslint',
       cmd = { "eslint", "--stdio" },
     },
+    'fsautocomplete',
     {
       'gopls',
       settings = {

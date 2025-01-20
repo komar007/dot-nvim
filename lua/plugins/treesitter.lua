@@ -11,6 +11,7 @@ return {
         "c",
         "css",
         "dockerfile",
+        "fsharp",
         "go",
         "gomod",
         "gosum",

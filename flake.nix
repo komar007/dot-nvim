@@ -51,6 +51,8 @@
           dockerfile-language-server-nodejs
           # docker-compose-language-service
           docker-compose-language-service
+          # fsautocomplete
+          fsautocomplete
           # gopls
           go
           gopls
