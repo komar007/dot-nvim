@@ -1,5 +1,6 @@
 return {
-  'lukas-reineke/indent-blankline.nvim',
+  'komar007/indent-blankline.nvim',
+  branch = 'yescombine',
   keys = {
     { "<F3>", ":IBLToggle<CR>" },
   },
