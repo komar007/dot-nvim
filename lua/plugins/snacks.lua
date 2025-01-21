@@ -12,6 +12,8 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+
+  ---@module "snacks"
   ---@type snacks.Config
   opts = {
     styles = {
@@ -47,6 +49,8 @@ return {
           preset = vim.o.lines >= 70 and "vertical" or "default",
         }
       end,
+      undo = {
+      }
     },
   },
   keys = {
@@ -54,5 +58,6 @@ return {
     { "<Leader><C-p>", ":lua Snacks.picker.files()<CR>" },
     { "<Leader>*",     ":lua Snacks.picker.grep_word()<CR>" },
     { "<Leader>/",     ":lua Snacks.picker.grep()<CR>" },
+    { "<Leader>u",     ":lua Snacks.picker.undo()<CR>" },
   }
 }
