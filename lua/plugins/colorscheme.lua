@@ -17,9 +17,12 @@ local gruvbox = {
     vim.opt.background = 'dark'
 
     vim.cmd [[ hi DiffAdd guibg=#071c04 guifg=NONE guisp=#444444 gui=NONE ]]
-    vim.cmd [[ hi DiffDelete guibg=#150504 guifg=#221111 guisp=#444444 gui=NONE ]]
+    vim.cmd [[ hi DiffDelete guibg=#0c0300 guifg=#221111 guisp=#444444 gui=NONE ]]
     vim.cmd [[ hi DiffChange guibg=#221505 guifg=NONE guisp=#444444 gui=NONE ]]
     vim.cmd [[ hi DiffText guibg=#663311 guifg=NONE guisp=#444444 gui=NONE ]]
+
+    vim.cmd [[ hi DiffviewDiffDeleteDim guibg=#0a0a0a guifg=#1a1a1a guisp=#444444 gui=NONE ]]
+    -- DiffviewDiffAddAsDelete is set on diffview's init
 
     vim.cmd [[ hi FoldColumn guibg=#000000 guifg=#444488 ]]
     vim.cmd [[ hi Folded guibg=#171737 guifg=#888888 guisp=#5555aa gui=undercurl ]]
