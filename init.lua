@@ -29,7 +29,6 @@ require("lazy").setup("plugins", {
 require("diagnostics")
 
 local utils = require("utils")
-local pg = require("playground")
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "*",
@@ -117,50 +116,7 @@ vim.keymap.set('n', '<leader>x', function()
   end
 end)
 
-vim.api.nvim_create_user_command('EditConfig', function()
-  local config_dir = vim.fn.stdpath('config')
-  assert(type(config_dir) == 'string', 'Expected string')
-  vim.fn.chdir(config_dir)
-  vim.api.nvim_cmd({ cmd = "edit", args = { "init.lua" } }, { output = false })
-end, {})
-
-pg.make_playground('rust', function()
-  vim.fn.system({ 'cargo', 'init', '.' })
-  return 'src/main.rs'
-end)
-
 require('filetypes')
-
-local maingo = [[
-package main
-
-
-import "fmt"
-
-func main() {
-    fmt.Println("hello world")
-}
-]]
-pg.make_playground('go', function()
-  utils.initialize_file('main.go', maingo)
-  return 'main.go'
-end)
-
-vim.cmd 'source ~/.config/nvim/legacy.vim'
-
-local function linked_to(parent)
-  local r = {}
-  for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
-    if hl.link == parent then
-      table.insert(r, name)
-    end
-  end
-  return r
-end
-
-vim.api.nvim_create_user_command('WhatLinksTo', function(ctx)
-  local parent = ctx.args
-  for _, linked in pairs(linked_to(parent)) do
-    print(linked)
-  end
-end, { nargs = 1, complete = "highlight" })
+require('commands')
+require('playgrounds')
+vim.cmd [[ source ~/.config/nvim/legacy.vim ]]
