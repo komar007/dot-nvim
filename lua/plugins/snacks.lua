@@ -18,6 +18,12 @@ return {
     },
     input = {
     },
+    scroll = {
+      animate = {
+        duration = { step = 20, total = 200 },
+        easing = "inOutExpo",
+      },
+    },
     picker = {
       win = {
         input = {
