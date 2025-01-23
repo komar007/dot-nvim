@@ -94,17 +94,6 @@ vim.opt.foldtext = 'v:lua.FoldText()'
 
 vim.keymap.set('n', '<F2>', function() vim.o.cursorcolumn = not vim.o.cursorcolumn end, { expr = true })
 
--- A little bit of emacs can't be too sacrilegious... right?
---
--- These are mainly for snacks inputs, which use insert mode for user input.
--- It's kind of hard for my brain to distinguish it from typing in shell, so I need some basic readline shortcuts.
--- Command line is handled by ryvnf/readline.vim.
-vim.keymap.set('i', '<C-a>', '<C-o>^')
-vim.keymap.set('i', '<C-e>', '<C-o>$')
-vim.keymap.set('i', '<C-b>', '<Left>')
-vim.keymap.set('i', '<C-f>', '<Right>')
-vim.keymap.set('i', '<C-d>', '<Delete>')
-
 -- Remove both the character under the cursor and its match
 vim.keymap.set('n', '<leader>x', function()
   local col = vim.api.nvim_win_get_cursor(0)[2]
@@ -116,6 +105,7 @@ vim.keymap.set('n', '<leader>x', function()
   end
 end)
 
+require('readline').set()
 require('filetypes')
 require('commands')
 require('playgrounds')

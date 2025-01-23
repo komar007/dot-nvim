@@ -1,3 +1,13 @@
+local function unbind_keys_def(keys)
+  local def = {}
+  for _, key in pairs(keys) do
+    def[key] = { "" }
+  end
+  return def
+end
+
+local readline = require('readline')
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -27,14 +37,7 @@ return {
     picker = {
       win = {
         input = {
-          keys = {
-            ["<c-b>"] = { "" },
-            ["<c-f>"] = { "" },
-            ["<c-a>"] = { "" },
-            ["<c-e>"] = { "" },
-            ["<c-d>"] = { "" },
-            ["<c-u>"] = { "" },
-          },
+          keys = unbind_keys_def(readline.keys),
         },
       },
       layout = function()
