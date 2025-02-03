@@ -8,6 +8,14 @@ end
 
 local readline = require('readline')
 
+UndoConfig = {
+  layout = {
+    fullscreen = true,
+    preset = "default",
+    cycle = false
+  }
+}
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -58,6 +66,6 @@ return {
     { "<Leader><C-p>", ":lua Snacks.picker.files()<CR>" },
     { "<Leader>*",     ":lua Snacks.picker.grep_word()<CR>" },
     { "<Leader>/",     ":lua Snacks.picker.grep()<CR>" },
-    { "<Leader>u",     ":lua Snacks.picker.undo()<CR>" },
+    { "<Leader>u",     ":lua Snacks.picker.undo(UndoConfig)<CR>" },
   }
 }
