@@ -30,6 +30,7 @@ require("diagnostics")
 require('title')
 
 -- look and feel
+vim.opt.undofile = true
 vim.opt.cursorline = true
 vim.opt.number = true
 vim.opt.wildmenu = true
