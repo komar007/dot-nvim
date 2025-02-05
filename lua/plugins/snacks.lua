@@ -57,6 +57,11 @@ return {
           preset = vim.o.lines >= 70 and "vertical" or "default",
         }
       end,
+      formatters = {
+        file = {
+          truncate = 120,
+        },
+      },
       undo = {
       }
     },
