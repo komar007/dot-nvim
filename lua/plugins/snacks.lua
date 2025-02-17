@@ -9,6 +9,18 @@ end
 local readline = require('readline')
 
 UndoConfig = {
+  actions = {
+    yank_add = { action = "yank", reg = '"', field = "added_lines" },
+    yank_del = { action = "yank", reg = '"', field = "removed_lines" },
+  },
+  win = {
+    input = {
+      keys = {
+        ["<c-y>"] = { "yank_add", mode = { "n", "i" } },
+        ["<Char-0xE105>"] = { "yank_del", mode = { "n", "i" } }, -- C-S-y mapped in alacritty
+      },
+    },
+  },
   layout = {
     fullscreen = true,
     preset = "default",
