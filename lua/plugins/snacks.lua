@@ -57,6 +57,10 @@ return {
       },
     },
     picker = {
+      matcher = {
+        frecency = true,
+        cwd_bonus = true,
+      },
       win = {
         input = {
           keys = unbind_keys_def(readline.keys),
@@ -74,8 +78,6 @@ return {
           truncate = 120,
         },
       },
-      undo = {
-      }
     },
   },
   keys = {
