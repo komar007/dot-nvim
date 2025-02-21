@@ -30,6 +30,7 @@ UndoConfig = {
 
 return {
   "folke/snacks.nvim",
+  tag = "v2.21.0",
   priority = 1000,
   lazy = false,
 
