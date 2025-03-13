@@ -7,7 +7,6 @@ return {
   'sotte/presenting.vim',
   'tpope/vim-fugitive',
   'tpope/vim-sleuth',
-  'vim-scripts/a.vim',
   {
     'lambdalisue/vim-suda',
     -- a very specific commit so that we cannot be compromised when someone hacks

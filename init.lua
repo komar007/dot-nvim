@@ -18,6 +18,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     os.exit(1)
   end
 end
+
+vim.g.mapleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
+
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
   change_detection = {
