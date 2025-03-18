@@ -87,5 +87,9 @@ return {
     { "<Leader>*",     ":lua Snacks.picker.grep_word()<CR>" },
     { "<Leader>/",     ":lua Snacks.picker.grep()<CR>" },
     { "<Leader>u",     ":lua Snacks.picker.undo(UndoConfig)<CR>" },
+    { "<Leader>gd",    ":lua Snacks.picker.git_diff()<CR>" },
+    { "<Leader>gl",    ":lua Snacks.picker.git_log()<CR>" },
+    { "<Leader>glf",   ":lua Snacks.picker.git_log_file()<CR>" },
+    { "<Leader>gll",   ":lua Snacks.picker.git_log_line()<CR>" },
   }
 }

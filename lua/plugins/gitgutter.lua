@@ -25,5 +25,7 @@ return {
   end,
   keys = {
     { "gc", "<Plug>(GitGutterPreviewHunk)" },
+    { "<leader>gu", "<Plug>(GitGutterUndoHunk)" },
+    { "<leader>gs", "<Plug>(GitGutterStageHunk)" },
   }
 }
