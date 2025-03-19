@@ -12,6 +12,8 @@ return {
   },
   config = function()
     local border = require('border')
+    --vim.lsp.set_log_level("trace")
+
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     local on_lsp_attach = function(client)
