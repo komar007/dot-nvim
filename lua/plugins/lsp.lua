@@ -97,7 +97,7 @@ return {
       on_attach = on_lsp_attach,
       settings = {
         pylsp = {
-          configurationSources = {'flake8'},
+          configurationSources = { 'flake8' },
           plugins = {
             flake8 = {
               enabled = true,

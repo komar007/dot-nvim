@@ -19,6 +19,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 
+-- leader must be set before initializing lazy!
 vim.g.mapleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
 
 vim.opt.rtp:prepend(lazypath)
@@ -28,9 +29,6 @@ require("lazy").setup("plugins", {
     notify = false,
   }
 })
-
-require("diagnostics")
-require('title')
 
 -- look and feel
 vim.opt.undofile = true
@@ -68,9 +66,11 @@ vim.keymap.set('n', '<leader>x', function()
   end
 end)
 
+require("diagnostics")
+require('title')
 require('folds')
 require('readline').set()
 require('filetypes')
 require('commands')
 require('playgrounds')
-vim.cmd [[ source ~/.config/nvim/legacy.vim ]]
+vim.cmd("source " .. vim.fn.stdpath("config") .. "/legacy.vim")
