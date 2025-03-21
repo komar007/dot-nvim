@@ -21,3 +21,7 @@ vim.api.nvim_create_user_command('WhatLinksTo', function(ctx)
     print(linked)
   end
 end, { nargs = 1, complete = "highlight" })
+
+vim.api.nvim_create_user_command('InlayHintsToggle', function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { nargs = 0 })
