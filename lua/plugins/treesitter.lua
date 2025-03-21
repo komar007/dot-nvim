@@ -62,6 +62,7 @@ return {
             ["]["] = "@function.inner",
             ["]{"] = "@function.outer",
             ["]a"] = "@parameter.inner",
+            ["]s"] = "@class.inner",
           },
           goto_next_end = {
             ["]]"] = "@function.inner",
@@ -69,6 +70,7 @@ return {
             ["]b"] = "@block.inner",
             ["]B"] = "@block.outer",
             ["]A"] = "@parameter.inner",
+            ["]S"] = "@class.inner",
           },
           goto_previous_start = {
             ["[["] = "@function.inner",
@@ -76,11 +78,13 @@ return {
             ["[b"] = "@block.inner",
             ["[B"] = "@block.outer",
             ["[a"] = "@parameter.inner",
+            ["[s"] = "@class.inner",
           },
           goto_previous_end = {
             ["[]"] = "@function.inner",
             ["[}"] = "@function.outer",
             ["[A"] = "@parameter.inner",
+            ["[S"] = "@class.inner",
           },
         },
       },
