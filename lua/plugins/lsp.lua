@@ -130,7 +130,18 @@ return {
       },
       server = {
         capabilities = capabilities,
-        on_attach = on_lsp_attach,
+        on_attach = function(client)
+          on_lsp_attach(client)
+          vim.keymap.set('n', 'gl', function()
+            vim.cmd.RustLsp('renderDiagnostic', 'current')
+          end, { noremap = true, silent = true })
+          vim.keymap.set('n', 'gL', function()
+            vim.cmd.RustLsp('explainError', 'current')
+          end, { noremap = true, silent = true })
+          vim.api.nvim_buf_create_user_command(0, 'CargoToml', function()
+            vim.cmd.RustLsp('openCargo')
+          end, { nargs = 0 })
+        end,
         settings = {
           ['rust-analyzer'] = {
             diagnostics = {
