@@ -15,22 +15,22 @@ return {
     --vim.lsp.set_log_level("trace")
 
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local lsp_keymap_opts = { buffer = true, noremap = true, silent = true }
 
     local on_lsp_attach = function(client)
       local snacks = require('snacks')
-      local keymap_opts = { noremap = true, silent = true }
       -- code navigation shortcuts
-      vim.keymap.set('n', 'gd', snacks.picker.lsp_definitions, keymap_opts)
-      vim.keymap.set('n', 'gD', snacks.picker.lsp_declarations, keymap_opts)
-      vim.keymap.set('n', 'gr', snacks.picker.lsp_references, keymap_opts)
-      vim.keymap.set('n', 'gi', snacks.picker.lsp_implementations, keymap_opts)
+      vim.keymap.set('n', 'gd', snacks.picker.lsp_definitions, lsp_keymap_opts)
+      vim.keymap.set('n', 'gD', snacks.picker.lsp_declarations, lsp_keymap_opts)
+      vim.keymap.set('n', 'gr', snacks.picker.lsp_references, lsp_keymap_opts)
+      vim.keymap.set('n', 'gi', snacks.picker.lsp_implementations, lsp_keymap_opts)
       -- docs and info
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, keymap_opts)
-      vim.keymap.set('n', 'gt', snacks.picker.lsp_type_definitions, keymap_opts)
-      vim.keymap.set('n', '<c-k>', vim.lsp.buf.signature_help, keymap_opts)
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, lsp_keymap_opts)
+      vim.keymap.set('n', 'gt', snacks.picker.lsp_type_definitions, lsp_keymap_opts)
+      vim.keymap.set('n', '<c-k>', vim.lsp.buf.signature_help, lsp_keymap_opts)
       -- action shortcuts (code actions are implemented in actions_preview.lua
-      vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, keymap_opts)
-      vim.keymap.set('n', 'gC', vim.lsp.codelens.run, keymap_opts)
+      vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, lsp_keymap_opts)
+      vim.keymap.set('n', 'gC', vim.lsp.codelens.run, lsp_keymap_opts)
 
       if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
@@ -134,10 +134,10 @@ return {
           on_lsp_attach(client)
           vim.keymap.set('n', 'gl', function()
             vim.cmd.RustLsp('renderDiagnostic', 'current')
-          end, { noremap = true, silent = true })
+          end, lsp_keymap_opts)
           vim.keymap.set('n', 'gL', function()
             vim.cmd.RustLsp('explainError', 'current')
-          end, { noremap = true, silent = true })
+          end, lsp_keymap_opts)
           vim.api.nvim_buf_create_user_command(0, 'CargoToml', function()
             vim.cmd.RustLsp('openCargo')
           end, { nargs = 0 })
