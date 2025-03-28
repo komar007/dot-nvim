@@ -26,8 +26,8 @@ return {
       vim.keymap.set('n', 'gi', snacks.picker.lsp_implementations, lsp_keymap_opts)
       -- docs and info
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, lsp_keymap_opts)
+      vim.keymap.set({ 'n', 'i' }, '<C-l>', vim.lsp.buf.signature_help, lsp_keymap_opts)
       vim.keymap.set('n', 'gt', snacks.picker.lsp_type_definitions, lsp_keymap_opts)
-      vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, lsp_keymap_opts)
       -- action shortcuts (code actions are implemented in actions_preview.lua
       vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, lsp_keymap_opts)
       vim.keymap.set('n', 'gC', vim.lsp.codelens.run, lsp_keymap_opts)
