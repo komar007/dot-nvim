@@ -2,10 +2,6 @@
 
 DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 
-if [ -n "$NVIM_FLAKE" ]; then
-	NVIM_BIN="nix run $DIR --"
-else
-	NVIM_BIN=nvim
-fi
-export NVIM_BIN
-"$DIR"/nvim_cold_reload/nvim_cold_reload.sh "$@"
+NVIM_BIN="nvim" \
+NVIM_BIN_ALT="nix run $DIR --" \
+	"$DIR"/nvim_cold_reload/nvim_cold_reload.sh "$@"
