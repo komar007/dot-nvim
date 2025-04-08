@@ -85,6 +85,7 @@
             text = ''nvim "$@"'';
           };
           packages.default = packages.nvim;
+          homeManagerModules.default = args: import ./hm-module.nix (args // { nvim = packages.nvim; });
         }
       );
 }
