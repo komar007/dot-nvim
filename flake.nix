@@ -14,6 +14,7 @@
           unstable = import nixpkgs-unstable {
             inherit system;
           };
+          neovim = stable.neovim;
           dependencies = with stable; [
             # Basic dependencies (lazy + fzf native compilation)
             # ==================================================
@@ -21,10 +22,6 @@
             cmake
             # telescope
             ripgrep
-
-            # Neovim itself
-            # =============
-            neovim
 
             # Language servers
             # ================
@@ -77,12 +74,12 @@
           ];
         in rec {
           devShells.default = stable.mkShell {
-            buildInputs = dependencies;
+            buildInputs = dependencies ++ [ neovim ];
           };
           packages.nvim = stable.writeShellApplication {
             name = "nvim";
             runtimeInputs = dependencies;
-            text = ''nvim "$@"'';
+            text = ''${neovim}/bin/nvim "$@"'';
           };
           packages.default = packages.nvim;
           homeManagerModules.default = args: import ./hm-module.nix (args // { nvim = packages.nvim; });
