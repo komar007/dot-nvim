@@ -1,9 +1,8 @@
-local function unbind_keys_def(keys)
-  local def = {}
-  for _, key in pairs(keys) do
-    def[key] = { "" }
+local function keys_but_unbind(unbind, keys)
+  for _, key in pairs(unbind) do
+    keys[key] = { "" }
   end
-  return def
+  return keys
 end
 
 local readline = require('readline')
@@ -64,7 +63,10 @@ return {
       },
       win = {
         input = {
-          keys = unbind_keys_def(readline.keys),
+          keys = keys_but_unbind(readline.keys, {
+            ["<Char-0xE106>"] = { "history_back", mode = { "i", "n" } }, -- C-S-p mapped in alacritty
+            ["<Char-0xE107>"] = { "history_forward", mode = { "i", "n" } }, -- C-S-n mapped in alacritty
+          })
         },
       },
       layout = function()
