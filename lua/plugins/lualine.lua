@@ -56,6 +56,14 @@ local function search_result()
   return ' ' .. last_search .. ' (' .. searchcount.current .. '/' .. searchcount.total .. ')'
 end
 
+local function is_alternate_config()
+  local config_dir = vim.fn.stdpath('config') ---@cast config_dir string
+  local gitdir = vim.fs.joinpath(config_dir, ".git")
+  local stat = vim.loop.fs_stat(gitdir)
+  return stat and stat.type == "directory"
+end
+local is_alternate_config_cached = is_alternate_config()
+
 return {
   'nvim-lualine/lualine.nvim',
   config = function()
@@ -70,11 +78,14 @@ return {
         lualine_a = {
           {
             function()
-              local out = ''
-              if next(vim.lsp.get_clients({ bufnr = 0 })) == nil then
-                out = ' ' .. out .. '  '
+              local nvim_icon = ''
+              if is_alternate_config_cached then
+                nvim_icon = nvim_icon .. ' 󰜘'
               end
-              return out
+              if next(vim.lsp.get_clients({ bufnr = 0 })) == nil then
+                nvim_icon = ' ' .. nvim_icon .. '  '
+              end
+              return nvim_icon
             end,
             padding = { left = 1, right = 0 },
           },
