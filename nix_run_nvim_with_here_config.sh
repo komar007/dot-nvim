@@ -2,4 +2,8 @@
 
 DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 
-env "NVIM_XDG_CONFIG_HOME=$DIR" nix run "$DIR" -- "$@"
+if nix --version > /dev/null; then
+	env "NVIM_XDG_CONFIG_HOME=$DIR" nix run "$DIR" -- "$@"
+else
+	env "NVIM_XDG_CONFIG_HOME=$DIR" nvim "$@"
+fi
