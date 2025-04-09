@@ -79,7 +79,9 @@
           packages.nvim = stable.writeShellApplication {
             name = "nvim";
             runtimeInputs = dependencies;
-            text = ''XDG_CONFIG_HOME="$NVIM_XDG_CONFIG_HOME" ${neovim}/bin/nvim "$@"'';
+            text = ''
+              XDG_CONFIG_HOME="''${NVIM_XDG_CONFIG_HOME:-''${XDG_CONFIG_HOME:-""}}" ${neovim}/bin/nvim "$@"
+            '';
           };
           packages.default = packages.nvim;
           homeManagerModules.default = args: import ./hm-module.nix (args // { nvim = packages.nvim; });
