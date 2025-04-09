@@ -59,7 +59,7 @@ end
 local function is_alternate_config()
   local config_dir = vim.fn.stdpath('config') ---@cast config_dir string
   local gitdir = vim.fs.joinpath(config_dir, ".git")
-  local stat = vim.loop.fs_stat(gitdir)
+  local stat = vim.uv.fs_stat(gitdir)
   return stat and stat.type == "directory"
 end
 local is_alternate_config_cached = is_alternate_config()
