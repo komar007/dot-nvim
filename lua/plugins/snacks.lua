@@ -6,6 +6,7 @@ local function keys_but_unbind(unbind, keys)
 end
 
 local readline = require('readline')
+local utils = require('utils')
 
 UndoConfig = {
   actions = {
@@ -14,9 +15,9 @@ UndoConfig = {
   },
   win = {
     input = {
-      keys = {
-        ["<c-y>"] = { "yank_add", mode = { "n", "i" } },
-        ["<Char-0xE105>"] = { "yank_del", mode = { "n", "i" } }, -- C-S-y mapped in alacritty
+      keys = utils.keys_with_alternate {
+        ["<C-y>"] = { "yank_add", mode = { "n", "i" } },
+        ["<C-S-y>"] = { "yank_del", mode = { "n", "i" } },
       },
     },
   },
@@ -63,9 +64,9 @@ return {
       },
       win = {
         input = {
-          keys = keys_but_unbind(readline.keys, {
-            ["<Char-0xE106>"] = { "history_back", mode = { "i", "n" } }, -- C-S-p mapped in alacritty
-            ["<Char-0xE107>"] = { "history_forward", mode = { "i", "n" } }, -- C-S-n mapped in alacritty
+          keys = keys_but_unbind(readline.keys, utils.keys_with_alternate {
+            ["<C-S-p>"] = { "history_back", mode = { "i", "n" } },
+            ["<C-S-n>"] = { "history_forward", mode = { "i", "n" } },
           })
         },
       },

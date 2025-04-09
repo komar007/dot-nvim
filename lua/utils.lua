@@ -91,4 +91,20 @@ function M.shorten_path(path)
   return path
 end
 
+function M.keys_with_alternate(keys)
+  local alt = {
+    ["<C-S-y>"] = "<Char-0xE105>",
+    ["<C-S-p>"] = "<Char-0xE106>",
+    ["<C-S-n>"] = "<Char-0xE107>",
+  }
+  local out = {}
+  for key, action in pairs(keys) do
+    out[key] = action
+    if alt[key] ~= nil then
+      out[alt[key]] = action
+    end
+  end
+  return out
+end
+
 return M
