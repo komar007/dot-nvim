@@ -80,7 +80,10 @@
             name = "nvim";
             runtimeInputs = dependencies;
             text = ''
-              XDG_CONFIG_HOME="''${NVIM_XDG_CONFIG_HOME:-''${XDG_CONFIG_HOME:-""}}" ${neovim}/bin/nvim "$@"
+              if [[ -v NVIM_XDG_CONFIG_HOME ]]; then
+                export XDG_CONFIG_HOME="''${NVIM_XDG_CONFIG_HOME}"
+              fi
+              ${neovim}/bin/nvim "$@"
             '';
           };
           packages.default = packages.nvim;
