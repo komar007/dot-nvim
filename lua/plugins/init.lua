@@ -13,10 +13,4 @@ return {
     -- the repo and pushes malicious code to it
     commit = "b97fab52f9cdeabe2bbb5eb98d82356899f30829"
   },
-  {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    opts = {},
-  },
 }
