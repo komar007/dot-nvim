@@ -86,14 +86,14 @@ return {
     },
   },
   keys = {
-    { "<C-p>",         function() require'snacks'.picker.buffers() end },
-    { "<Leader><C-p>", function() require'snacks'.picker.files() end },
-    { "<Leader>*",     function() require'snacks'.picker.grep_word() end },
-    { "<Leader>/",     function() require'snacks'.picker.grep() end },
-    { "<Leader>u",     function() require'snacks'.picker.undo(UndoConfig) end },
-    { "<Leader>gd",    function() require'snacks'.picker.git_diff() end },
-    { "<Leader>gl",    function() require'snacks'.picker.git_log() end },
-    { "<Leader>glf",   function() require'snacks'.picker.git_log_file() end },
-    { "<Leader>gll",   function() require'snacks'.picker.git_log_line() end },
+    { "<C-p>",         function() require 'snacks'.picker.buffers() end },
+    { "<Leader><C-p>", function() require 'snacks'.picker.files() end },
+    { "<Leader>*",     function() require 'snacks'.picker.grep_word() end },
+    { "<Leader>/",     function() require 'snacks'.picker.grep() end },
+    { "<Leader>u",     function() require 'snacks'.picker.undo(UndoConfig) end },
+    { "<Leader>gd",    function() require 'snacks'.picker.git_diff() end },
+    { "<Leader>gl",    function() require 'snacks'.picker.git_log() end },
+    { "<Leader>glf",   function() require 'snacks'.picker.git_log_file() end },
+    { "<Leader>gll",   function() require 'snacks'.picker.git_log_line() end },
   }
 }
