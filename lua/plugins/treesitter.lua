@@ -51,8 +51,6 @@ return {
             ["ia"] = "@parameter.inner",
             ["ac"] = "@class.outer",
             ["ic"] = "@class.inner",
-            ["ib"] = "@block.inner",
-            ["ab"] = "@block.outer",
           },
         },
         move = {
