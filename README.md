@@ -81,14 +81,15 @@ alias nvim=~/repos/neovim-config/nvim_wrapper
 
 Then, run `nvim` and inside of neovim, `:ReloadAlt` (provided by wrapper). This reloads neovim to an
 alternative configuration which uses the package (neovim + dependencies like LSP servers) and the
-configuration from the flake (cloned to `~/repos/neovim-config`). You can continue using
-`:ReloadAlt` as you work on the configuration. `:Reload` takes you back to the flake-locked
-configuration and package.
+configuration from the flake (cloned to `~/repos/neovim-config`). You can then use `:Reload` as you
+work on the configuration. `:ReloadNorm` takes you back to the flake-locked configuration and
+package.
 
 When you finally fork this repository on github, you can maintain a stable version of your
 configuration in the fork. After you introduce a change, switch to it and test “in production” in
-one of you open sessions with `:ReloadAlt` and go back with `:Reload`. When the change is stable,
-push to gerrit, update your home-manager’s flake input `komar-nvim` and run `home-manager switch`.
+one of you open sessions with `:ReloadAlt` and go back with `:ReloadNorm`. When the change is
+stable, push to gerrit, update your home-manager’s flake input `komar-nvim` and run
+`home-manager switch`.
 
 ### If you are not using Nix (and don’t want to (…but you should, really))
 
@@ -128,12 +129,12 @@ alias nvim=~/repos/neovim-config/nvim_wrapper
 Now you can use `:Reload` to quickly reload neovim with new configuration keeping your current
 session intact.
 
-`:ReloadAlt` will run the same `nvim` executable, but will actually load the configuration from the
-directory in which it resides. This will make absolutely no sense if you have this repository cloned
-into `~/.config/nvim` or linked there, but if you just want to try it, instead of setting
-`XDG_CONFIG_HOME` yourself, you can use `nvim_wrapper`. It will run neovim normally, with whatever
-you have in `~/.config/nvim`, but then switch the configuration when you run `:ReloadAlt`. And
-you’ll also get cold reload as a bonus.
+If you are not on Nix, `:ReloadAlt` will run the same `nvim` executable, but will actually load the
+configuration from the directory in which the wrapper resides. This will make absolutely no sense if
+you have this repository cloned into `~/.config/nvim` or linked there, but if you just want to try
+it, instead of setting `XDG_CONFIG_HOME` yourself, you can use `nvim_wrapper`. It will run neovim
+normally, with whatever you have in `~/.config/nvim`, but then switch the configuration when you run
+`:ReloadAlt`. And you’ll also get cold reload as a bonus.
 
 You may also do everything above if you do use Nix, BTW.
 
