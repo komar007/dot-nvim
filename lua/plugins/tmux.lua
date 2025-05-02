@@ -5,10 +5,16 @@ return {
     vim.g.tmux_navigator_no_mappings = 1
   end,
   keys = {
-    { "<C-w>h",    ":<C-U>TmuxNavigateLeft<cr>" },
-    { "<C-w>j",    ":<C-U>TmuxNavigateDown<cr>" },
-    { "<C-w>k",    ":<C-U>TmuxNavigateUp<cr>" },
-    { "<C-w>l",    ":<C-U>TmuxNavigateRight<cr>" },
-    { "<C-w><BS>", ":<C-U>TmuxNavigatePrevious<cr>" },
+    { "<C-w><BS>",         "<C-w><C-p>",                          mode = { 'n' } },
+    { "<Char-0xE120>h",    "<C-o>:<C-U>TmuxNavigateLeft<cr>",     mode = { 'i' } },
+    { "<Char-0xE120>j",    "<C-o>:<C-U>TmuxNavigateDown<cr>",     mode = { 'i' } },
+    { "<Char-0xE120>k",    "<C-o>:<C-U>TmuxNavigateUp<cr>",       mode = { 'i' } },
+    { "<Char-0xE120>l",    "<C-o>:<C-U>TmuxNavigateRight<cr>",    mode = { 'i' } },
+    { "<Char-0xE120><BS>", "<C-o>:<C-U>TmuxNavigatePrevious<cr>", mode = { 'i' } },
+    { "<Char-0xE120>h",    ":<C-U>TmuxNavigateLeft<cr>",          mode = { 'n' } },
+    { "<Char-0xE120>j",    ":<C-U>TmuxNavigateDown<cr>",          mode = { 'n' } },
+    { "<Char-0xE120>k",    ":<C-U>TmuxNavigateUp<cr>",            mode = { 'n' } },
+    { "<Char-0xE120>l",    ":<C-U>TmuxNavigateRight<cr>",         mode = { 'n' } },
+    { "<Char-0xE120><BS>", ":<C-U>TmuxNavigatePrevious<cr>",      mode = { 'n' } },
   }
 }
