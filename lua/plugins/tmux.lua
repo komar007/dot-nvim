@@ -1,10 +1,13 @@
 return {
-  'christoomey/vim-tmux-navigator',
+  --'christoomey/vim-tmux-navigator',
+  -- temporarily using a local fork with #396 fixed and a new feature #439.
+  'komar007/vim-tmux-navigator',
 
   init = function()
     vim.g.tmux_navigator_no_mappings = 1
     vim.g.tmux_navigator_preserve_zoom = 1
     vim.g.tmux_navigator_no_wrap = 1
+    vim.g.tmux_navigator_no_wrap_disable_when_zoomed = 1
   end,
   keys = {
     { "<C-w><BS>",         "<C-w><C-p>",                          mode = { 'n' } },
