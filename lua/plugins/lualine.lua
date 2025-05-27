@@ -212,13 +212,17 @@ return {
           },
           {
             'o:encoding',
-            cond = conditions.hide_in_width,
+            cond = function()
+              return conditions.hide_in_width() and vim.bo.filetype ~= 'man'
+            end,
             padding = { left = 1, right = 1 },
           },
           {
             'fileformat',
             icons_enabled = true,
-            cond = conditions.hide_in_width,
+            cond = function()
+              return conditions.hide_in_width() and vim.bo.filetype ~= 'man'
+            end,
             padding = { left = 0, right = 1 },
           },
         },
