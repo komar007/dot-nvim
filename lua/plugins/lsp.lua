@@ -96,6 +96,7 @@ return {
         'marksman',
         'nixd',
         'protols',
+        'taplo',
         'vacuum',
         'vimls',
         'yamlls',

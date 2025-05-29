@@ -47,6 +47,8 @@
             }))
             # jsonls
             nodePackages.vscode-json-languageserver
+            # taplo
+            taplo
             # lua_ls
             lua-language-server
             # nixd
