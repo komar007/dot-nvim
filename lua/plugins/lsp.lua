@@ -89,6 +89,7 @@ return {
         'marksman',
         'nixd',
         'protols',
+        'vacuum',
         'vimls',
         'yamlls',
       }
