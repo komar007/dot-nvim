@@ -12,6 +12,8 @@ return {
         "css",
         "dockerfile",
         "go",
+        "gomod",
+        "gosum",
         "html",
         "java",
         "javascript",
