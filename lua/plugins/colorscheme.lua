@@ -21,6 +21,10 @@ local gruvbox = {
     vim.cmd [[ hi DiffChange guibg=#221505 guifg=NONE guisp=#444444 gui=NONE ]]
     vim.cmd [[ hi DiffText guibg=#663311 guifg=NONE guisp=#444444 gui=NONE ]]
 
+    -- used in GitGutterPreviewHunk
+    vim.cmd [[ hi diffRemoved guifg=#bb1910 ]]
+    vim.cmd [[ hi diffAdded guifg=#687b06 ]]
+
     vim.cmd [[ hi DiffviewDiffDeleteDim guibg=#0a0a0a guifg=#1a1a1a guisp=#444444 gui=NONE ]]
     -- DiffviewDiffAddAsDelete is set on diffview's init
 
