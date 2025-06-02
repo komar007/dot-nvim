@@ -35,3 +35,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   group = "FileTypeSettings",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "nix",
+  callback = function()
+    vim.opt_local.iskeyword:append("-")
+  end,
+  group = "FileTypeSettings",
+})
