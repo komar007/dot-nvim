@@ -63,6 +63,13 @@ return {
           vim.lsp.buf.format()
         end, {})
       end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          vim.cmd [[ :LspRestart ]]
+        end,
+        buffer = 0,
+      })
     end
 
     local caps_for_jsonls = vim.lsp.protocol.make_client_capabilities()
