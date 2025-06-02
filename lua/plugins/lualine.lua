@@ -78,16 +78,20 @@ return {
         lualine_a = {
           {
             function()
-              local nvim_icon = ''
-              if is_alternate_config_cached then
-                nvim_icon = nvim_icon .. ' 󰜘'
-              end
-              if next(vim.lsp.get_clients({ bufnr = 0 })) == nil then
-                nvim_icon = ' ' .. nvim_icon .. '  '
-              end
-              return nvim_icon
+              return ''
             end,
-            padding = { left = 1, right = 0 },
+            padding = { left = 1, right = 1 },
+          },
+          {
+            function()
+              if is_alternate_config_cached then
+                return '󰙨'
+              else
+                return ''
+              end
+            end,
+            padding = { left = 0, right = 1 },
+            color = { fg = colors.red },
           },
           {
             function()
@@ -96,8 +100,6 @@ return {
               for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
                 if added then
                   out = out .. ','
-                else
-                  out = out .. ' '
                 end
                 out = out .. client.name
                 added = true
