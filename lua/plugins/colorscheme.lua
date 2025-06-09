@@ -90,6 +90,8 @@ local gruvbox = {
 
     vim.cmd [[ hi RenderMarkdownCode guibg=#151515 ]]
 
+    vim.cmd [[ hi QuickFixLine guibg=#3333aa guifg=none gui=bold ]]
+
     utils.autocmd_all({ "ColorScheme" }, set_extra_whitespace)
     local match_extrawhitespace = [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
     utils.autocmd_all({ "BufWinEnter" }, match_extrawhitespace)
