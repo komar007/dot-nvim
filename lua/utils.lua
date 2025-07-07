@@ -107,4 +107,15 @@ function M.keys_with_alternate(keys)
   return out
 end
 
+function M.define_text_object(object, motion)
+  vim.keymap.set({ 'x', 'o' }, object, function()
+    vim.cmd('normal! ' .. motion)
+  end, { noremap = true, silent = true })
+end
+
+function M.define_text_object_inside_around(char)
+  M.define_text_object("i" .. char, "T".. char .. "vt" .. char)
+  M.define_text_object("a" .. char, "F".. char .. "vf" .. char)
+end
+
 return M
