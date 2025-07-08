@@ -33,3 +33,8 @@ end)
 utils.on_ft("nix", function()
   vim.opt_local.iskeyword:append("-")
 end)
+
+utils.on_ft("proto", function()
+  vim.opt_local.textwidth = 80
+  vim.opt_local.formatoptions:append("ro")
+end)
