@@ -52,6 +52,7 @@ vim.opt.inccommand = "split"
 vim.opt.scrolloff = 8
 vim.opt.relativenumber = true
 vim.opt.showmode = false
+vim.opt.formatoptions:append("1")
 vim.opt.fillchars = {
   foldopen = "󰚕",
   foldsep = "│",
