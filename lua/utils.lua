@@ -114,8 +114,16 @@ function M.define_text_object(object, motion)
 end
 
 function M.define_text_object_inside_around(char)
-  M.define_text_object("i" .. char, "T".. char .. "vt" .. char)
-  M.define_text_object("a" .. char, "F".. char .. "vf" .. char)
+  M.define_text_object("i" .. char, "T" .. char .. "vt" .. char)
+  M.define_text_object("a" .. char, "F" .. char .. "vf" .. char)
+end
+
+function M.on_ft(ft, callback)
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = ft,
+    callback = callback,
+    group = "FileTypeSettings",
+  })
 end
 
 return M
