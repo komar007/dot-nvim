@@ -96,36 +96,14 @@ return {
         'marksman',
         'nixd',
         'protols',
+        'pyright',
+        'ruff',
         'taplo',
         'vacuum',
         'vimls',
         'yamlls',
       }
     )
-
-    require('lspconfig').pylsp.setup({
-      capabilities = capabilities,
-      on_attach = on_lsp_attach,
-      settings = {
-        pylsp = {
-          configurationSources = { 'flake8' },
-          plugins = {
-            flake8 = {
-              enabled = true,
-            },
-            pycodestyle = {
-              enabled = false,
-            },
-            mccabe = {
-              enabled = false,
-            },
-            pyflakes = {
-              enabled = false,
-            },
-          }
-        }
-      }
-    })
 
     -- rust LSP is not managed by nix, but installed locally using rustup.
     vim.g.rustaceanvim = {

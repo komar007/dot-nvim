@@ -57,8 +57,8 @@
             nodePackages.eslint
             # bashls
             nodePackages_latest.bash-language-server
-            # pylsp
-            python312Packages.flake8 python312Packages.python-lsp-server
+            # pyright
+            pyright
             # vacuum
             vacuum-go
             # vimls
@@ -67,6 +67,8 @@
             yaml-language-server
             # protols
             protols
+            # ruff
+            ruff
 
             # Other requirements
             # ==================
