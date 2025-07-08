@@ -125,9 +125,9 @@ return {
           vim.keymap.set('n', 'gL', function()
             vim.cmd.RustLsp('explainError', 'current')
           end, lsp_keymap_opts)
-          vim.api.nvim_buf_create_user_command(0, 'CargoToml', function()
+          vim.keymap.set("n", "<leader>c", function()
             vim.cmd.RustLsp('openCargo')
-          end, { nargs = 0 })
+          end, { buffer = true, desc = "Go to Cargo.toml" })
         end,
         settings = {
           ['rust-analyzer'] = {
