@@ -30,7 +30,15 @@ require("lazy").setup("plugins", {
   }
 })
 
--- look and feel
+vim.opt.sessionoptions = {
+  "buffers",
+  "curdir",
+  "folds",
+  "tabpages"
+}
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.smartindent = true
 vim.opt.undofile = true
 vim.opt.cursorline = true
 vim.opt.number = true

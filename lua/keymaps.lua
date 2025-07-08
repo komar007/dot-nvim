@@ -11,6 +11,10 @@ vim.keymap.set('n', '<leader>x', function()
   end
 end)
 
+vim.keymap.set('n', '<leader>y', function()
+  vim.api.nvim_feedkeys([[mY"*yiw`Y]], 'n', true)
+end, { noremap = true })
+
 local utils = require('utils')
 
 utils.define_text_object_inside_around('/')
