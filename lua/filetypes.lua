@@ -52,3 +52,7 @@ utils.on_ft("cpp", function()
   vim.opt_local.shiftwidth = 4
   vim.opt_local.expandtab = true
 end)
+
+utils.on_ft("man", function()
+  vim.opt_local.signcolumn = "no"
+end)
