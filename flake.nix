@@ -77,6 +77,8 @@
             yarn nodejs_22 nodePackages.npm
             # for markdown formatting
             pandoc
+            # for shell formatting
+            shfmt
           ];
         in rec {
           devShells.default = stable.mkShell {

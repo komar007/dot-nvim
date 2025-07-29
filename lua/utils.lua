@@ -126,4 +126,20 @@ function M.on_ft(ft, callback)
   })
 end
 
+local function process_buffer_with_shell(cmd)
+  local current_line = vim.fn.line('.')
+  vim.cmd("%!" .. cmd)
+  vim.fn.cursor(current_line, 1)
+end
+
+function M.setup_shell_fmt_buf(cmd, post_hook)
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_create_user_command(bufnr, "Fmt", function()
+    process_buffer_with_shell(cmd)
+    if post_hook ~= nil then
+      post_hook()
+    end
+  end, {})
+end
+
 return M
