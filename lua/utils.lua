@@ -128,8 +128,9 @@ end
 
 local function process_buffer_with_shell(cmd)
   local current_line = vim.fn.line('.')
+  local current_col = vim.fn.col('.')
   vim.cmd("%!" .. cmd)
-  vim.fn.cursor(current_line, 1)
+  vim.fn.cursor(current_line, current_col)
 end
 
 function M.setup_shell_fmt_buf(cmd, post_hook)
