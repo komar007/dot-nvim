@@ -5,8 +5,14 @@ local gruvbox = {
   init = function()
     local utils = require('utils')
 
-    local set_extra_whitespace = [[ highlight ExtraWhitespace ctermbg=red guibg=#ff7aa8 ]]
-    local clear_extra_whitespace = [[ highlight clear ExtraWhitespace ]]
+    local function set_highlight_nonfloat()
+      vim.cmd [[ hi ExtraWhitespace guibg=#ff7aa8 ]]
+      vim.cmd [[ hi PastTextWidth guibg=#6c1a28 ]]
+    end
+    local function clear_highlight_nonfloat()
+      vim.cmd [[ hi clear ExtraWhitespace ]]
+      vim.cmd [[ hi clear PastTextWidth ]]
+    end
 
     vim.opt.termguicolors = true
     vim.g.gruvbox_contrast_dark = 'hard'
@@ -41,7 +47,7 @@ local gruvbox = {
 
     vim.cmd [[ hi Visual guibg=#3333aa guifg=none gui=none ]]
 
-    vim.cmd(set_extra_whitespace)
+    set_highlight_nonfloat()
     vim.cmd [[ hi PmenuSel guifg=#ffffff ctermfg=236 ]]
     vim.cmd [[ hi FloatBorder guibg=#000000 guifg=#446699 ]]
     vim.cmd [[ hi NormalFloat guibg=#000000 guifg=#777777 ]]
@@ -92,21 +98,23 @@ local gruvbox = {
 
     vim.cmd [[ hi QuickFixLine guibg=#3333aa guifg=none gui=bold ]]
 
-    utils.autocmd_all({ "ColorScheme" }, set_extra_whitespace)
-    local match_extrawhitespace = [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
+    utils.autocmd_all({ "ColorScheme" }, set_highlight_nonfloat)
+    local function match_extrawhitespace()
+      vim.cmd [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
+    end
     utils.autocmd_all({ "BufWinEnter" }, match_extrawhitespace)
-    vim.cmd(match_extrawhitespace)
+    match_extrawhitespace()
     vim.api.nvim_create_autocmd('BufWinEnter', {
       pattern = '*',
       callback = function()
         local is_floating = vim.api.nvim_win_get_config(0).relative ~= ""
         if is_floating then
-          vim.cmd(clear_extra_whitespace)
+          clear_highlight_nonfloat()
         end
       end,
     })
-    utils.autocmd_all({ "TermOpen", "TermEnter" }, clear_extra_whitespace)
-    utils.autocmd_all({ "TermLeave", "TermClose", "BufWinLeave" }, set_extra_whitespace)
+    utils.autocmd_all({ "TermOpen", "TermEnter" }, clear_highlight_nonfloat)
+    utils.autocmd_all({ "TermLeave", "TermClose", "BufWinLeave" }, set_highlight_nonfloat)
   end,
 }
 

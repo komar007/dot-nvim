@@ -1,7 +1,7 @@
 local M = {}
 
-function M.autocmd_all(events, command)
-  vim.api.nvim_create_autocmd(events, { pattern = "*", command = command })
+function M.autocmd_all(events, callback)
+  vim.api.nvim_create_autocmd(events, { pattern = "*", callback = callback })
 end
 
 local function codes(s)
