@@ -57,3 +57,7 @@ end)
 utils.on_ft("man", function()
   vim.opt_local.signcolumn = "no"
 end)
+
+utils.on_ft("oil", function()
+  vim.o.textwidth = 0
+end)
