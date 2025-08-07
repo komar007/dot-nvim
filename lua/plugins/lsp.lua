@@ -134,7 +134,7 @@ return {
             diagnostics = {
               enable = true,
               disabled = { "unresolved-proc-macro" },
-              enableExperimental = true,
+              enableExperimental = false,
             },
             check = {
               command = "clippy",
