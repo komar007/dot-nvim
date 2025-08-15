@@ -16,12 +16,28 @@ vim.diagnostic.config({
   },
 })
 
-local types = { "Error", "Warn", "Hint", "Info" }
-for _, type in pairs(types) do
-  local hl = "DiagnosticSign" .. type
-  local lhl = "DiagnosticSign" .. type .. "Line"
-  vim.fn.sign_define(hl, { text = '', numhl = hl, linehl = lhl })
-end
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignErrorLine",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarnLine",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfoLine",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHintLine",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+    },
+  },
+})
 
 vim.keymap.set('n', ']l', function() vim.diagnostic.goto_next({ wrap = false }) end)
 vim.keymap.set('n', '[l', function() vim.diagnostic.goto_prev({ wrap = false }) end)

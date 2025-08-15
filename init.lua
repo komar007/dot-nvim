@@ -36,6 +36,7 @@ vim.opt.sessionoptions = {
   "folds",
   "tabpages"
 }
+vim.opt.winborder = "rounded"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.smartindent = true

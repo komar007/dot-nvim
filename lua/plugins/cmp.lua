@@ -57,11 +57,6 @@ return {
       completion = {
         autocomplete = false,
       },
-      snippet = {
-        expand = function(args)
-          vim.fn["vsnip#anonymous"](args.body)
-        end,
-      },
       mapping = cmp.mapping.preset.insert({
         ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
         ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
@@ -111,19 +106,5 @@ return {
     })
 
     vim.opt.completeopt = "menu,menuone,noselect"
-
-    -- vsnip is only used in cmp, so it's configured here...
-    local function cmp_jump(direction, otherwise)
-      local action = direction == 1 and 'vsnip-jump-next' or 'vsnip-jump-prev'
-      return function()
-        if vim.fn['vsnip#jumpable'](direction) > 0 then
-          return '<Plug>(' .. action .. ')'
-        else
-          return otherwise
-        end
-      end
-    end
-    vim.keymap.set({"i", "s"}, "<Tab>", cmp_jump(1, '<Tab>'), {silent = true, expr = true})
-    vim.keymap.set({"i", "s"}, "<S-Tab>", cmp_jump(-1, '<S-Tab>'), {silent = true, expr = true})
   end
 }

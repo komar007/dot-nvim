@@ -19,3 +19,15 @@ local utils = require('utils')
 
 utils.define_text_object_inside_around('/')
 utils.define_text_object_inside_around('.')
+
+local nvim_011_new_maps = {
+  { k = 'grn', m = 'n' },
+  { k = 'grr', m = 'n' },
+  { k = 'gri', m = 'n' },
+  { k = 'gO',  m = 'n' },
+  { k = 'gra', m = { 'n', 'x' } },
+}
+
+for _, map in ipairs(nvim_011_new_maps) do
+  vim.keymap.del(map.m, map.k);
+end
