@@ -61,3 +61,13 @@ end)
 utils.on_ft("oil", function()
   vim.o.textwidth = 0
 end)
+
+vim.api.nvim_create_autocmd("WinNew", {
+  callback = function()
+    local winid = vim.api.nvim_get_current_win()
+    local config = vim.api.nvim_win_get_config(winid)
+    if config.relative ~= "" then
+      vim.o.textwidth = 0
+    end
+  end,
+})
