@@ -98,13 +98,6 @@ return {
       },
     })
 
-    local debounce_group = vim.api.nvim_create_augroup("CmpDebounceAuGroup", {})
-    vim.api.nvim_create_autocmd("TextChangedI", {
-      pattern = "*",
-      callback = function() require("debounce").debounce() end,
-      group = debounce_group
-    })
-
     vim.opt.completeopt = "menu,menuone,noselect"
   end
 }
