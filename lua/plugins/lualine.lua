@@ -174,10 +174,25 @@ return {
             padding = { left = 0, right = 1 },
           },
           {
-            '%l:%c',
+            '%l',
             color = { fg = colors.lightfg, gui = "bold" },
-            separator = '│',
-            padding = { left = 0, right = 1 },
+            padding = { left = 0, right = 0 },
+          },
+          {
+            function()
+              return ":" .. tostring(vim.fn.virtcol('.'))
+            end,
+            color = function()
+              local col = vim.fn.virtcol('.')
+              local width = vim.bo.textwidth
+              if width > 0 and col > width then
+                return { fg = colors.red, gui = "bold" }
+              else
+                return { fg = colors.lightfg, gui = "bold" }
+              end
+            end,
+            separator = ' │',
+            padding = { left = 0, right = 0 },
           },
           {
             'diagnostics',
