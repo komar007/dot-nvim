@@ -39,13 +39,13 @@ vim.diagnostic.config({
   },
 })
 
-vim.keymap.set('n', ']l', function() vim.diagnostic.goto_next({ wrap = false }) end)
-vim.keymap.set('n', '[l', function() vim.diagnostic.goto_prev({ wrap = false }) end)
+vim.keymap.set('n', ']l', function() vim.diagnostic.jump({ count = 1, wrap = false }) end)
+vim.keymap.set('n', '[l', function() vim.diagnostic.jump({ count = -1, wrap = false }) end)
 vim.keymap.set('n', ']e', function()
-  vim.diagnostic.goto_next({ wrap = false, severity = vim.diagnostic.severity.ERROR })
+  vim.diagnostic.jump({ count = 1, wrap = false, severity = vim.diagnostic.severity.ERROR })
 end)
 vim.keymap.set('n', '[e', function()
-  vim.diagnostic.goto_prev({ wrap = false, severity = vim.diagnostic.severity.ERROR })
+  vim.diagnostic.jump({ count = -1, wrap = false, severity = vim.diagnostic.severity.ERROR })
 end)
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
 

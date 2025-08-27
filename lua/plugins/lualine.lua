@@ -208,9 +208,9 @@ return {
             },
             on_click = function(_, but, _)
               if but == 'l' then
-                vim.diagnostic.goto_next();
+                vim.diagnostic.jump({ count = 1, wrap = false });
               elseif but == 'r' then
-                vim.diagnostic.goto_prev();
+                vim.diagnostic.jump({ count = -1, wrap = false });
               end
             end,
           },
