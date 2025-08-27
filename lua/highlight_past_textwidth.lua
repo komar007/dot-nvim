@@ -9,7 +9,8 @@ local function update_colorcolumn()
 
   for l = 1, lines do
     if l < cursor[1] - 1 or l > cursor[1] + 1 then
-      vim.api.nvim_buf_add_highlight(0, ns, "PastTextWidth", l - 1, col, -1)
+      local vcol = vim.fn.virtcol2col(0, l, col)
+      vim.api.nvim_buf_add_highlight(0, ns, "PastTextWidth", l - 1, vcol, -1)
     end
   end
 end
