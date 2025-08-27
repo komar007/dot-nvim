@@ -188,7 +188,7 @@ return {
               if width > 0 and col > width then
                 return { fg = colors.red, gui = "bold" }
               else
-                return { fg = colors.lightfg, gui = "bold" }
+                return { fg = colors.lightfg }
               end
             end,
             separator = ' │',
