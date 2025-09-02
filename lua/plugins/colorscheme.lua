@@ -37,7 +37,12 @@ local gruvbox = {
     vim.cmd [[ hi FoldColumn guibg=#000000 guifg=#444488 ]]
     vim.cmd [[ hi Folded guibg=#171737 guifg=#888888 guisp=#5555aa gui=undercurl ]]
 
-    vim.cmd [[ hi Normal ctermbg=16 guibg=#000000 ]]
+    -- FIXME: this is set to guifg=none because otherwise winblend works weird even though there is
+    -- nothing below the scrollbar; not having dimmed "~" is acceptable as the cost of having
+    -- stable colors of the scrollbar signs
+    vim.cmd [[ hi EndOfBuffer guifg=none ]]
+
+    vim.cmd [[ hi Normal ctermbg=16 guibg=none ]]
     vim.cmd [[ hi Comment ctermfg=243 guifg=#7f7f7f ]]
     vim.cmd [[ hi CursorLine ctermbg=237 guibg=#2c2826 ]]
     vim.cmd [[ hi CursorColumn ctermbg=237 guibg=#2c2826 ]]
@@ -97,6 +102,18 @@ local gruvbox = {
     vim.cmd [[ hi RenderMarkdownCode guibg=#151515 ]]
 
     vim.cmd [[ hi QuickFixLine guibg=#3333aa guifg=none gui=bold ]]
+
+    vim.cmd [[ hi SatelliteBar guibg=#444444 ]] -- this is affected by winblend...
+    vim.cmd [[ hi SatelliteMark guifg=#6666a4 ]] -- ... while this is not
+    vim.cmd [[ hi SatelliteSearch guifg=#ffff11 gui=bold ]]
+    vim.cmd [[ hi SatelliteCursor guifg=#eeeeee ]]
+    vim.cmd [[ hi SatelliteGitSignsAdd guibg=none guifg=#2f5f2f ]]
+    vim.cmd [[ hi SatelliteGitSignsDelete guibg=none guifg=#fb4934 ]]
+    vim.cmd [[ hi SatelliteGitSignsChange guibg=none guifg=#7a4d1f ]]
+    vim.cmd [[ hi SatelliteDiagnosticError guifg=#ff0000 gui=bold ]]
+    vim.cmd [[ hi SatelliteDiagnosticHint guifg=#8ec07c gui=bold ]]
+    vim.cmd [[ hi SatelliteDiagnosticInfo guifg=#83a598 gui=bold ]]
+    vim.cmd [[ hi SatelliteDiagnosticWarn guifg=#fa8462 gui=bold ]]
 
     utils.autocmd_all({ "ColorScheme" }, set_highlight_nonfloat)
     local function match_extrawhitespace()
