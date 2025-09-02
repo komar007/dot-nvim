@@ -86,7 +86,16 @@ return {
         'docker_compose_language_service',
         'dockerls',
         'eslint',
-        'gopls',
+        {
+          'gopls',
+          settings = {
+            gopls = {
+              codelenses = {
+                test = true,
+              },
+            },
+          },
+        },
         'jqls', -- nixpkgs contains an old version, instead, jq-lsp is installed with: nix run nixpkgs#go install github.com/wader/jq-lsp@master
         {
           'jsonls',
