@@ -65,11 +65,12 @@ local gruvbox = {
     vim.cmd [[ hi SnacksPickerBufFlags guifg=#888888 ]]
     vim.cmd [[ hi SnacksPickerMatch guifg=#fabd2f gui=underline guisp=#fabd2f ]]
 
-    vim.cmd [[ hi SignColumn guibg='#000000' ctermbg=16 ]]
-    vim.cmd [[ hi GitGutterAdd ctermfg=71 guifg=#5FAF5F ]]
-    vim.cmd [[ hi GitGutterDelete ctermbg=16 guibg='#000000' guifg='#fb4934']]
-    vim.cmd [[ hi GitGutterChange ctermfg=214 guifg=#FABD2F ]]
-    vim.cmd [[ hi GitGutterChangeDelete ctermfg=202 guifg=#ff5f00 ]]
+    vim.cmd [[ hi SignColumn guibg=none ]]
+    vim.cmd [[ hi GitSignsAdd guifg=#5faf5f ]]
+    vim.cmd [[ hi GitSignsDelete guifg=#fb4934]]
+    vim.cmd [[ hi GitSignsChange guifg=#FABD2F ]]
+    vim.cmd [[ hi GitSignsChangedelete guifg=#ff5f00 ]]
+    vim.cmd [[ hi GitSignsCurrentLineBlame guifg=#417fbf ]]
 
     vim.cmd [[ hi DiagnosticSignError guifg='#000000' guibg='#d75f5f' ctermfg=237 ctermbg=167 gui=bold ]]
     vim.cmd [[ hi DiagnosticSignHint guifg='#3c3836' guibg='#8ec07c' ctermfg=237 ctermbg=108 ]]
