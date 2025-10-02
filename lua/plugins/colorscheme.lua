@@ -104,7 +104,7 @@ local gruvbox = {
 
     vim.cmd [[ hi QuickFixLine guibg=#3333aa guifg=none gui=bold ]]
 
-    vim.cmd [[ hi SatelliteBar guibg=#444444 ]] -- this is affected by winblend...
+    vim.cmd [[ hi SatelliteBar guibg=#171737 ]] -- this is affected by winblend...
     vim.cmd [[ hi SatelliteMark guifg=#6666a4 ]] -- ... while this is not
     vim.cmd [[ hi SatelliteSearch guifg=#ffff11 gui=bold ]]
     vim.cmd [[ hi SatelliteCursor guifg=#eeeeee ]]
