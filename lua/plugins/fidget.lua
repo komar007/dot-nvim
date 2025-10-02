@@ -16,12 +16,14 @@ return {
     notification = {
       override_vim_notify = true,
       window = {
+        normal_hl = "NormalFloat",
         x_padding = 1,
         y_padding = 1,
         winblend = 20,
       },
       view = {
         group_separator = "   ",
+        group_separator_hl = "NormalFloat",
       }
     },
   },
