@@ -64,6 +64,15 @@ local function is_alternate_config()
 end
 local is_alternate_config_cached = is_alternate_config()
 
+local function diag_color(color)
+  local diag = vim.diagnostic.is_enabled()
+  if diag then
+    return { fg = color }
+  else
+    return { bg = color, fg = '#222222' }
+  end
+end
+
 return {
   'nvim-lualine/lualine.nvim',
   config = function()
@@ -201,10 +210,10 @@ return {
             padding = { left = 1, right = 1 },
             diagnostics_color = {
               -- TODO: extract the colors below, they should be the same as those used in respective diagnostics
-              error = { fg = '#d75f5f' },
-              warn = { fg = '#ca8462' },
-              info = { fg = '#ecbe7b' },
-              hint = { fg = '#83a598' },
+              error = function() return diag_color('#d75f5f') end,
+              warn = function() return diag_color('#ca8462') end,
+              info = function() return diag_color('#ecbe7b') end,
+              hint = function() return diag_color('#83a598') end,
             },
             on_click = function(_, but, _)
               if but == 'l' then
