@@ -41,5 +41,17 @@
       "${1:variant},"
     ],
     "description": "thiserror-style error variant"
+  },
+  "grpcfun": {
+    "prefix": "grpcfun",
+    "body": [
+      "async fn ${1:rpc}(",
+      "    &self,",
+      "    request: Request<${1/(.*)/${1:/pascalcase}/}Request>,",
+      ") -> Result<Response<${1/(.*)/${1:/pascalcase}/}Response>, Status> {",
+      "    ${2:todo!()}",
+      "}"
+    ],
+    "description": "gRPC tonic function implementation"
   }
 }
