@@ -64,7 +64,6 @@ function M.initialize_file(name, content)
 end
 
 function M.setup_lsps(base_cfg, lsps)
-  local lspconfig = require('lspconfig')
   for _, lsp in pairs(lsps) do
     local lsp_name
     if type(lsp) == "table" then
@@ -79,7 +78,8 @@ function M.setup_lsps(base_cfg, lsps)
       lsp_name = lsp
       lsp = base_cfg
     end
-    lspconfig[lsp_name].setup(lsp)
+    vim.lsp.config(lsp_name, lsp)
+    vim.lsp.enable({lsp_name})
   end
 end
 
