@@ -3,7 +3,6 @@ return {
 
   dependencies = {
     'nvim-telescope/telescope.nvim',
-    'neovim/nvim-lspconfig',
   },
   lazy = false,
   opts = function()
@@ -18,6 +17,6 @@ return {
     }
   end,
   keys = {
-    { "ga", (function() require("actions-preview").code_actions() end), mode = { "v", "n" } },
+    { "ga", function() require("actions-preview").code_actions() end, mode = { "v", "n" } },
   },
 }
