@@ -47,6 +47,8 @@
             }))
             # jsonls
             nodePackages.vscode-json-languageserver
+            # jqls
+            unstable.jq-lsp
             # taplo
             taplo
             # lua_ls

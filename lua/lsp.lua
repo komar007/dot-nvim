@@ -66,7 +66,10 @@ require('utils').setup_lsps(
     },
     'docker_compose_language_service',
     'dockerls',
-    'eslint',
+    {
+      'eslint',
+      cmd = { "eslint", "--stdio" },
+    },
     {
       'gopls',
       settings = {
@@ -77,10 +80,11 @@ require('utils').setup_lsps(
         },
       },
     },
-    'jqls',     -- nixpkgs contains an old version, instead, jq-lsp is installed with: nix run nixpkgs#go install github.com/wader/jq-lsp@master
+    'jqls',
     {
       'jsonls',
       capabilities = caps_for_jsonls,
+      cmd = { "vscode-json-languageserver", "--stdio" },
     },
     'lua_ls',
     'marksman',
