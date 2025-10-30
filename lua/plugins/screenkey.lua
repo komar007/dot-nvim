@@ -4,7 +4,7 @@ return {
   cmd = "Screenkey",
   opts = {
     win_opts = {
-      border = require('border'),
+      border = require('border').round,
     },
   },
 }

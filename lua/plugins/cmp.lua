@@ -53,11 +53,11 @@ return {
           winhighlight = 'CursorLine:FloatVisual,Search:None',
           scrolloff = 1,
           side_padding = 1,
-          border = border,
+          border = border.round,
         },
         documentation = {
           winhighlight = 'CursorLine:FloatVisual,Search:None',
-          border = border,
+          border = border.round,
         },
       },
       completion = {

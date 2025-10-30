@@ -10,7 +10,7 @@ return {
       width = 100,
       height = 20,
       relative = 'cursor',
-      border = require('border'),
+      border = require('border').round,
       style = 'minimal',
     }
     vim.g.gitgutter_preview_win_floating = 1

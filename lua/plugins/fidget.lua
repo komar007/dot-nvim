@@ -16,10 +16,13 @@ return {
     notification = {
       override_vim_notify = true,
       window = {
-        normal_hl = "NormalFloat",
+        normal_hl = "FidgetFloat",
         x_padding = 1,
-        y_padding = 1,
-        winblend = 20,
+        y_padding = 0,
+        max_width = 80,
+        max_height = 40,
+        winblend = 0,
+        border = require("border").fidget,
       },
       view = {
         group_separator = "   ",

@@ -116,6 +116,8 @@ local gruvbox = {
     vim.cmd [[ hi SatelliteDiagnosticInfo guifg=#83a598 gui=bold ]]
     vim.cmd [[ hi SatelliteDiagnosticWarn guifg=#fa8462 gui=bold ]]
 
+    vim.cmd [[ hi FidgetFloat guibg=none ]]
+
     utils.autocmd_all({ "ColorScheme" }, set_highlight_nonfloat)
     local function match_extrawhitespace()
       vim.cmd [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]

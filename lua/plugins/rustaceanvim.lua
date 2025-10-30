@@ -9,7 +9,7 @@ return {
     vim.g.rustaceanvim = {
       tools = {
         float_win_config = {
-          border = border,
+          border = border.round,
         },
         inlay_hints = {
           highlight = "InlayHint",
