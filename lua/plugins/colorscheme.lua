@@ -113,6 +113,10 @@ local gruvbox = {
 
     vim.cmd [[ hi FidgetFloat guibg=none ]]
 
+    vim.cmd [[ hi TabLine guibg=black guifg=#555555 ]]
+    vim.cmd [[ hi TabLineFill guibg=black gui=underdotted guisp=#333333 ]]
+    vim.cmd [[ hi TabLineSel guibg=terminal guifg=#61afef gui=bold ]]
+
     utils.autocmd_all({ "ColorScheme" }, set_highlight_nonfloat)
     local function match_extrawhitespace()
       vim.cmd [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
