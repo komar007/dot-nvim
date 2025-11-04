@@ -37,11 +37,6 @@ local gruvbox = {
     vim.cmd [[ hi FoldColumn guibg=#000000 guifg=#444488 ]]
     vim.cmd [[ hi Folded guibg=#171737 guifg=#888888 guisp=#5555aa gui=undercurl ]]
 
-    -- FIXME: this is set to guifg=none because otherwise winblend works weird even though there is
-    -- nothing below the scrollbar; not having dimmed "~" is acceptable as the cost of having
-    -- stable colors of the scrollbar signs
-    vim.cmd [[ hi EndOfBuffer guifg=none ]]
-
     vim.cmd [[ hi Normal ctermbg=16 guibg=none ]]
     vim.cmd [[ hi Comment ctermfg=243 guifg=#7f7f7f ]]
     vim.cmd [[ hi CursorLine ctermbg=237 guibg=#2c2826 ]]
