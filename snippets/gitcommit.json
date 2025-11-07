@@ -1,0 +1,11 @@
+{
+  "m": {
+    "prefix": "m",
+    "body": [
+      "[${1|I,B,F|}] [PRISME-${2:0000}] $3",
+      "",
+      "$4"
+    ],
+    "description": "ADB commit message"
+  }
+}
