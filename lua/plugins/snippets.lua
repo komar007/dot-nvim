@@ -24,5 +24,15 @@ return {
       mode = { "i", "s" }
     },
     { "<S-Tab>", function() require('luasnip').jump(-1) end, mode = { "i", "s" } },
+    {
+      "<M-Tab>",
+      function()
+        local ls = require('luasnip')
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end,
+      mode = { "i", "s" }
+    },
   },
 }
