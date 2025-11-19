@@ -93,6 +93,7 @@ require('utils').setup_lsps(
     'pyright',
     'ruff',
     'taplo',
+    'ts_ls',
     'vacuum',
     'vimls',
     'yamlls',

@@ -71,6 +71,8 @@
             protols
             # ruff
             ruff
+            # ts_ls
+            typescript-language-server
 
             # Other requirements
             # ==================
