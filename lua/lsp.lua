@@ -89,7 +89,10 @@ require('utils').setup_lsps(
     'lua_ls',
     'marksman',
     'nixd',
-    'protols',
+    {
+      'protols',
+      root_markers = { "protols.toml", ".git" },
+    },
     'pyright',
     'ruff',
     'taplo',
