@@ -15,6 +15,14 @@
             inherit system;
           };
           neovim = stable.neovim;
+          # provide the include path containing the well-known protos from protobuf,
+          # hijacking protols's pkg-config-based detection
+          protols_wrap_wellknown = pkg: stable.writeShellApplication {
+            name = "protols";
+            text = ''
+              ${pkg}/bin/protols -i "${stable.protobuf}/include" "$@"
+            '';
+          };
           dependencies = with stable; [
             # Basic dependencies (lazy + fzf native compilation)
             # ==================================================
@@ -68,7 +76,7 @@
             # yamlls
             yaml-language-server
             # protols
-            protols
+            (protols_wrap_wellknown protols)
             # ruff
             ruff
             # ts_ls
