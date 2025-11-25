@@ -66,7 +66,7 @@
             # eslint
             nodePackages.eslint
             # bashls
-            nodePackages_latest.bash-language-server
+            unstable.bash-language-server
             # pyright
             pyright
             # vacuum
