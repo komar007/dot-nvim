@@ -54,8 +54,9 @@ utils.on_ft("cpp", function()
   vim.opt_local.expandtab = true
 end)
 
-utils.on_ft("man", function()
+utils.on_ft("man", function(opts)
   vim.opt_local.signcolumn = "no"
+  vim.opt_local.scrolloff = 1000
 end)
 
 utils.on_ft("oil", function()
