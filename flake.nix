@@ -2,10 +2,18 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+    systems.url = "github:nix-systems/default-linux";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
-    { flake-utils, ... }@inputs:
+    { self, flake-utils, ... }@inputs:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -99,6 +107,7 @@
           # for shell formatting
           shfmt
         ];
+        treefmtEval = inputs.treefmt-nix.lib.evalModule stable ./treefmt.nix;
       in
       rec {
         devShells.default = stable.mkShell {
@@ -116,6 +125,11 @@
         };
         packages.default = packages.nvim;
         homeManagerModules.default = args: import ./hm-module.nix (args // { nvim = packages.nvim; });
+
+        formatter = treefmtEval.config.build.wrapper;
+        checks = {
+          formatting = treefmtEval.config.build.check self;
+        };
       }
     );
 }
