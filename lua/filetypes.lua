@@ -57,6 +57,7 @@ end)
 utils.on_ft("man", function(opts)
   vim.opt_local.signcolumn = "no"
   vim.opt_local.scrolloff = 1000
+  vim.b[opts.buf].snacks_scroll = false
 end)
 
 utils.on_ft("oil", function()
