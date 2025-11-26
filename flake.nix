@@ -76,7 +76,7 @@
             # yamlls
             yaml-language-server
             # protols
-            (protols_wrap_wellknown protols)
+            (protols_wrap_wellknown unstable.protols)
             # ruff
             ruff
             # ts_ls
