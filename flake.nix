@@ -62,7 +62,7 @@
             # lua_ls
             lua-language-server
             # nixd
-            nixd nixpkgs-fmt
+            nixd nixfmt-rfc-style
             # eslint
             nodePackages.eslint
             # bashls

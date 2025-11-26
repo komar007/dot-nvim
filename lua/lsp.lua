@@ -88,7 +88,16 @@ require('utils').setup_lsps(
     },
     'lua_ls',
     'marksman',
-    'nixd',
+    {
+      'nixd',
+      settings = {
+        nixd = {
+          formatting = {
+            command = { "nixfmt" },
+          },
+        },
+      }
+    },
     {
       'protols',
       root_markers = { "protols.toml", ".git" },
