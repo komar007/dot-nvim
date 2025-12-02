@@ -1,15 +1,21 @@
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "oil",
   callback = function()
-    vim.api.nvim_buf_create_user_command(0, 'ORun', function(opts)
+    local function o_cmd(args)
       local dir = require('oil').get_current_dir(nil)
       if dir == nil then
         vim.notify("Oil not running", vim.log.levels.ERROR) -- should never happen...
         return
       end
-      local cmd = opts.args:gsub('%%O', dir)
+      local cmd = args:gsub('%%O', dir)
       vim.cmd(cmd)
-    end, { nargs = 1 })
+    end;
+    vim.api.nvim_buf_create_user_command(0, 'OCmd', function(opts) o_cmd(opts.args) end,
+      { nargs = 1, complete = "command" })
+    vim.api.nvim_buf_create_user_command(0, 'ORun', function(opts)
+      local cmd = "!(cd %O && " .. opts.args .. ")"
+      o_cmd(cmd)
+    end, { nargs = 1, complete = "shellcmd" })
   end
 })
 
