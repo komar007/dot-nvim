@@ -100,6 +100,7 @@
           yarn
           nodejs_22
           nodePackages.npm
+          unstable.surf
           # for markdown formatting
           pandoc
           # for shell formatting
