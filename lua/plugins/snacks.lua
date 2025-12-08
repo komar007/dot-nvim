@@ -95,6 +95,20 @@ return {
         },
       },
     },
+    gitbrowse = {
+      config = function(config, _)
+        local remote_patterns = {
+          -- local overrides
+        }
+        vim.list_extend(remote_patterns, config.remote_patterns)
+        config.remote_patterns = remote_patterns
+
+        local url_patterns = {
+          -- local overrides
+        }
+        config.url_patterns = vim.tbl_deep_extend('force', config.url_patterns, url_patterns)
+      end,
+    },
   },
   keys = {
     { "<C-p>",         function() require 'snacks'.picker.buffers() end },
@@ -106,5 +120,6 @@ return {
     { "<Leader>gl",    function() require 'snacks'.picker.git_log() end },
     { "<Leader>glf",   function() require 'snacks'.picker.git_log_file() end },
     { "<Leader>gll",   function() require 'snacks'.picker.git_log_line() end },
+    { "<Leader>gb",    function() require 'snacks'.gitbrowse() end,            mode = { 'n', 'x' } },
   }
 }
