@@ -31,7 +31,7 @@ UndoConfig = {
 
 return {
   "folke/snacks.nvim",
-  tag = "v2.27.0",
+  tag = "stable",
   priority = 1000,
   lazy = false,
 
@@ -81,6 +81,17 @@ return {
       formatters = {
         file = {
           truncate = 120,
+        },
+      },
+      previewers = {
+        diff = {
+          -- FIXME: fancy is disabled because it uses the same highlight (DiffDelete) as the area
+          -- used by diffview in side-by-side mode where it is set to very dark red background.
+          -- This makes sense in the side-by-side mode because it is always a "grayed-out" area
+          -- with no text, but in unified mode the deleted background is almost invisible, which is
+          -- not as indented. This should be fixed in diffview's configuration, as the current
+          -- setting of DiffDelete is likely only valid for DiffView.
+          style = 'syntax',
         },
       },
     },
