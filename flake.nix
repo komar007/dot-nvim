@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils = {
       url = "github:numtide/flake-utils";
@@ -48,7 +48,7 @@
           # clangd
           clang-tools
           # dockerls
-          dockerfile-language-server-nodejs
+          dockerfile-language-server
           # docker-compose-language-service
           docker-compose-language-service
           # fsautocomplete
