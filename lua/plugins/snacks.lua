@@ -98,13 +98,15 @@ return {
     gitbrowse = {
       config = function(config, _)
         local remote_patterns = {
-          -- local overrides
+          { "^ssh://[^@]+@gerrit.([^:/]+)(:[0-9]+)\\?/(.+)$", "https://gerrit.%1/plugins/gitiles/%3" }
         }
         vim.list_extend(remote_patterns, config.remote_patterns)
         config.remote_patterns = remote_patterns
 
         local url_patterns = {
-          -- local overrides
+          ["gerrit."] = {
+            file = "/+/refs/heads/{branch}/{file}#{line_start}"
+          },
         }
         config.url_patterns = vim.tbl_deep_extend('force', config.url_patterns, url_patterns)
       end,
