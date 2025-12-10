@@ -30,8 +30,8 @@ UndoConfig = {
 
 
 return {
-  "folke/snacks.nvim",
-  tag = "stable",
+  "komar007/snacks.nvim",
+  branch = "stable_plus",
   priority = 1000,
   lazy = false,
 
