@@ -26,14 +26,6 @@
         neovim = stable.neovim;
         # provide the include path containing the well-known protos from protobuf,
         # hijacking protols's pkg-config-based detection
-        protols_wrap_wellknown =
-          pkg:
-          stable.writeShellApplication {
-            name = "protols";
-            text = ''
-              ${pkg}/bin/protols -i "${stable.protobuf}/include" "$@"
-            '';
-          };
         dependencies = with stable; [
           # Basic dependencies (lazy + fzf native compilation)
           # ==================================================
@@ -57,16 +49,7 @@
           go
           gopls
           # marksman
-          (unstable.marksman.overrideAttrs (old: {
-            src = fetchFromGitHub {
-              owner = "artempyanykh";
-              repo = "marksman";
-              # heading ID disambiguation fix (see: https://github.com/artempyanykh/marksman/issues/383)
-              # nixpkgs-unstable is used as base, because tooling has been upgraded between 2024-10-07 and 2024-12-18
-              rev = "2ae290a8c7352d349e1f7581fd757ce2d58268bf";
-              hash = "sha256-eN3M2RaTUivtdLcRrpUuYoWmuPtlQycv6N/P9MwoRtM=";
-            };
-          }))
+          unstable.marksman
           # jsonls
           nodePackages.vscode-json-languageserver
           # jqls
@@ -91,7 +74,7 @@
           # yamlls
           yaml-language-server
           # protols
-          (protols_wrap_wellknown unstable.protols)
+          unstable.protols
           # ruff
           ruff
           # ts_ls
