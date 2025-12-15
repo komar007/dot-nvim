@@ -38,7 +38,7 @@ local gruvbox = {
     vim.cmd [[ hi Folded guibg=#171737 guifg=#888888 guisp=#5555aa gui=undercurl ]]
 
     vim.cmd [[ hi Normal ctermbg=16 guibg=none ]]
-    vim.cmd [[ hi Comment ctermfg=243 guifg=#7f7f7f ]]
+    vim.cmd [[ hi Comment ctermfg=243 guifg=#888888 ]]
     vim.cmd [[ hi CursorLine ctermbg=237 guibg=#2c2826 ]]
     vim.cmd [[ hi CursorColumn ctermbg=237 guibg=#2c2826 ]]
     vim.cmd [[ hi StatusLine gui=none guibg=#0a0a1a ]]
@@ -86,7 +86,7 @@ local gruvbox = {
     vim.cmd [[ hi LspReferenceRead guifg='#acaf26' ctermfg=green gui=reverse,bold cterm=reverse,bold ]]
 
     vim.cmd [[ hi InlayHint guibg='#171717' guifg='#888888' ]]
-    vim.cmd [[ hi LspCodeLens guifg='#555555' gui=italic ]]
+    vim.cmd [[ hi LspCodeLens guifg='#555555' guibg='#111111' gui=italic,underdotted ]]
     vim.cmd [[ hi LspCodeLensSeparator guifg='#555555' gui=italic ]]
 
     vim.cmd [[ hi! link Pmenu Normal ]]
