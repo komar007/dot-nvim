@@ -54,10 +54,11 @@ utils.on_ft("cpp", function()
   vim.opt_local.expandtab = true
 end)
 
-utils.on_ft("man", function(opts)
+utils.on_ft("man", function(ev)
   vim.opt_local.signcolumn = "no"
   vim.opt_local.scrolloff = 1000
-  vim.b[opts.buf].snacks_scroll = false
+  vim.b[ev.buf].snacks_scroll = false
+  vim.keymap.set("n", "<space>", "<C-f>", { buffer = ev.buf, noremap = true, silent = true })
 end)
 
 utils.on_ft("oil", function()
