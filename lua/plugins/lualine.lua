@@ -75,6 +75,9 @@ end
 
 return {
   'nvim-lualine/lualine.nvim',
+  dependencies = {
+    "NotAShelf/direnv.nvim",
+  },
   config = function()
     local colored_filename = require('lualine_colored_filename').colored_filename
     require('lualine').setup {
@@ -120,6 +123,10 @@ return {
           },
         },
         lualine_b = {
+          {
+            require('direnv').statusline,
+            padding = { left = 1, right = 0 },
+          },
           {
             'branch',
             icon = '⎇',
