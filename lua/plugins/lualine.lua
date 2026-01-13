@@ -124,7 +124,12 @@ return {
         },
         lualine_b = {
           {
-            require('direnv').statusline,
+            function()
+              return require('direnv').statusline()
+                  :gsub("active", "✓")
+                  :gsub("pending", "✗")
+                  :gsub("blocked", "")
+            end,
             padding = { left = 1, right = 0 },
           },
           {
