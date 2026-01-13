@@ -28,6 +28,11 @@ UndoConfig = {
   }
 }
 
+function _G.yank_gitbrowse_url()
+  local value = nil
+  require 'snacks'.gitbrowse.open({ open = function(url) value = url end })
+  vim.fn.setreg(vim.v.register, value, "v")
+end
 
 return {
   "komar007/snacks.nvim",
@@ -117,11 +122,21 @@ return {
     { "<Leader><C-p>", function() require 'snacks'.picker.files() end },
     { "<Leader>*",     function() require 'snacks'.picker.grep_word() end },
     { "<Leader>/",     function() require 'snacks'.picker.grep() end },
+
     { "<Leader>u",     function() require 'snacks'.picker.undo(UndoConfig) end },
     { "<Leader>gd",    function() require 'snacks'.picker.git_diff() end },
     { "<Leader>gl",    function() require 'snacks'.picker.git_log() end },
     { "<Leader>glf",   function() require 'snacks'.picker.git_log_file() end },
     { "<Leader>gll",   function() require 'snacks'.picker.git_log_line() end },
+
     { "<Leader>gb",    function() require 'snacks'.gitbrowse() end,            mode = { 'n', 'x' } },
+    {
+      "ygb",
+      function()
+        vim.go.operatorfunc = "v:lua.yank_gitbrowse_url"
+        return "g@l"
+      end,
+      expr = true
+    },
   }
 }
