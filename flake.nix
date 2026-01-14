@@ -98,15 +98,11 @@
         devShells.default = stable.mkShell {
           buildInputs = dependencies ++ [ neovim ];
         };
+        # neovim with all dependencies required by config
         packages.nvim = stable.writeShellApplication {
           name = "nvim";
           runtimeInputs = dependencies;
-          text = ''
-            if [[ -v NVIM_XDG_CONFIG_HOME ]]; then
-              export XDG_CONFIG_HOME="''${NVIM_XDG_CONFIG_HOME}"
-            fi
-            ${neovim}/bin/nvim "$@"
-          '';
+          text = ''${neovim}/bin/nvim "$@"'';
         };
         packages.default = packages.nvim;
         homeManagerModules.default = args: import ./hm-module.nix (args // { nvim = packages.nvim; });
