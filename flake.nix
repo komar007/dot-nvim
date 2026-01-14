@@ -93,19 +93,57 @@
           shfmt
         ];
         treefmtEval = inputs.treefmt-nix.lib.evalModule stable ./treefmt.nix;
+        getExe = stable.lib.getExe;
       in
       rec {
         devShells.default = stable.mkShell {
           buildInputs = dependencies ++ [ neovim ];
         };
-        # neovim with all dependencies required by config
-        packages.nvim = stable.writeShellApplication {
-          name = "nvim";
-          runtimeInputs = dependencies;
-          text = ''${neovim}/bin/nvim "$@"'';
+        packages = rec {
+          # neovim with all dependencies required by config
+          nvim_with_deps = stable.writeShellApplication {
+            name = "nvim";
+            runtimeInputs = dependencies;
+            text = ''${neovim}/bin/nvim "$@"'';
+          };
+          # a tool which unloads any .envrc previously loaded via direnv before spawning the wrapped
+          # program
+          with_unloaded_direnv = stable.writeShellApplication {
+            name = "nvim";
+            runtimeInputs = [ stable.coreutils ];
+            text = builtins.readFile ./with_unloaded_direnv.sh;
+          };
+          # Unload any previously loaded direnv, as neovim manages direnv itself
+          #
+          # The "hack" below is specific to the design of this neovim configuration where neovim is
+          # a nix package that contains its executable dependencies (LSPs, rg, etc.) as
+          # `runtimeInputs` which essentially makes it a wrapper that extends PATH before spawning
+          # original nvim. This causes problems if the nix package is started in a direnv-enabled
+          # environment, as the environment likely overrides PATH (especially with `use flake`).
+          #
+          # Not doing the unloading would cause direnv reloading inside NotAShelf/direnv.nvim to
+          # break runtimeInputs in direnv directories with `use flake` (or any PATH
+          # appending/prepending):
+          # - .envrc in current directory appends to PATH,
+          # - neovim wrapped in a subshell appending deps to PATH spawned (*),
+          # - :Direnv reload restores environment state serialized by direnv before entering current
+          #   directory causing changes to PATH introduced in (*) to be lost,
+          # - direnv applies new (or updated) .envrc,
+          # - result: neovim does not recognize dependencies: LSPs, basic tools, etc.
+          #
+          # Unloading the changes currently applied by direnv before spawning nvim wrapped with its
+          # dependencies (whether it's a package or devshell) makes sure that the dependencies
+          # provided by this flake are the starting point for any direnv reloads happening inside
+          # neovim and will not be lost. `autoload_direnv` makes sure that the current directory's
+          # .envrc will be immediately loaded anyway.
+          nvim_with_deps_unloaded_direnv = stable.writeShellApplication {
+            name = "nvim";
+            text = ''${getExe with_unloaded_direnv} ${getExe nvim_with_deps} "$@"'';
+          };
+          default = nvim_with_deps_unloaded_direnv;
         };
-        packages.default = packages.nvim;
-        homeManagerModules.default = args: import ./hm-module.nix (args // { nvim = packages.nvim; });
+        homeManagerModules.default =
+          args: import ./hm-module.nix (args // { nvim = packages.nvim_with_deps_unloaded_direnv; });
 
         formatter = treefmtEval.config.build.wrapper;
         checks = {
