@@ -6,5 +6,8 @@ return {
       enabled = true,
       icon = "󰌪",
     },
+    notifications = {
+      silent_autoload = false,
+    },
   },
 }
