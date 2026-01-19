@@ -2,20 +2,14 @@ return {
   "aznhe21/actions-preview.nvim",
 
   dependencies = {
-    'nvim-telescope/telescope.nvim',
+    "komar007/snacks.nvim",
   },
   lazy = false,
-  opts = function()
-    return {
-      telescope = require('telescope.themes').get_dropdown({
-        layout_config = {
-          height = 20,
-          width = 125,
-        },
-        layout_strategy = 'cursor',
-      })
-    }
-  end,
+  opts = {
+    snacks = {
+      layout = { preset = "ivy" },
+    },
+  },
   keys = {
     { "ga", function() require("actions-preview").code_actions() end, mode = { "v", "n" } },
   },

@@ -10,6 +10,7 @@ return {
       ensure_installed = {
         "c",
         "css",
+        "diff",
         "dockerfile",
         "fsharp",
         "go",

@@ -31,7 +31,7 @@
           # ==================================================
           git
           cmake
-          # telescope
+          # snacks grep picker
           ripgrep
 
           # Language servers
