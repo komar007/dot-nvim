@@ -31,6 +31,7 @@
           # ==================================================
           git
           cmake
+          delta
           # snacks grep picker
           ripgrep
 
