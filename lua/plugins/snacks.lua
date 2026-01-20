@@ -1,6 +1,8 @@
 local function keys_but_unbind(unbind, keys)
   for _, key in pairs(unbind) do
-    keys[key] = { "" }
+    if keys[key] == nil then
+      keys[key] = { "" }
+    end
   end
   return keys
 end
@@ -73,6 +75,8 @@ return {
           keys = keys_but_unbind(readline.keys, utils.keys_with_alternate {
             ["<C-S-p>"] = { "history_back", mode = { "i", "n" } },
             ["<C-S-n>"] = { "history_forward", mode = { "i", "n" } },
+            ["<C-u>"] = { "preview_scroll_up", mode = { "n" } },
+            ["<C-d>"] = { "preview_scroll_down", mode = { "n" } },
           })
         },
       },
