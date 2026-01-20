@@ -10,7 +10,7 @@ end
 local readline = require('readline')
 local utils = require('utils')
 
-UndoConfig = {
+local undo_config = {
   actions = {
     yank_add = { action = "yank", reg = '"', field = "added_lines" },
     yank_del = { action = "yank", reg = '"', field = "removed_lines" },
@@ -127,13 +127,13 @@ return {
     { "<Leader>*",     function() require 'snacks'.picker.grep_word() end },
     { "<Leader>/",     function() require 'snacks'.picker.grep() end },
 
-    { "<Leader>u",     function() require 'snacks'.picker.undo(UndoConfig) end },
+    { "<Leader>u",     function() require 'snacks'.picker.undo(undo_config) end },
     { "<Leader>gd",    function() require 'snacks'.picker.git_diff() end },
     { "<Leader>gl",    function() require 'snacks'.picker.git_log() end },
     { "<Leader>glf",   function() require 'snacks'.picker.git_log_file() end },
     { "<Leader>gll",   function() require 'snacks'.picker.git_log_line() end },
 
-    { "<Leader>gb",    function() require 'snacks'.gitbrowse() end,            mode = { 'n', 'x' } },
+    { "<Leader>gb",    function() require 'snacks'.gitbrowse() end,             mode = { 'n', 'x' } },
     {
       "ygb",
       function()
