@@ -77,8 +77,24 @@ return {
             ["<C-S-n>"] = { "history_forward", mode = { "i", "n" } },
             ["<C-u>"] = { "preview_scroll_up", mode = { "n" } },
             ["<C-d>"] = { "preview_scroll_down", mode = { "n" } },
+            ["<leader>"] = { "switch_alternate_picker", mode = { "n" } },
           })
         },
+      },
+      actions = {
+        switch_alternate_picker = function(picker)
+          local alt_picker
+          if picker.title == "Buffers" then
+            alt_picker = require 'snacks'.picker.files
+          elseif picker.title == "Files" then
+            alt_picker = require 'snacks'.picker.buffers
+          else
+            return
+          end
+          local input = picker.input:get()
+          picker:close()
+          alt_picker({ pattern = input })
+        end,
       },
       layout = function()
         return {
