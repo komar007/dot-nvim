@@ -36,6 +36,47 @@ function _G.yank_gitbrowse_url()
   vim.fn.setreg(vim.v.register, value, "v")
 end
 
+local function wrap_one_based(idx, n)
+  return (idx - 1) % n + 1
+end
+
+local function picker_from_title_HACK(title)
+  return title:lower():gsub(" ", "_")
+end
+
+-- Build a snacks picker action which closes the current picker and opens an alternative one from
+-- the group of alternatives, maintaining the input pattern.
+--
+-- The first group where the current picker is found is used as the group of alternatives. The next
+-- item from the group is always selected. When the current picker is the last in the group, the
+-- first picker from the group is selected.
+---@param alternatives string[][]
+local function make_alternate_picker_action(alternatives)
+  ---@param current_picker snacks.Picker
+  return function(current_picker)
+    local alt_picker = nil
+    for _, group in ipairs(alternatives) do
+      for i, title in ipairs(group) do
+        -- FIXME: no way to get picker name ("git_grep", "files", etc), so we rely on titles
+        if current_picker.title == title then
+          alt_picker = group[wrap_one_based(i + 1, #group)]
+          goto end_search
+        end
+      end
+    end
+    ::end_search::
+    if alt_picker == nil then
+      return
+    end
+    -- FIXME: current_picker.input = either pattern or search, depending on what is being edited,
+    -- there seems to be no way to get both and know which one is which.
+    local input = current_picker.input:get()
+    current_picker:close()
+    vim.notify("alt " .. alt_picker)
+    require 'snacks'.picker(picker_from_title_HACK(alt_picker), { pattern = input })
+  end
+end
+
 return {
   "komar007/snacks.nvim",
   branch = "stable_plus",
@@ -82,19 +123,10 @@ return {
         },
       },
       actions = {
-        switch_alternate_picker = function(picker)
-          local alt_picker
-          if picker.title == "Buffers" then
-            alt_picker = require 'snacks'.picker.files
-          elseif picker.title == "Files" then
-            alt_picker = require 'snacks'.picker.buffers
-          else
-            return
-          end
-          local input = picker.input:get()
-          picker:close()
-          alt_picker({ pattern = input })
-        end,
+        switch_alternate_picker = make_alternate_picker_action({
+          { "Buffers", "Files" },
+          { "Git Log", "Git Log Line", "Git Log File" },
+        }),
       },
       layout = function()
         return {
