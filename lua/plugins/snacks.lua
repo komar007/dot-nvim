@@ -72,7 +72,6 @@ local function make_alternate_picker_action(alternatives)
     -- there seems to be no way to get both and know which one is which.
     local input = current_picker.input:get()
     current_picker:close()
-    vim.notify("alt " .. alt_picker)
     require 'snacks'.picker(picker_from_title_HACK(alt_picker), { pattern = input })
   end
 end
