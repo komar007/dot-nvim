@@ -25,12 +25,3 @@ end, { nargs = 1, complete = "highlight" })
 vim.api.nvim_create_user_command('InlayHintsToggle', function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { nargs = 0 })
-
--- A workaround for https://github.com/mrcjkb/rustaceanvim/issues/949 to use instead of
--- :RustAnalyzer restart
-vim.api.nvim_create_user_command('RARestart', function()
-  vim.cmd.RustAnalyzer("stop")
-  vim.defer_fn(function()
-    vim.cmd.RustAnalyzer("start")
-  end, 1000)
-end, { nargs = 0 })
