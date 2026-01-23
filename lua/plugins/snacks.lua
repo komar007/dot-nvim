@@ -40,10 +40,6 @@ local function wrap_one_based(idx, n)
   return (idx - 1) % n + 1
 end
 
-local function picker_from_title_HACK(title)
-  return title:lower():gsub(" ", "_")
-end
-
 -- Build a snacks picker action which closes the current picker and opens an alternative one from
 -- the group of alternatives, maintaining the input pattern.
 --
@@ -56,9 +52,8 @@ local function make_alternate_picker_action(alternatives)
   return function(current_picker)
     local alt_picker = nil
     for _, group in ipairs(alternatives) do
-      for i, title in ipairs(group) do
-        -- FIXME: no way to get picker name ("git_grep", "files", etc), so we rely on titles
-        if current_picker.title == title then
+      for i, source in ipairs(group) do
+        if current_picker.opts.source == source then
           alt_picker = group[wrap_one_based(i + 1, #group)]
           goto end_search
         end
@@ -68,11 +63,14 @@ local function make_alternate_picker_action(alternatives)
     if alt_picker == nil then
       return
     end
-    -- FIXME: current_picker.input = either pattern or search, depending on what is being edited,
-    -- there seems to be no way to get both and know which one is which.
-    local input = current_picker.input:get()
+    local new_opts = {
+      show_empty = true, -- so that the cycle is not broken by some of the pickers never appearing
+      pattern = current_picker:filter().pattern,
+      search = current_picker:filter().search,
+      live = current_picker.opts.live,
+    }
     current_picker:close()
-    require 'snacks'.picker(picker_from_title_HACK(alt_picker), { pattern = input })
+    require 'snacks'.picker(alt_picker, new_opts)
   end
 end
 
@@ -123,8 +121,8 @@ return {
       },
       actions = {
         switch_alternate_picker = make_alternate_picker_action({
-          { "Buffers", "Files" },
-          { "Git Log", "Git Log Line", "Git Log File" },
+          { "buffers", "files" },
+          { "git_log", "git_log_line", "git_log_file" },
         }),
       },
       layout = function()
