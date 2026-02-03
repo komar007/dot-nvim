@@ -145,7 +145,7 @@ return {
           -- with no text, but in unified mode the deleted background is almost invisible, which is
           -- not as indented. This should be fixed in diffview's configuration, as the current
           -- setting of DiffDelete is likely only valid for DiffView.
-          style = 'syntax',
+          style = 'terminal',
         },
       },
     },
