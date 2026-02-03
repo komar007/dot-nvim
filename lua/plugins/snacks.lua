@@ -115,6 +115,7 @@ return {
             ["<C-S-n>"] = { "history_forward", mode = { "i", "n" } },
             ["<C-u>"] = { "preview_scroll_up", mode = { "n" } },
             ["<C-d>"] = { "preview_scroll_down", mode = { "n" } },
+            ["<C-a>"] = { "select_all", mode = { "n" } },
             ["<leader>"] = { "switch_alternate_picker", mode = { "n" } },
           })
         },
