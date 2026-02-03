@@ -170,8 +170,8 @@ return {
   keys = {
     { "<C-p>",         function() require 'snacks'.picker.buffers() end },
     { "<Leader><C-p>", function() require 'snacks'.picker.files() end },
-    { "<Leader>*",     function() require 'snacks'.picker.grep_word() end },
-    { "<Leader>/",     function() require 'snacks'.picker.grep() end },
+    { "g*",            function() require 'snacks'.picker.grep_word() end },
+    { "g/",            function() require 'snacks'.picker.grep() end },
 
     { "<Leader>u",     function() require 'snacks'.picker.undo(undo_config) end },
     { "<Leader>gd",    function() require 'snacks'.picker.git_diff() end },
