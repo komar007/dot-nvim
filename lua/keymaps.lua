@@ -20,6 +20,9 @@ local utils = require('utils')
 utils.define_text_object_inside_around('/')
 utils.define_text_object_inside_around('.')
 
+-- last inline changed
+vim.keymap.set({ 'n', 'x', 'o' }, 'gb', ':normal `[v`]<cr>', { noremap = true, silent = true })
+
 local nvim_011_new_maps = {
   { k = 'grn', m = 'n' },
   { k = 'grr', m = 'n' },
