@@ -78,6 +78,16 @@ return {
               disabled = { "unresolved-proc-macro" },
               enableExperimental = false,
             },
+            hover = {
+              show = {
+                traitAssocItems = 5,
+              },
+            },
+            signatureInfo = {
+              -- "full" causes the whole signature to be in one line and it becomes a mess,
+              -- showing just parameters is a workaround.
+              detail = "parameters",
+            },
             check = {
               command = "clippy",
             },
