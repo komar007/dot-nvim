@@ -30,6 +30,27 @@ local undo_config = {
   }
 }
 
+local buffer_file_picker_config = function()
+  local roots = utils.lsp_roots(0)
+  local sort = require('snacks.picker.sort').default()
+  return {
+    sort = function(a, b)
+      local a_in_root, b_in_root = false, false
+      for _, root in ipairs(roots) do
+        a_in_root = a_in_root or (a.file ~= nil and a._path:find(root.path, 1, true) == 1)
+        b_in_root = b_in_root or (b.file ~= nil and b._path:find(root.path, 1, true) == 1)
+      end
+      if a_in_root and not b_in_root then
+        return true
+      end
+      if b_in_root and not a_in_root then
+        return false
+      end
+      return sort(a, b)
+    end,
+  }
+end
+
 function _G.yank_gitbrowse_url()
   local value = nil
   require 'snacks'.gitbrowse.open({ open = function(url) value = url end })
@@ -168,8 +189,8 @@ return {
     },
   },
   keys = {
-    { "<C-p>",         function() require 'snacks'.picker.buffers() end },
-    { "<Leader><C-p>", function() require 'snacks'.picker.files() end },
+    { "<C-p>",         function() require 'snacks'.picker.buffers(buffer_file_picker_config()) end },
+    { "<Leader><C-p>", function() require 'snacks'.picker.files(buffer_file_picker_config()) end },
     { "g*",            function() require 'snacks'.picker.grep_word() end },
     { "g/",            function() require 'snacks'.picker.grep() end },
 

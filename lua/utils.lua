@@ -79,7 +79,7 @@ function M.setup_lsps(base_cfg, lsps)
       lsp = base_cfg
     end
     vim.lsp.config(lsp_name, lsp)
-    vim.lsp.enable({lsp_name})
+    vim.lsp.enable({ lsp_name })
   end
 end
 
@@ -141,6 +141,31 @@ function M.setup_shell_fmt_buf(cmd, post_hook)
       post_hook()
     end
   end, {})
+end
+
+function M.lsp_roots(bufnr)
+  local file
+  if bufnr == nil then
+    file = nil
+  else
+    file = vim.api.nvim_buf_get_name(bufnr)
+  end
+  local workspace_dirs = {}
+  for _, client in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+    local folders, paths = client.workspace_folders or {}, {}
+    for _, wf in ipairs(folders) do
+      table.insert(paths, vim.uri_to_fname(wf.uri))
+    end
+    if #paths == 0 and client.config and client.config.root_dir then
+      paths = { client.config.root_dir }
+    end
+    for _, p in ipairs(paths) do
+      if file == nil or file:find(p, 1, true) == 1 then
+        table.insert(workspace_dirs, { client = client, path = p })
+      end
+    end
+  end
+  return workspace_dirs
 end
 
 return M
