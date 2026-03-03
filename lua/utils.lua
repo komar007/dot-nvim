@@ -14,12 +14,28 @@ local function codes(s)
   return r
 end
 
-local function map(x, f)
+---@generic T
+---@generic U
+---@param x T[]
+---@param f fun(item: T): U
+---@return U[]
+function M.map(x, f)
   local o = {}
   for k, v in pairs(x) do
     o[k] = f(v)
   end
   return o
+end
+
+---@generic T
+---@generic U
+---@param x T[][]
+---@param f fun(item: T): U
+---@return U[][]
+function M.map2(x, f)
+  return M.map(x, function(e)
+    return M.map(e, f)
+  end)
 end
 
 local function border_map(x)
@@ -47,10 +63,10 @@ function M.make_border(spec)
   local spec_border = spec[1]
   local spec_hi = spec[2]
   local spec_hi_name = spec[3]
-  local b = border_map(map({ 1, 2, 3 }, function(i)
+  local b = border_map(M.map({ 1, 2, 3 }, function(i)
     return codes(spec_border[i])
   end))
-  local hi = map(border_map(spec_hi), function(h) return spec_hi_name[h] end)
+  local hi = M.map(border_map(spec_hi), function(h) return spec_hi_name[h] end)
   return zip(b, hi)
 end
 
