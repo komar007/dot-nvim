@@ -30,10 +30,13 @@ local undo_config = {
   }
 }
 
-local buffer_file_picker_config = function()
+local bf_picker_config = function()
   local roots = utils.lsp_roots(0)
   local sort = require('snacks.picker.sort').default()
   return {
+    matcher = {
+      sort_empty = true,
+    },
     sort = function(a, b)
       local a_in_root, b_in_root = false, false
       for _, root in ipairs(roots) do
@@ -107,6 +110,11 @@ local function make_alternate_picker_action(alternatives_spec)
   end
 end
 
+local bf_specific_opts = {}
+for k, _ in pairs(bf_picker_config()) do
+  table.insert(bf_specific_opts, k)
+end
+
 return {
   "komar007/snacks.nvim",
   branch = "stable_plus",
@@ -156,8 +164,8 @@ return {
       actions = {
         switch_alternate_picker = make_alternate_picker_action({
           {
-            { source = "buffers", reuse_opts = { "sort" } },
-            { source = "files",   reuse_opts = { "sort" } },
+            { source = "buffers", reuse_opts = bf_specific_opts },
+            { source = "files",   reuse_opts = bf_specific_opts },
           },
           {
             "git_log",
@@ -208,8 +216,8 @@ return {
     },
   },
   keys = {
-    { "<C-p>",         function() require 'snacks'.picker.buffers(buffer_file_picker_config()) end },
-    { "<Leader><C-p>", function() require 'snacks'.picker.files(buffer_file_picker_config()) end },
+    { "<C-p>",         function() require 'snacks'.picker.buffers(bf_picker_config()) end },
+    { "<Leader><C-p>", function() require 'snacks'.picker.files(bf_picker_config()) end },
     { "g*",            function() require 'snacks'.picker.grep_word() end },
     { "g/",            function() require 'snacks'.picker.grep() end },
 
