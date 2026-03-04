@@ -159,6 +159,9 @@ function M.setup_shell_fmt_buf(cmd, post_hook)
   end, {})
 end
 
+--- Get LSP roots for buffer or all buffers
+---@param bufnr integer?
+---@return {client: string, path: string}[]
 function M.lsp_roots(bufnr)
   local file
   if bufnr == nil then

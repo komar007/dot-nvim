@@ -30,6 +30,8 @@ local undo_config = {
   }
 }
 
+--- Picker config for buffers and files
+---@return snacks.picker.Config
 local bf_picker_config = function()
   local roots = utils.lsp_roots(0)
   local sort = require('snacks.picker.sort').default()
@@ -64,12 +66,12 @@ local function wrap_one_based(idx, n)
   return (idx - 1) % n + 1
 end
 
--- Build a snacks picker action which closes the current picker and opens an alternative one from
--- the group of alternatives, maintaining the input pattern.
---
--- The first group where the current picker is found is used as the group of alternatives. The next
--- item from the group is always selected. When the current picker is the last in the group, the
--- first picker from the group is selected.
+--- Build a snacks picker action which closes the current picker and opens an alternative one from
+--- the group of alternatives, maintaining the input pattern.
+---
+--- The first group where the current picker is found is used as the group of alternatives. The next
+--- item from the group is always selected. When the current picker is the last in the group, the
+--- first picker from the group is selected.
 ---@param alternatives_spec string[][]|{source: string, reuse_opts: string[]}[][]
 local function make_alternate_picker_action(alternatives_spec)
   local alternatives = utils.map2(alternatives_spec, function(item)
@@ -110,6 +112,7 @@ local function make_alternate_picker_action(alternatives_spec)
   end
 end
 
+---@type string[]
 local bf_specific_opts = {}
 for k, _ in pairs(bf_picker_config()) do
   table.insert(bf_specific_opts, k)
