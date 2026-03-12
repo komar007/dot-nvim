@@ -211,7 +211,8 @@ return {
 
         local url_patterns = {
           ["gerrit."] = {
-            file = "/+/refs/heads/{branch}/{file}#{line_start}"
+            file = "/+/refs/heads/{branch}/{file}#{line_start}",
+            permalink = "/+/{commit}/{file}#{line_start}",
           },
         }
         config.url_patterns = vim.tbl_deep_extend('force', config.url_patterns, url_patterns)
@@ -230,7 +231,20 @@ return {
     { "<Leader>glf",   function() require 'snacks'.picker.git_log_file() end },
     { "<Leader>gll",   function() require 'snacks'.picker.git_log_line() end },
 
-    { "<Leader>gb",    function() require 'snacks'.gitbrowse() end,             mode = { 'n', 'x' } },
+    {
+      "<Leader>gb",
+      function()
+        require 'snacks'.gitbrowse()
+      end,
+      mode = { 'n', 'x' }
+    },
+    {
+      "<Leader>gp",
+      function()
+        require 'snacks'.gitbrowse.open({ what = "permalink" })
+      end,
+      mode = { 'n', 'x' }
+    },
     {
       "ygb",
       function()
