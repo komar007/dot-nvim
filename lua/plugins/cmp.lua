@@ -137,10 +137,7 @@ return {
         end,
       },
       experimental = {
-        -- workaround from https://github.com/hrsh7th/nvim-cmp/issues/1573
-        ghost_text = {
-          hl_group = 'Comment',
-        },
+        ghost_text = true,
       },
     })
 
