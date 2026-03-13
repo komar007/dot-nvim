@@ -16,25 +16,41 @@ return {
 
     ---@param entry cmp.Entry
     ---@return string|nil
-    local function get_lsp_client_name(entry)
+    local function lsp_client_name(entry)
       local source = entry.source and entry.source.source
       local client = source and source.client
       return client and client.config and client.config.name or nil
     end
 
-    ---@param entry1 cmp.Entry
-    ---@param entry2 cmp.Entry
-    local function compare_crates_before_taplo(entry1, entry2)
-      local client1 = get_lsp_client_name(entry1)
-      local client2 = get_lsp_client_name(entry2)
+    --- Return a cmp comparator that enforces a relative ordering for entries whose
+    --- mapped keys are both present in `expected_order`.
+    ---
+    --- If either entry maps to a value outside `expected_order`, or both map to the
+    --- same position, the comparator returns `nil` so later comparators can decide.
+    ---
+    ---@generic T
+    ---@param key_fn fun(entry: cmp.Entry): T|nil Maps an entry to the value used for ordering.
+    ---@param expected_order T[] Earlier items have higher priority.
+    ---@return fun(entry1: cmp.Entry, entry2: cmp.Entry): boolean|nil
+    local function enforce_order(key_fn, expected_order)
+      ---@type table<any, integer>
+      local positions = {}
 
-      if client1 == 'crates.nvim' and client2 == 'taplo' then
-        return true
+      for index, value in ipairs(expected_order) do
+        positions[value] = index
       end
-      if client1 == 'taplo' and client2 == 'crates.nvim' then
-        return false
+
+      return function(a, b)
+        local key_a = key_fn(a)
+        local key_b = key_fn(b)
+        local pos1 = key_a and positions[key_a] or nil
+        local pos2 = key_b and positions[key_b] or nil
+
+        if pos1 and pos2 and pos1 ~= pos2 then
+          return pos1 > pos2
+        end
+        return nil
       end
-      return nil
     end
 
     local kind_icons = {
@@ -99,7 +115,7 @@ return {
       sorting = {
         priority_weight = 100,
         comparators = {
-          compare_crates_before_taplo,
+          enforce_order(lsp_client_name, { 'crates.nvim', 'taplo' }),
           require('cmp_lsp_rs').comparators.inscope_inherent_import,
           cmp.config.compare.score,
         },
