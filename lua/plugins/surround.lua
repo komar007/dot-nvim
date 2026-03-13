@@ -2,9 +2,8 @@ return {
   "kylechui/nvim-surround",
   version = "*",
   event = "VeryLazy",
-  opts = {
-    keymaps = {
-      visual = "ys",
-    },
-  },
+  opts = {},
+  keys = {
+    { "ys", "<Plug>(nvim-surround-visual)", mode = { "v" } },
+  }
 }
