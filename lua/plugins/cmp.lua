@@ -14,6 +14,29 @@ return {
     local cmp = require('cmp')
     local border = require('border')
 
+    ---@param entry cmp.Entry
+    ---@return string|nil
+    local function get_lsp_client_name(entry)
+      local source = entry.source and entry.source.source
+      local client = source and source.client
+      return client and client.config and client.config.name or nil
+    end
+
+    ---@param entry1 cmp.Entry
+    ---@param entry2 cmp.Entry
+    local function compare_crates_before_taplo(entry1, entry2)
+      local client1 = get_lsp_client_name(entry1)
+      local client2 = get_lsp_client_name(entry2)
+
+      if client1 == 'crates.nvim' and client2 == 'taplo' then
+        return true
+      end
+      if client1 == 'taplo' and client2 == 'crates.nvim' then
+        return false
+      end
+      return nil
+    end
+
     local kind_icons = {
       Text = "󰦨",
       Method = "󰫺",
@@ -76,6 +99,7 @@ return {
       sorting = {
         priority_weight = 100,
         comparators = {
+          compare_crates_before_taplo,
           require('cmp_lsp_rs').comparators.inscope_inherent_import,
           cmp.config.compare.score,
         },
