@@ -11,6 +11,6 @@ return {
     mode = 'cursor',
   },
   keys = {
-    { "<F4>", ":TSContextToggle<CR>" },
+    { "<F4>", ":TSContext toggle<CR>" },
   },
 }
