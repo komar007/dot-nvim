@@ -23,7 +23,7 @@ utils.on_ft("markdown", function()
 end)
 
 utils.on_ft("sh", function()
-  utils.setup_shell_fmt_buf("shfmt --case-indent")
+  utils.setup_shell_fmt_buf("shfmt --filename %")
 end)
 
 utils.on_ft("kanata", function()
