@@ -4,6 +4,7 @@ set -e
 
 DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 
-NVIM_BIN="nvim" \
-NVIM_BIN_ALT="$DIR"/nix_run_nvim_with_here_config.sh \
-	"$DIR"/nvim_cold_reload/nvim_cold_reload.sh "$@"
+export NVIM_BIN="nvim"
+export NVIM_BIN_ALT="$DIR"/nix_run_nvim_with_here_config.sh
+
+"$DIR"/nvim_cold_reload/nvim_cold_reload.sh "$@"
