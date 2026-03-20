@@ -56,10 +56,18 @@ local bf_picker_config = function()
   }
 end
 
-function _G.yank_gitbrowse_url()
+local function yank_gitbrowse_url(what)
   local value = nil
-  require 'snacks'.gitbrowse.open({ open = function(url) value = url end })
+  require 'snacks'.gitbrowse.open({ what = what, open = function(url) value = url end })
   vim.fn.setreg(vim.v.register, value, "v")
+end
+
+function _G.yank_gitbrowse_url(_)
+  yank_gitbrowse_url(nil)
+end
+
+function _G.yank_gitbrowse_url_permalink(_)
+  yank_gitbrowse_url("permalink")
 end
 
 local function wrap_one_based(idx, n)
@@ -249,6 +257,14 @@ return {
       "ygb",
       function()
         vim.go.operatorfunc = "v:lua.yank_gitbrowse_url"
+        return "g@l"
+      end,
+      expr = true
+    },
+    {
+      "ygp",
+      function()
+        vim.go.operatorfunc = "v:lua.yank_gitbrowse_url_permalink"
         return "g@l"
       end,
       expr = true
