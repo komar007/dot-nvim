@@ -58,7 +58,7 @@ end
 
 local function yank_gitbrowse_url(what)
   local value = nil
-  require 'snacks'.gitbrowse.open({ what = what, open = function(url) value = url end })
+  require 'snacks'.gitbrowse.open({ notify = false, what = what, open = function(url) value = url end })
   vim.fn.setreg(vim.v.register, value, "v")
 end
 
