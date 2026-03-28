@@ -63,6 +63,7 @@ vim.opt.fillchars = {
 
   diff = "╱",
 }
+vim.opt.laststatus = 3
 
 require('keymaps')
 require('diagnostics')
