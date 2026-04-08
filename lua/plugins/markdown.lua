@@ -21,10 +21,18 @@ return {
     code = {
       sign = false,
       width = 'block',
+      position = 'right',
       min_width = 79,
+      language_border = ' ',
+      language_left = '█',
+      language_right = '█',
     },
     dash = {
       width = 79,
+    },
+    pipe_table = {
+      preset = 'round',
+      alignment_indicator = '○',
     },
     overrides = {
       buftype = {
