@@ -25,10 +25,7 @@ utils.on_ft("markdown", function()
   vim.opt_local.wrap = false
   vim.opt_local.textwidth = 100
 
-  utils.setup_shell_fmt_buf("pandoc -t gfm --columns 100", function()
-    -- workaround: some plugin (likely render-markdown) sets conceallevel=2 all the time...
-    vim.o.conceallevel = 0
-  end)
+  utils.setup_shell_fmt_buf("pandoc -t gfm --columns 100")
 end)
 
 utils.on_ft("sh", function()
