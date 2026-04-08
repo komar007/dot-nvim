@@ -26,5 +26,16 @@ return {
     dash = {
       width = 79,
     },
+    overrides = {
+      buftype = {
+        nofile = {
+          win_options = {
+            concealcursor = {
+              rendered = "nc",
+            },
+          },
+        },
+      },
+    },
   },
 }

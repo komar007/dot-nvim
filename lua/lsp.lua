@@ -2,6 +2,11 @@ local M = {}
 
 --vim.lsp.set_log_level("trace")
 
+local lsp_float_opts = {
+  wrap = true,
+  max_width = 100,
+}
+
 M.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 M.keymap_opts = { buffer = true, noremap = true, silent = true }
 
@@ -13,8 +18,8 @@ M.on_attach = function(client)
   vim.keymap.set('n', 'gr', snacks.picker.lsp_references, M.keymap_opts)
   vim.keymap.set('n', 'gi', snacks.picker.lsp_implementations, M.keymap_opts)
   -- docs and info
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, M.keymap_opts)
-  vim.keymap.set({ 'n', 'v', 'i' }, '<C-l>', vim.lsp.buf.signature_help, M.keymap_opts)
+  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover(lsp_float_opts) end, M.keymap_opts)
+  vim.keymap.set({ 'n', 'v', 'i' }, '<C-l>', function() vim.lsp.buf.signature_help(lsp_float_opts) end, M.keymap_opts)
   vim.keymap.set('n', 'gt', snacks.picker.lsp_type_definitions, M.keymap_opts)
   -- action shortcuts (code actions are implemented in actions_preview.lua
   vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, M.keymap_opts)
