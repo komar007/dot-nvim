@@ -2,6 +2,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
@@ -145,6 +149,19 @@
         };
         homeManagerModules.default =
           args: import ./hm-module.nix (args // { nvim = packages.nvim_with_deps_unloaded_direnv; });
+
+        homeConfigurations.default = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = stable;
+          modules = [
+            homeManagerModules.default
+            {
+              home.username = "tmp";
+              home.homeDirectory = "/tmp/home";
+              home.stateVersion = "25.11";
+              dot-nvim.quirks.gitBranchSymbol = builtins.getEnv "DOT_NVIM_GIT_BRANCH_SYMBOL";
+            }
+          ];
+        };
 
         formatter = treefmtEval.config.build.wrapper;
         checks = {

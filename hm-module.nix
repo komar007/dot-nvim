@@ -21,6 +21,7 @@ let
           ) patterns
         );
     };
+  branchSymbol = config.dot-nvim.quirks.gitBranchSymbol;
 in
 {
   options.dot-nvim.quirks.gitBranchSymbol = lib.mkOption {
@@ -44,7 +45,11 @@ in
 
   config.home.file.".config/nvim/lua/quirks.lua".text = ''
     return {
-      git_branch_symbol = '${config.dot-nvim.quirks.gitBranchSymbol}',
+      git_branch_symbol = '${branchSymbol}',
     }
   '';
+
+  config.home.sessionVariables = {
+    DOT_NVIM_GIT_BRANCH_SYMBOL = branchSymbol;
+  };
 }
