@@ -25,7 +25,7 @@ utils.on_ft("markdown", function()
   vim.opt_local.wrap = false
   vim.opt_local.textwidth = 100
 
-  utils.setup_shell_fmt_buf("pandoc -t gfm --columns 100")
+  utils.setup_shell_fmt_buf("pandoc -t gfm -f gfm --columns 100")
 end)
 
 utils.on_ft("sh", function()
