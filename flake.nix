@@ -84,6 +84,9 @@
           ruff
           # ts_ls
           typescript-language-server
+          # hls
+          ghc
+          haskell-language-server
 
           # Other requirements
           # ==================

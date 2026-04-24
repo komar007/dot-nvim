@@ -86,6 +86,7 @@ require('utils').setup_lsps(
         },
       },
     },
+    'hls',
     'jqls',
     {
       'jsonls',
