@@ -238,6 +238,7 @@ return {
     { "<Leader>gl",    function() require 'snacks'.picker.git_log() end },
     { "<Leader>glf",   function() require 'snacks'.picker.git_log_file() end },
     { "<Leader>gll",   function() require 'snacks'.picker.git_log_line() end },
+    { "<Leader>gg",    function() require 'snacks'.picker.git_status() end },
 
     {
       "<Leader>gb",
