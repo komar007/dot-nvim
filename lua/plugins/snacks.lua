@@ -31,9 +31,9 @@ local undo_config = {
 }
 
 --- Picker config for buffers and files
+---@param roots { path: string }[] Files under these LSP roots are ranked ahead of files outside the project roots.
 ---@return snacks.picker.Config
-local bf_picker_config = function()
-  local roots = utils.lsp_roots(0)
+local function bf_picker_config(roots)
   local sort = require('snacks.picker.sort').default()
   return {
     matcher = {
@@ -138,10 +138,10 @@ local function make_alternate_picker_action(alternatives_spec)
   end
 end
 
----@type string[]
-local bf_specific_opts = {}
-for k, _ in pairs(bf_picker_config()) do
-  table.insert(bf_specific_opts, k)
+---@return snacks.picker.Config
+local function bf_picker_source_config(opts)
+  local roots = utils.lsp_roots(0)
+  return vim.tbl_deep_extend('force', opts, bf_picker_config(roots))
 end
 
 return {
@@ -179,7 +179,10 @@ return {
         cwd_bonus = true,
       },
       sources = {
+        buffers = { config = bf_picker_source_config },
+        files = { config = bf_picker_source_config },
         git_status = git_status_picker_config(),
+        undo = undo_config,
       },
       win = {
         input = {
@@ -196,8 +199,8 @@ return {
       actions = {
         switch_alternate_picker = make_alternate_picker_action({
           {
-            { source = "buffers", reuse_opts = bf_specific_opts },
-            { source = "files",   reuse_opts = bf_specific_opts },
+            "buffers",
+            "files",
           },
           {
             "git_log",
@@ -249,12 +252,12 @@ return {
     },
   },
   keys = {
-    { "<C-p>",         function() require 'snacks'.picker.buffers(bf_picker_config()) end },
-    { "<Leader><C-p>", function() require 'snacks'.picker.files(bf_picker_config()) end },
+    { "<C-p>",         function() require 'snacks'.picker.buffers() end },
+    { "<Leader><C-p>", function() require 'snacks'.picker.files() end },
     { "g*",            function() require 'snacks'.picker.grep_word() end },
     { "g/",            function() require 'snacks'.picker.grep() end },
 
-    { "<Leader>u",     function() require 'snacks'.picker.undo(undo_config) end },
+    { "<Leader>u",     function() require 'snacks'.picker.undo() end },
     { "<Leader>gd",    function() require 'snacks'.picker.git_diff() end },
     { "<Leader>gl",    function() require 'snacks'.picker.git_log() end },
     { "<Leader>glf",   function() require 'snacks'.picker.git_log_file() end },
