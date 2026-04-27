@@ -56,6 +56,24 @@ local bf_picker_config = function()
   }
 end
 
+---@return snacks.picker.Config
+local function git_status_picker_config()
+  local git = require('snacks.picker.source.git')
+  return {
+    matcher = {
+      sort_empty = true,
+    },
+    sort = function(a, b)
+      local a_unmerged = git.git_status(a.status).unmerged or false
+      local b_unmerged = git.git_status(b.status).unmerged or false
+      if a_unmerged ~= b_unmerged then
+        return a_unmerged and not b_unmerged
+      end
+      return a.idx < b.idx
+    end,
+  }
+end
+
 local function yank_gitbrowse_url(what)
   local value = nil
   require 'snacks'.gitbrowse.open({ notify = false, what = what, open = function(url) value = url end })
@@ -159,6 +177,9 @@ return {
       matcher = {
         frecency = true,
         cwd_bonus = true,
+      },
+      sources = {
+        git_status = git_status_picker_config(),
       },
       win = {
         input = {
