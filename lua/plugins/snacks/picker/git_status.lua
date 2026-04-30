@@ -13,4 +13,13 @@ return {
     end
     return a.idx < b.idx
   end,
+  win = {
+    input = {
+      keys = {
+        ["<Tab>"] = { "select_and_next", mode = { "n", "i" } },
+        ["<c-s>"] = { "git_stage", mode = { "n", "i" } },
+        ["<c-r>"] = { "git_restore", mode = { "n", "i" }, nowait = true },
+      },
+    },
+  },
 }
