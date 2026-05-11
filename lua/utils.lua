@@ -201,4 +201,20 @@ function M.require_if_exists(modname)
   error(result)
 end
 
+--- Set shada file. Mainly for use with .nvim.lua
+function M.set_shada_file(path)
+  local shada = vim.opt.shada:get()
+  shada = vim.tbl_filter(function(item)
+    return item:sub(1, 1) ~= "n"
+  end, shada)
+  vim.opt.shada = shada
+  vim.opt.shada:append("n" .. path)
+end
+
+--- Set shada file to a standard location in CWD. Mainly for use with .nvim.lua
+function M.set_local_shada_file()
+  local shadafile = vim.fn.getcwd() .. "/.nvim.shada"
+  M.set_shada_file(shadafile)
+end
+
 return M
