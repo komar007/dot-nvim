@@ -30,6 +30,7 @@ require("lazy").setup("plugins", {
   }
 })
 
+vim.opt.shada = "'1000,<50,s10,h"
 vim.opt.sessionoptions = {
   "buffers",
   "curdir",
