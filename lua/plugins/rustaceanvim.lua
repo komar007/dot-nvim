@@ -42,7 +42,7 @@ end
 
 return {
   'mrcjkb/rustaceanvim',
-  version = '^7',
+  version = '^8',
   lazy = false,
   config = function()
     local border = require('border')
