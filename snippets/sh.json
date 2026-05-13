@@ -1,0 +1,10 @@
+{
+  "scriptdir": {
+    "prefix": "scriptdir",
+    "body": [
+      "DIR=\"$(cd \"$(dirname \"\\$0\")\" >/dev/null && pwd)\"",
+      "$2"
+    ],
+    "description": "DIR=#<script directory>"
+  }
+}

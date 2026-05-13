@@ -16,6 +16,14 @@
             {
                 "language": [ "gitcommit" ],
                 "path": "./gitcommit.json"
+            },
+            {
+                "language": [ "sh" ],
+                "path": "./sh.json"
+            },
+            {
+                "language": [ "bash" ],
+                "path": "./bash.json"
             }
         ]
   }
