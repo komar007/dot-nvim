@@ -13,6 +13,8 @@ require("lazy").setup({
   lockfile = vim.env.LAZY_NVIM_LOCKFILE or (vim.fn.stdpath("config") .. "/lazy-lock.json")
 })
 
+require('vim._core.ui2').enable({ enable = true })
+
 vim.opt.shada = "'1000,<50,s10,h"
 vim.opt.sessionoptions = {
   "buffers",

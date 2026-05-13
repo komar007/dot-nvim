@@ -43,12 +43,7 @@ M.on_attach = function(client)
   end
 
   if client.server_capabilities.codeLensProvider then
-    vim.lsp.codelens.refresh()
-    vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
-      callback = vim.lsp.codelens.refresh,
-      desc = "Refresh codelens",
-      buffer = 0,
-    })
+    vim.lsp.codelens.enable(true, { bufnr = 0 })
   end
 
   if client.server_capabilities.documentFormattingProvider then

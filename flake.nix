@@ -1,9 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils = {
@@ -42,6 +42,7 @@
           cmake
           delta
           direnv
+          luaPackages.tree-sitter-cli
           # snacks grep picker
           ripgrep
 
@@ -62,7 +63,7 @@
           # marksman
           unstable.marksman
           # jsonls
-          nodePackages.vscode-json-languageserver
+          vscode-json-languageserver
           # jqls
           unstable.jq-lsp
           # taplo
@@ -71,9 +72,9 @@
           lua-language-server
           # nixd
           nixd
-          nixfmt-rfc-style
+          nixfmt
           # eslint
-          nodePackages.eslint
+          eslint
           # bashls
           unstable.bash-language-server
           # pyright
@@ -104,7 +105,6 @@
           # iamcco/markdown-preview.nvim plugin
           yarn
           nodejs_22
-          nodePackages.npm
           unstable.surf
           # for markdown formatting
           pandoc
