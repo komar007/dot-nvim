@@ -109,6 +109,8 @@ local gruvbox = {
     vim.cmd [[ hi SatelliteDiagnosticInfo guifg=#83a598 gui=bold ]]
     vim.cmd [[ hi SatelliteDiagnosticWarn guifg=#fa8462 gui=bold ]]
 
+    vim.cmd [[ hi FidgetFloat guibg=NONE ]]
+
     vim.cmd [[ hi TabLine guifg=#555555 guibg=black ]]
     vim.cmd [[ hi TabLineFill guibg=black guisp=#333333 gui=underdotted ]]
     vim.cmd [[ hi TabLineSel guifg=#61afef guibg=terminal gui=bold ]]
