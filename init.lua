@@ -1,28 +1,7 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
-  local out = vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "--branch=stable",
-    "https://github.com/folke/lazy.nvim.git",
-    lazypath,
-  })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-
 -- leader must be set before initializing lazy!
 vim.g.mapleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
 
-vim.opt.rtp:prepend(lazypath)
+require('lazy_nvim_bootstrap')
 require("lazy").setup("plugins", {
   change_detection = {
     enabled = true,
