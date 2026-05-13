@@ -1,4 +1,8 @@
 return {
+  {
+    'folke/lazy.nvim',
+    tag = 'stable',
+  },
   'neovim/nvim-lspconfig',
   'HiPhish/rainbow-delimiters.nvim',
   'bogado/file-line',
