@@ -45,6 +45,7 @@ vim.opt.fillchars = {
 }
 vim.opt.laststatus = 3
 
+require('lazy_headless')
 require('keymaps')
 require('diagnostics')
 require('title')
