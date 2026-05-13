@@ -6,11 +6,9 @@ local gruvbox = {
     local utils = require('utils')
 
     local function set_highlight_nonfloat()
-      vim.cmd [[ hi ExtraWhitespace guibg=#ff7aa8 ]]
       vim.cmd [[ hi PastTextWidth guibg=#6c1a28 ]]
     end
     local function clear_highlight_nonfloat()
-      vim.cmd [[ hi clear ExtraWhitespace ]]
       vim.cmd [[ hi clear PastTextWidth ]]
     end
 
@@ -116,11 +114,6 @@ local gruvbox = {
     vim.cmd [[ hi TabLineSel guifg=#61afef guibg=terminal gui=bold ]]
 
     utils.autocmd_all({ "ColorScheme" }, set_highlight_nonfloat)
-    local function match_extrawhitespace()
-      vim.cmd [[ match ExtraWhitespace /\s\+$\|^\ [^*]?/ ]]
-    end
-    utils.autocmd_all({ "BufWinEnter" }, match_extrawhitespace)
-    match_extrawhitespace()
     vim.api.nvim_create_autocmd('BufWinEnter', {
       pattern = '*',
       callback = function()
