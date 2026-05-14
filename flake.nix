@@ -31,8 +31,10 @@
         # provide the include path containing the well-known protos from protobuf,
         # hijacking protols's pkg-config-based detection
         dependencies = with stable; [
-          # Basic dependencies (lazy + fzf native compilation)
+          # Basic dependencies (lazy + treesitter modules compilation)
           # ==================================================
+          gcc
+          gnumake
           git
           cmake
           delta
