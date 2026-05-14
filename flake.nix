@@ -156,18 +156,46 @@
         homeManagerModules.default =
           args: import ./hm-module.nix (args // { nvim = packages.nvim_with_deps_unloaded_direnv; });
 
-        homeConfigurations.default = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = stable;
-          modules = [
-            homeManagerModules.default
-            {
-              home.username = "tmp";
-              home.homeDirectory = "/tmp/home";
-              home.stateVersion = "25.11";
-              dot-nvim.quirks.gitBranchSymbol = builtins.getEnv "DOT_NVIM_GIT_BRANCH_SYMBOL";
-            }
-          ];
-        };
+        # A dummy home-manager configuration used to produce the built configuration from the
+        # currently checked out tree of this repository.
+        #
+        # The standard use-case is to use homeManagerModules.default as a home-manager module to
+        # include this neovim configuration in a home-manager configuration, locking a specific
+        # commit of this flake. The home-manager configuration below is used by
+        # nix_run_nvim_with_here_config.sh to produce an ad-hoc configuration without using the
+        # provided home-manager module. It allows to test the configuration without installing it
+        # user-wide and to switch between the installed configuration and the configuration in this
+        # directory as it develops using nvim_wrapper.
+        #
+        # As opposed to the HM module, using this home-manager configuration requires impure
+        # evaluation to resolve the values of the environment variables:
+        # - USER: the user name of the user running the produced configuration,
+        # - BUILT_HERE_CONFIG_ROOT: the absolute path where the configuration shall be applied;
+        #   this directory will contain the whole home-directory-like structure.
+        # Non mandatory environment variables include:
+        # - DOT_NVIM_GIT_BRANCH_SYMBOL: the value of dot-nvim.quirks.gitBranchSymbol to use for the
+        #   generated configuration.
+        homeConfigurations.hereConfig =
+          let
+            getEnvOrDie =
+              env:
+              let
+                val = builtins.getEnv env;
+              in
+              if val == "" then throw "missing required env ${env}" else val;
+          in
+          inputs.home-manager.lib.homeManagerConfiguration {
+            pkgs = stable;
+            modules = [
+              homeManagerModules.default
+              {
+                home.username = getEnvOrDie "USER";
+                home.homeDirectory = getEnvOrDie "BUILT_HERE_CONFIG_ROOT";
+                home.stateVersion = "25.11";
+                dot-nvim.quirks.gitBranchSymbol = builtins.getEnv "DOT_NVIM_GIT_BRANCH_SYMBOL";
+              }
+            ];
+          };
 
         formatter = treefmtEval.config.build.wrapper;
         checks = {

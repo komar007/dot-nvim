@@ -34,16 +34,18 @@ DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 EXTRA_CMD="unlet \$XDG_CONFIG_HOME | let g:is_alternative_config=v:true"
 
 RESULT=$DIR/.tmp_hm_result # TODO: consider ~/.cache or something
+OUTPUT=$DIR/.tmp_hm_output
 if nix --version >/dev/null; then
 	SYSTEM=$(nix eval --impure --raw --expr 'builtins.currentSystem')
-	nix build \
+	BUILT_HERE_CONFIG_ROOT="$OUTPUT" nix build \
 		--out-link "$RESULT" \
 		--impure \
-		"${DIR}#homeConfigurations.${SYSTEM}.default.activationPackage"
+		"${DIR}#homeConfigurations.${SYSTEM}.hereConfig.activationPackage"
+	mkdir -p "$OUTPUT" && HOME="$OUTPUT" "$RESULT"/activate
 	if [ "${NIX_RUN_NVIM_WITH_HERE_CONFIG_GENERATED}" = false ]; then
 		CONFIG_DIR="$DIR"
 	else
-		CONFIG_DIR="$RESULT/home-files/.config/"
+		CONFIG_DIR="$OUTPUT/.config/"
 	fi
 	exec env XDG_CONFIG_HOME="$CONFIG_DIR" "$RESULT/home-path/bin/nvim" \
 		-c "$EXTRA_CMD" \
