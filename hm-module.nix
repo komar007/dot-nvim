@@ -53,7 +53,11 @@ in
         XDG_CONFIG_HOME="$HOME/.config" \
         XDG_DATA_HOME="$HOME/.local/share" \
         LAZY_NVIM_LOCKFILE="$T/lazy-lock.json" \
-        ${lib.getExe nvim} --headless "+LazyHeadless restore"
+        ${lib.getExe nvim} --headless "+LazyHeadless restore" 2>&1 |
+        while IFS= read -r line; do
+          printf "\r\033[KRestoring lazy.nvim: %s" "$line"
+        done
+        printf "\r\033[KRestored lazy.nvim\n"
       diff -Naur "$HOME/.config/nvim/lazy-lock.json" "$T/lazy-lock.json" > "$T/lock-diff" ||
         (echo "ERROR: lazy-lock.json would be updated, aborting" && cat "$T/lock-diff" && exit 1)
     '';
