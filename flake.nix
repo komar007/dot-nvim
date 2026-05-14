@@ -38,6 +38,7 @@
           git
           cmake
           delta
+          direnv
           # snacks grep picker
           ripgrep
 

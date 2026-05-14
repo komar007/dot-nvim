@@ -6,7 +6,7 @@
 set -e
 
 DIRENV_UNLOAD=""
-if direnv --version > /dev/null; then
+if direnv --version > /dev/null 2>&1; then
 	T=$(mktemp -d) # guaranteed to have no .envrc
 	cd "$T" > /dev/null || exit
 	DIRENV_UNLOAD="$(direnv export bash)"
