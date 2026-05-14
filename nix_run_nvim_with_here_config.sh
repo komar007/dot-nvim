@@ -4,24 +4,30 @@
 # default.
 #
 # In non-nix mode this is done by setting XDG_CONFIG_HOME to this directory. Neovim reads the config
-# from $XDG_CONFIG_HOME/nvim, so we also have a symbolic link ./nvim -> ./.
+# from $XDG_CONFIG_HOME/nvim, so we also have a symbolic link ./nvim -> ./. Also XDG_DATA_HOME is
+# set to an alternative directory so that the plugins installed by lazy.nvim are separated from the
+# plugins potentially installed in ~/.config/nvim.
 #
 # In nix mode, a dummy home-manager configuration is built (containing just wrapped neovim and
-# config) and XDG_CONFIG_HOME is set to the built configuration.
+# config) and XDG_CONFIG_HOME is set to the dummy home directory built using home-manager.
+# XDG_DATA_HOME is set to the respective directory inside the dummy home too.
 #
 # Running with XDG_CONFIG_HOME set to the built configuration has the advantage of vim being run on
 # mostly(*) read-only configuration files so it cannot modify anything, especially lazy-lock.json.
 # This is also a disadvantage for the very same reason - it is not possible to use :Lazy inside
-# neovim started by this script to update lazy-lock.nvim (plugins themselves are managed in
-# ~/.local/share/nvim which we do not override here).
+# neovim started by this script to update lazy-lock.json.
 #
 # That's why this script accepts NIX_RUN_NVIM_WITH_HERE_CONFIG_GENERATED=false in which case,
 # instead of setting XDG_CONFIG_HOME to the generated config, it sets it to this repository. This
 # can be used to perform lazy-nvim tasks in a non-sandboxed environment.
 #
-# Unwanted propagation of XDG_CONFIG_HOME to processes spawned by neovim (like git, for example) is
-# mitigated by immediately removing this variable inside neovim's session by injecting an unlet
-# command
+# Unwanted propagation of XDG_*_HOME to processes spawned by neovim (like git, for example) is
+# mitigated by immediately removing these variables inside neovim's session by injecting an unlet
+# command. While the neovim configuration is read from XDG_CONFIG_HOME and lazy loads the plugins
+# from XDG_DATA_HOME, vim.fn.stdpath(...) returns the "original", "post-unlet" paths later. This
+# should be mostly harmless and may even have an advantage, since some plugins store data in
+# XDG_DATA_HOME (for example input history of telescope and snacks), and such data is expected to be
+# shared between the configurations of neovim.
 #
 # (*) - currently we are using recursive = true for config.home.file.".config/nvim", but it is just
 # because it was easier to add generation of quirks.lua this way. This should probably be changed
@@ -31,7 +37,7 @@ set -e
 
 DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 
-EXTRA_CMD="unlet \$XDG_CONFIG_HOME | let g:is_alternative_config=v:true"
+EXTRA_CMD="unlet \$XDG_CONFIG_HOME \$XDG_DATA_HOME | let g:is_alternative_config=v:true"
 
 RESULT=$DIR/.tmp_hm_result # TODO: consider ~/.cache or something
 OUTPUT=$DIR/.tmp_hm_output
@@ -47,11 +53,13 @@ if nix --version >/dev/null; then
 	else
 		CONFIG_DIR="$OUTPUT/.config/"
 	fi
-	exec env XDG_CONFIG_HOME="$CONFIG_DIR" "$RESULT/home-path/bin/nvim" \
-		-c "$EXTRA_CMD" \
-		"$@"
+	exec env \
+		XDG_CONFIG_HOME="$CONFIG_DIR" \
+		XDG_DATA_HOME="$OUTPUT/.local/share" \
+		"$RESULT/home-path/bin/nvim" -c "$EXTRA_CMD" "$@"
 else
-	exec env "XDG_CONFIG_HOME=$DIR" nvim \
-		-c "$EXTRA_CMD" \
-		"$@"
+	exec env \
+		XDG_CONFIG_HOME="$DIR" \
+		XDG_DATA_HOME="$OUTPUT/.local/share" \
+		nvim -c "$EXTRA_CMD" "$@"
 fi
