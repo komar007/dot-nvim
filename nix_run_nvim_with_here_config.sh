@@ -17,9 +17,8 @@
 # This is also a disadvantage for the very same reason - it is not possible to use :Lazy inside
 # neovim started by this script to update lazy-lock.json.
 #
-# That's why this script accepts NIX_RUN_NVIM_WITH_HERE_CONFIG_GENERATED=false in which case,
-# instead of setting XDG_CONFIG_HOME to the generated config, it sets it to this repository. This
-# can be used to perform lazy-nvim tasks in a non-sandboxed environment.
+# Allowing lazy.nvim to update lazy-lock.json can be achieved by overriding lazy.nvim's lockfile
+# path which is done using LAZY_NVIM_LOCKFILE environment variable, checked by init.lua.
 #
 # Unwanted propagation of XDG_*_HOME to processes spawned by neovim (like git, for example) is
 # mitigated by immediately removing these variables inside neovim's session by injecting an unlet
@@ -48,13 +47,8 @@ if nix --version >/dev/null; then
 		--impure \
 		"${DIR}#homeConfigurations.${SYSTEM}.hereConfig.activationPackage"
 	mkdir -p "$OUTPUT" && HOME="$OUTPUT" "$RESULT"/activate
-	if [ "${NIX_RUN_NVIM_WITH_HERE_CONFIG_GENERATED}" = false ]; then
-		CONFIG_DIR="$DIR"
-	else
-		CONFIG_DIR="$OUTPUT/.config/"
-	fi
 	exec env \
-		XDG_CONFIG_HOME="$CONFIG_DIR" \
+		XDG_CONFIG_HOME="$OUTPUT/.config/" \
 		XDG_DATA_HOME="$OUTPUT/.local/share" \
 		"$RESULT/home-path/bin/nvim" -c "$EXTRA_CMD" "$@"
 else

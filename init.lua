@@ -2,11 +2,15 @@
 vim.g.mapleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
 
 require('lazy_nvim_bootstrap')
-require("lazy").setup("plugins", {
+require("lazy").setup({
+  spec = {
+    { import = "plugins" },
+  },
   change_detection = {
     enabled = true,
     notify = false,
-  }
+  },
+  lockfile = vim.env.LAZY_NVIM_LOCKFILE or (vim.fn.stdpath("config") .. "/lazy-lock.json")
 })
 
 vim.opt.shada = "'1000,<50,s10,h"
