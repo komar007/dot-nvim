@@ -30,6 +30,12 @@ in
     default = "⎇";
   };
 
+  options.dot-nvim.lazy.locked = lib.mkOption {
+    type = lib.types.bool;
+    description = "verify that lazy-lock.json is in sync with plugin config during activation";
+    default = true;
+  };
+
   config.home.packages = [ nvim ];
 
   config.home.file.".config/nvim" = {
@@ -58,8 +64,15 @@ in
           printf "\r\033[KRestoring lazy.nvim: %s" "$line"
         done
         printf "\r\033[KRestored lazy.nvim\n"
-      diff -Naur "$HOME/.config/nvim/lazy-lock.json" "$T/lazy-lock.json" > "$T/lock-diff" ||
-        (echo "ERROR: lazy-lock.json would be updated, aborting" && cat "$T/lock-diff" && exit 1)
+      ${
+        if config.dot-nvim.lazy.locked then
+          ''
+            diff -Naur "$HOME/.config/nvim/lazy-lock.json" "$T/lazy-lock.json" > "$T/lock-diff" ||
+              (echo "ERROR: lazy-lock.json would be updated, aborting" && cat "$T/lock-diff" && exit 1)
+          ''
+        else
+          ""
+      }
     '';
   };
 

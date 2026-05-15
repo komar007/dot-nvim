@@ -174,7 +174,10 @@
         #   this directory will contain the whole home-directory-like structure.
         # Non mandatory environment variables include:
         # - DOT_NVIM_GIT_BRANCH_SYMBOL: the value of dot-nvim.quirks.gitBranchSymbol to use for the
-        #   generated configuration.
+        #   generated configuration,
+        # - LAZY_NVIM_UNLOCKED: if "true", omit the default check that verifies if lazy-lock.json
+        #   is in sync with the plugin spec; this is the only way to actually perform a
+        #   lazy-lock.json update using lazy.nvim in headless mode.
         homeConfigurations.hereConfig =
           let
             getEnvOrDie =
@@ -193,6 +196,7 @@
                 home.homeDirectory = getEnvOrDie "BUILT_HERE_CONFIG_ROOT";
                 home.stateVersion = "25.11";
                 dot-nvim.quirks.gitBranchSymbol = builtins.getEnv "DOT_NVIM_GIT_BRANCH_SYMBOL";
+                dot-nvim.lazy.locked = builtins.getEnv "LAZY_NVIM_UNLOCKED" != "true";
               }
             ];
           };
