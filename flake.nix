@@ -154,7 +154,14 @@
           default = nvim_with_deps_unloaded_direnv;
         };
         homeManagerModules.default =
-          args: import ./hm-module.nix (args // { nvim = packages.nvim_with_deps_unloaded_direnv; });
+          args:
+          import ./hm-module.nix (
+            args
+            // {
+              nvim = packages.nvim_with_deps_unloaded_direnv;
+              pkgs = stable;
+            }
+          );
 
         # A dummy home-manager configuration used to produce the built configuration from the
         # currently checked out tree of this repository.

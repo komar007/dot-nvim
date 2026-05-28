@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   nvim,
   ...
 }:
@@ -46,15 +47,27 @@ in
   config.home.packages = [ nvim ];
 
   config.home.file.".config/${appname}" = {
-    source = filteredPath ./. [
-      "init.lua"
-      "lazy-lock.json"
-      "legacy.vim"
-      "snippets/"
-      "lua/"
-    ];
-    recursive = true;
-    # FIXME: this currently runs on every activation, because of recursive = true above.
+    source = pkgs.symlinkJoin {
+      name = "dot-nvim-generated-config";
+      paths = [
+        (filteredPath ./. [
+          "init.lua"
+          "lazy-lock.json"
+          "legacy.vim"
+          "snippets/"
+          "lua/"
+        ])
+        (pkgs.writeTextFile {
+          name = "quirks.lua";
+          destination = "/lua/quirks.lua";
+          text = ''
+            return {
+              git_branch_symbol = '${branchSymbol}',
+            }
+          '';
+        })
+      ];
+    };
     onChange = ''
       T=$(mktemp -d)
       cleanup() {
@@ -82,12 +95,6 @@ in
       }
     '';
   };
-
-  config.home.file.".config/${appname}/lua/quirks.lua".text = ''
-    return {
-      git_branch_symbol = '${branchSymbol}',
-    }
-  '';
 
   config.home.sessionVariables = {
     DOT_NVIM_GIT_BRANCH_SYMBOL = branchSymbol;

@@ -13,7 +13,7 @@
 # XDG_DATA_HOME is set to the respective directory inside the dummy home too.
 #
 # Running with XDG_CONFIG_HOME set to the built configuration has the advantage of vim being run on
-# mostly(*) read-only configuration files so it cannot modify anything, especially lazy-lock.json.
+# read-only configuration files so it cannot modify anything, especially lazy-lock.json.
 # This is also a disadvantage for the very same reason - it is not possible to use :Lazy inside
 # neovim started by this script to update lazy-lock.json.
 #
@@ -27,10 +27,6 @@
 # should be mostly harmless and may even have an advantage, since some plugins store data in
 # XDG_DATA_HOME (for example input history of telescope and snacks), and such data is expected to be
 # shared between the configurations of neovim.
-#
-# (*) - currently we are using recursive = true for config.home.file.".config/nvim", but it is just
-# because it was easier to add generation of quirks.lua this way. This should probably be changed
-# one day.
 
 set -e
 
