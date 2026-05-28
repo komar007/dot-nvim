@@ -87,8 +87,8 @@ package.
 
 When you finally fork this repository on github, you can maintain a stable version of your
 configuration in the fork. After you introduce a change, switch to it and test “in production” in
-one of you open sessions with `:ReloadAlt` and go back with `:ReloadNorm`. When the change is
-stable, push to gerrit, update your home-manager’s flake input `komar-nvim` and run
+one of your open sessions with `:ReloadAlt` and go back with `:ReloadNorm`. When the change is
+stable, push to github, update your home-manager’s flake input `komar-nvim` and run
 `home-manager switch`.
 
 ### If you are not using Nix (and don’t want to (…but you should, really))
