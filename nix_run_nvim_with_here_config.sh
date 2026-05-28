@@ -34,8 +34,9 @@ DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 
 EXTRA_CMD="unlet \$XDG_CONFIG_HOME \$XDG_DATA_HOME | let g:is_alternative_config=v:true"
 
-RESULT=$DIR/.tmp_hm_result # TODO: consider ~/.cache or something
-OUTPUT=$DIR/.tmp_hm_output
+BASE=${HERE_CONFIG_BASE:-$DIR/.here_config}
+RESULT=${BASE}/result
+OUTPUT=${BASE}/output
 if nix --version >/dev/null; then
 	SYSTEM=$(nix eval --impure --raw --expr 'builtins.currentSystem')
 	BUILT_HERE_CONFIG_ROOT="$OUTPUT" nix build \
