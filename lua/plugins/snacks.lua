@@ -35,6 +35,16 @@ local function buffers_files_picker_source_config(opts)
   )
 end
 
+---@return snacks.picker.Config
+local function git_status_picker_source_config(opts)
+  local current_file = vim.api.nvim_buf_get_name(0);
+  return vim.tbl_deep_extend(
+    'force',
+    opts,
+    require('plugins.snacks.picker.git_status').for_promoted_file(current_file)
+  )
+end
+
 return {
   "komar007/snacks.nvim",
   branch = "stable_plus",
@@ -72,7 +82,7 @@ return {
       sources = {
         buffers = { config = buffers_files_picker_source_config },
         files = { config = buffers_files_picker_source_config },
-        git_status = require('plugins.snacks.picker.git_status'),
+        git_status = { config = git_status_picker_source_config },
         undo = require('plugins.snacks.picker.undo'),
       },
       win = {
