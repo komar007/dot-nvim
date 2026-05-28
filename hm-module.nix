@@ -63,14 +63,14 @@ in
       trap cleanup EXIT
       cat "$HOME/.config/nvim/lazy-lock.json" > "$T/lazy-lock.json"
       env \
-        XDG_CONFIG_HOME="$HOME/.config" \
-        XDG_DATA_HOME="$HOME/.local/share" \
-        LAZY_NVIM_LOCKFILE="$T/lazy-lock.json" \
-        ${lib.getExe nvim} --headless "+LazyHeadless restore" 2>&1 |
+          XDG_CONFIG_HOME="$HOME/.config" \
+          XDG_DATA_HOME="$HOME/.local/share" \
+          LAZY_NVIM_LOCKFILE="$T/lazy-lock.json" \
+          ${lib.getExe nvim} --headless "+LazyHeadless restore" 2>&1 |
         while IFS= read -r line; do
           printf "\r\033[KRestoring lazy.nvim: %s" "$line"
         done
-        printf "\r\033[KRestored lazy.nvim\n"
+      printf "\r\033[KRestored lazy.nvim\n"
       ${
         if config.dot-nvim.lazy.locked then
           ''
