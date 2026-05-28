@@ -74,8 +74,8 @@ in
   config.home.activation.updateNvimDataDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     set -e
 
-    CURRENT_CONFIG="$(readlink "$HOME"/.config/nvim)"
-    DATA_CONFIG_LINK="$HOME"/.local/share/nvim/config
+    CURRENT_CONFIG="$(readlink "$HOME"/.config/${appname})"
+    DATA_CONFIG_LINK="$HOME"/.local/share/${appname}/config
     if [ -L "$DATA_CONFIG_LINK" ] && [ "$(readlink "$DATA_CONFIG_LINK")" = "$CURRENT_CONFIG" ]; then
       exit 0
     fi
@@ -85,7 +85,7 @@ in
       rm -fr "$T"
     }
     trap cleanup EXIT
-    cat "$HOME/.config/nvim/lazy-lock.json" > "$T/lazy-lock.json"
+    cat "$HOME/.config/${appname}/lazy-lock.json" > "$T/lazy-lock.json"
     env \
         XDG_CONFIG_HOME="$HOME/.config" \
         XDG_DATA_HOME="$HOME/.local/share" \
@@ -98,7 +98,7 @@ in
     ${
       if config.dot-nvim.lazy.locked then
         ''
-          diff -Naur "$HOME/.config/nvim/lazy-lock.json" "$T/lazy-lock.json" > "$T/lock-diff" ||
+          diff -Naur "$HOME/.config/${appname}/lazy-lock.json" "$T/lazy-lock.json" > "$T/lock-diff" ||
             (echo "ERROR: lazy-lock.json would be updated, aborting" && cat "$T/lock-diff" && exit 1)
         ''
       else
