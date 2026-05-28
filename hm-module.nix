@@ -68,33 +68,44 @@ in
         })
       ];
     };
-    onChange = ''
-      T=$(mktemp -d)
-      cleanup() {
-        rm -fr "$T"
-      }
-      trap cleanup EXIT
-      cat "$HOME/.config/nvim/lazy-lock.json" > "$T/lazy-lock.json"
-      env \
-          XDG_CONFIG_HOME="$HOME/.config" \
-          XDG_DATA_HOME="$HOME/.local/share" \
-          LAZY_NVIM_LOCKFILE="$T/lazy-lock.json" \
-          ${lib.getExe nvim} --headless "+LazyHeadless restore" 2>&1 |
-        while IFS= read -r line; do
-          printf "\r\033[KRestoring lazy.nvim: %s" "$line"
-        done
-      printf "\r\033[KRestored lazy.nvim\n"
-      ${
-        if config.dot-nvim.lazy.locked then
-          ''
-            diff -Naur "$HOME/.config/nvim/lazy-lock.json" "$T/lazy-lock.json" > "$T/lock-diff" ||
-              (echo "ERROR: lazy-lock.json would be updated, aborting" && cat "$T/lock-diff" && exit 1)
-          ''
-        else
-          ""
-      }
-    '';
   };
+
+  # TODO: implement VERBOSE and DRY_RUN required by home.activation
+  config.home.activation.updateNvimDataDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    set -e
+
+    CURRENT_CONFIG="$(readlink "$HOME"/.config/nvim)"
+    DATA_CONFIG_LINK="$HOME"/.local/share/nvim/config
+    if [ -L "$DATA_CONFIG_LINK" ] && [ "$(readlink "$DATA_CONFIG_LINK")" = "$CURRENT_CONFIG" ]; then
+      exit 0
+    fi
+
+    T=$(mktemp -d)
+    cleanup() {
+      rm -fr "$T"
+    }
+    trap cleanup EXIT
+    cat "$HOME/.config/nvim/lazy-lock.json" > "$T/lazy-lock.json"
+    env \
+        XDG_CONFIG_HOME="$HOME/.config" \
+        XDG_DATA_HOME="$HOME/.local/share" \
+        LAZY_NVIM_LOCKFILE="$T/lazy-lock.json" \
+        ${lib.getExe nvim} --headless "+LazyHeadless restore" 2>&1 |
+      while IFS= read -r line; do
+        printf "\r\033[KRestoring lazy.nvim: %s" "$line"
+      done
+    printf "\r\033[KRestored lazy.nvim\n"
+    ${
+      if config.dot-nvim.lazy.locked then
+        ''
+          diff -Naur "$HOME/.config/nvim/lazy-lock.json" "$T/lazy-lock.json" > "$T/lock-diff" ||
+            (echo "ERROR: lazy-lock.json would be updated, aborting" && cat "$T/lock-diff" && exit 1)
+        ''
+      else
+        ""
+    }
+    ln -sfn "$CURRENT_CONFIG" "$DATA_CONFIG_LINK"
+  '';
 
   config.home.sessionVariables = {
     DOT_NVIM_GIT_BRANCH_SYMBOL = branchSymbol;
