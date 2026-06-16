@@ -89,12 +89,14 @@ in
     }
     trap cleanup EXIT
     cat "$HOME/.config/${appname}/lazy-lock.json" > "$T/lazy-lock.json"
-    env \
-        XDG_CONFIG_HOME="$HOME/.config" \
-        XDG_DATA_HOME="$HOME/.local/share" \
-        XDG_CACHE_HOME="$HOME/.cache" \
-        LAZY_NVIM_LOCKFILE="$T/lazy-lock.json" \
-        ${lib.getExe nvim} --headless "+LazyHeadless restore" 2>&1 |
+    export XDG_CONFIG_HOME="$HOME/.config"
+    export XDG_DATA_HOME="$HOME/.local/share"
+    export XDG_CACHE_HOME="$HOME/.cache"
+    export LAZY_NVIM_LOCKFILE="$T/lazy-lock.json"
+    (
+      ${lib.getExe nvim} --headless "+LazyHeadless restore" &&
+      ${lib.getExe nvim} --headless "+LazyHeadless clean"
+    ) 2>&1 |
       while IFS= read -r line; do
         printf "\r\033[KRestoring lazy.nvim: %s" "$line"
       done
