@@ -15,6 +15,12 @@ vim.keymap.set('n', '<leader>y', function()
   vim.api.nvim_feedkeys([[mY"*yiw`Y]], 'n', true)
 end, { noremap = true })
 
+-- keep conflict region's area under cursor, delete the rest
+vim.keymap.set('n', '<leader>gc',
+  [[mc?^[=><\|]\{7\}?1<CR>d?^<\{7\}<CR>/^[=><\|]\{7\}<CR>d/^>\{7\}<CR>dd`c]],
+  { noremap = true }
+)
+
 local utils = require('utils')
 
 utils.define_text_object_inside_around('/')
