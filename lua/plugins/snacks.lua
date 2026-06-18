@@ -27,34 +27,20 @@ function _G.yank_gitbrowse_url_permalink(_)
   yank_gitbrowse_url("permalink")
 end
 
----@return snacks.picker.Config
-local function buffers_files_picker_source_config(opts)
-  local roots = utils.lsp_roots(0)
-  return vim.tbl_deep_extend(
-    'force',
-    opts,
-    require('plugins.snacks.picker.buffers_files').for_roots(roots)
-  )
+---@return fun(snacs.picker.Config): snacks.picker.Config
+local function extended_source_config(f)
+  return function(opts)
+    return vim.tbl_deep_extend('force', opts, f())
+  end
 end
 
----@return snacks.picker.Config
-local function git_status_picker_source_config(opts)
-  local current_file = vim.api.nvim_buf_get_name(0);
-  return vim.tbl_deep_extend(
-    'force',
-    opts,
-    git.status_config_for_promoted_file(current_file)
-  )
-end
-
----@return snacks.picker.Config
-local function git_log_picker_source_config(opts)
-  return vim.tbl_deep_extend(
-    'force',
-    opts,
-    git.log_config()
-  )
-end
+local common_source_configs = {
+  buffers_files = extended_source_config(function()
+    local roots = utils.lsp_roots(0)
+    return require('plugins.snacks.picker.buffers_files').for_roots(roots)
+  end),
+  git_log_picker = extended_source_config(git.log_config),
+}
 
 return {
   "komar007/snacks.nvim",
@@ -91,12 +77,17 @@ return {
         cwd_bonus = true,
       },
       sources = {
-        buffers = { config = buffers_files_picker_source_config },
-        files = { config = buffers_files_picker_source_config },
-        git_status = { config = git_status_picker_source_config },
-        git_log = { config = git_log_picker_source_config },
-        git_log_file = { config = git_log_picker_source_config },
-        git_log_line = { config = git_log_picker_source_config },
+        buffers = { config = common_source_configs.buffers_files },
+        files = { config = common_source_configs.buffers_files },
+        git_status = {
+          config = extended_source_config(function()
+            local current_file = vim.api.nvim_buf_get_name(0);
+            return git.status_config_for_promoted_file(current_file)
+          end)
+        },
+        git_log = { config = common_source_configs.git_log_picker },
+        git_log_file = { config = common_source_configs.git_log_picker },
+        git_log_line = { config = common_source_configs.git_log_picker },
         undo = require('plugins.snacks.picker.undo'),
       },
       win = {
