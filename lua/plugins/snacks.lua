@@ -1,3 +1,5 @@
+local git = require('plugins.snacks.picker.git')
+
 local function keys_but_unbind(unbind, keys)
   for _, key in pairs(unbind) do
     if keys[key] == nil then
@@ -41,7 +43,16 @@ local function git_status_picker_source_config(opts)
   return vim.tbl_deep_extend(
     'force',
     opts,
-    require('plugins.snacks.picker.git_status').for_promoted_file(current_file)
+    git.status_config_for_promoted_file(current_file)
+  )
+end
+
+---@return snacks.picker.Config
+local function git_log_picker_source_config(opts)
+  return vim.tbl_deep_extend(
+    'force',
+    opts,
+    git.log_config()
   )
 end
 
@@ -83,6 +94,9 @@ return {
         buffers = { config = buffers_files_picker_source_config },
         files = { config = buffers_files_picker_source_config },
         git_status = { config = git_status_picker_source_config },
+        git_log = { config = git_log_picker_source_config },
+        git_log_file = { config = git_log_picker_source_config },
+        git_log_line = { config = git_log_picker_source_config },
         undo = require('plugins.snacks.picker.undo'),
       },
       win = {

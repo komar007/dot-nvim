@@ -5,12 +5,14 @@ local function normalize(path)
   return vim.fs.normalize(vim.fn.fnamemodify(path, ":p"))
 end
 
+local utils = require('utils')
+
 local M = {}
 
 --- Picker config for git_status
 ---@param promoted_file string The file which should be sorted first
 ---@return snacks.picker.Config
-function M.for_promoted_file(promoted_file)
+function M.status_config_for_promoted_file(promoted_file)
   return {
     matcher = {
       sort_empty = true,
@@ -37,6 +39,24 @@ function M.for_promoted_file(promoted_file)
           ["<Tab>"] = { "select_and_next", mode = { "n", "i" } },
           ["<C-S>"] = { "git_stage", mode = { "n", "i" } },
           ["<C-R>"] = { "git_restore", mode = { "n", "i" }, nowait = true },
+        },
+      },
+    },
+  }
+end
+
+---@return snacks.picker.Config
+function M.log_config()
+  return {
+    actions = {
+      yank_commit_sha = { action = "yank", reg = '"', field = "commit" },
+      yank_commit_sha_clip = { action = "yank", reg = '+', field = "commit" },
+    },
+    win = {
+      input = {
+        keys = utils.keys_with_alternate {
+          ["<C-y>"] = { "yank_commit_sha", mode = { "n", "i" } },
+          ["Y"] = { "yank_commit_sha_clip", mode = { "n" } },
         },
       },
     },
