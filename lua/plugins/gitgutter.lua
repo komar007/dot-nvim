@@ -16,7 +16,7 @@ return {
     vim.g.gitgutter_preview_win_floating = 1
   end,
   keys = {
-    { "gc", "<Plug>(GitGutterPreviewHunk)" },
+    { "gz", "<Plug>(GitGutterPreviewHunk)" },
     { "<leader>gu", "<Plug>(GitGutterUndoHunk)" },
     { "<leader>gs", "<Plug>(GitGutterStageHunk)" },
   }
