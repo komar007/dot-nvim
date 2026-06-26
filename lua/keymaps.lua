@@ -17,7 +17,7 @@ end, { noremap = true })
 
 -- keep conflict region's area under cursor, delete the rest
 vim.keymap.set('n', '<leader>gc',
-  [[mc?^[=><\|]\{7\}?1<CR>d?^<\{7\}<CR>/^[=><\|]\{7\}<CR>d/^>\{7\}<CR>dd`c]],
+  [[mc?^\([=><\|]\)\1\{6\}<CR>d?^<<<<<<<?0<CR>/^\([=><\|]\)\1\{6\}<CR>d/^>>>>>>>/0<CR>`c]],
   { noremap = true }
 )
 
