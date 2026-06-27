@@ -142,19 +142,29 @@ function M.on_ft(ft, callback)
   })
 end
 
-local function process_buffer_with_shell(cmd)
+---@param range string
+local function process_buffer_with_shell(cmd, range)
   local current_line = vim.fn.line('.')
   local current_col = vim.fn.col('.')
-  vim.cmd("%!" .. cmd)
+  vim.cmd(range .. "!" .. cmd)
   vim.fn.cursor(current_line, current_col)
 end
 
-function M.setup_shell_fmt_buf(cmd, post_hook)
+---@param opts {post_hook: fun(), range: (string | (function))?}
+function M.setup_shell_fmt_buf(cmd, opts)
   local bufnr = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_create_user_command(bufnr, "Fmt", function()
-    process_buffer_with_shell(cmd)
-    if post_hook ~= nil then
-      post_hook()
+    local range
+    if type(opts.range) == "function" then
+      range = opts.range()
+    elseif type(opts.range) == "string" then
+      range = opts.range
+    else
+      range = '%'
+    end
+    process_buffer_with_shell(cmd, range)
+    if opts.post_hook ~= nil then
+      opts.post_hook()
     end
   end, {})
 end
