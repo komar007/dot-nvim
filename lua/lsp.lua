@@ -155,6 +155,7 @@ require('utils').setup_lsps(
       'clangd',
       filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
     },
+    'cssls',
     'docker_compose_language_service',
     'dockerls',
     {

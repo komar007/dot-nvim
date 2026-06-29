@@ -90,6 +90,8 @@
           # hls
           ghc
           haskell-language-server
+          # cssls
+          vscode-css-languageserver
 
           # Other requirements
           # ==================
