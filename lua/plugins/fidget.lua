@@ -1,3 +1,14 @@
+local function fidget_hide_if_small_window(min_cols, min_lines)
+  return function()
+    local small = vim.o.columns < min_cols or vim.o.lines < min_lines
+    vim.cmd("Fidget suppress " .. tostring(small))
+  end
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter", "VimResized" }, {
+  callback = fidget_hide_if_small_window(80, 20)
+})
+
 return {
   "j-hui/fidget.nvim",
   lazy = false,
@@ -27,7 +38,7 @@ return {
       view = {
         group_separator = "   ",
         group_separator_hl = "NormalFloat",
-      }
+      },
     },
   },
 }
