@@ -80,6 +80,9 @@ in
       exit 0
     fi
 
+    # invalidate lua cache because it has issues with HM links
+    rm -fr "$HOME/.cache/nvim/luac"
+
     T=$(mktemp -d)
     cleanup() {
       rm -fr "$T"
@@ -89,6 +92,7 @@ in
     env \
         XDG_CONFIG_HOME="$HOME/.config" \
         XDG_DATA_HOME="$HOME/.local/share" \
+        XDG_CACHE_HOME="$HOME/.cache" \
         LAZY_NVIM_LOCKFILE="$T/lazy-lock.json" \
         ${lib.getExe nvim} --headless "+LazyHeadless restore" 2>&1 |
       while IFS= read -r line; do

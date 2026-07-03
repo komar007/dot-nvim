@@ -32,7 +32,7 @@ set -e
 
 DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 
-EXTRA_CMD="unlet \$XDG_CONFIG_HOME \$XDG_DATA_HOME | let g:is_alternative_config=v:true"
+EXTRA_CMD="unlet \$XDG_CONFIG_HOME \$XDG_DATA_HOME \$XDG_CACHE_HOME | let g:is_alternative_config=v:true"
 
 BASE=${HERE_CONFIG_BASE:-$DIR/.here_config}
 RESULT=${BASE}/result
@@ -47,10 +47,12 @@ if nix --version >/dev/null; then
 	exec env \
 		XDG_CONFIG_HOME="$OUTPUT/.config/" \
 		XDG_DATA_HOME="$OUTPUT/.local/share" \
+		XDG_CACHE_HOME="$OUTPUT/.cache" \
 		"$RESULT/home-path/bin/nvim" -c "$EXTRA_CMD" "$@"
 else
 	exec env \
 		XDG_CONFIG_HOME="$DIR" \
 		XDG_DATA_HOME="$OUTPUT/.local/share" \
+		XDG_CACHE_HOME="$OUTPUT/.cache/" \
 		nvim -c "$EXTRA_CMD" "$@"
 fi
