@@ -28,7 +28,8 @@ return {
       "regex",
       "rust",
       "toml",
-      "xml"
+      "xml",
+      "yaml",
     }):wait(300000)
   end,
 }
