@@ -43,6 +43,7 @@
   "rustaceanvim": { "branch": "main", "commit": "f69c85a955b9a83d495e3dc8d43adb6364a0b765" },
   "satellite.nvim": { "branch": "main", "commit": "633d60d45d7b266dabcc82261bea51385a972e8b" },
   "screenkey.nvim": { "branch": "main", "commit": "fd321966b41d111eed0488b5a3c2d2f8159e1158" },
+  "smart-codelens-run.nvim": { "branch": "main", "commit": "4c322d9cc96f0dbcfc04ebcb1d42999f27a97258" },
   "snacks.nvim": { "branch": "stable_plus", "commit": "16b6beaf949f0b38118bd498d44c62a23c963db8" },
   "tiny-code-action.nvim": { "branch": "main", "commit": "8e72efa075ba3154bbc4c7d1db532b03b4e68373" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
