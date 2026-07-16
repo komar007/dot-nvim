@@ -192,6 +192,7 @@ require('utils').setup_lsps(
         },
       }
     },
+    'postgres_lsp',
     {
       'protols',
       root_markers = { "protols.toml", ".git" },

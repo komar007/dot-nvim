@@ -92,6 +92,8 @@
           haskell-language-server
           # cssls
           vscode-css-languageserver
+          # postgres_lsp
+          postgres-language-server
 
           # Other requirements
           # ==================
