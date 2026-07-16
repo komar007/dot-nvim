@@ -33,6 +33,9 @@
         dependencies = with stable; [
           # Basic dependencies (lazy + treesitter modules compilation)
           # ==================================================
+          curl
+          gnutar
+          gzip
           gcc
           gnumake
           git
