@@ -19,8 +19,16 @@ with stable;
   delta
   direnv
   ripgrep
-  pandoc # for markdown formatting
   shfmt # for shell formatting
+
+  # markdown formatting
+  (mdformat.withPlugins (
+    pkgs: with pkgs; [
+      mdformat-gfm
+      mdformat-gfm-alerts
+      mdformat-front-matters
+    ]
+  ))
 
   # iamcco/markdown-preview.nvim plugin
   yarn

@@ -33,16 +33,7 @@ utils.on_ft("markdown", function()
   vim.opt_local.wrap = false
   vim.opt_local.textwidth = 100
 
-  utils.setup_shell_fmt_buf("pandoc -t gfm -f gfm --columns 100", {
-    range = function()
-      local first = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-      if first == "+++" or first == '---' then
-        return '1/' .. first ..'/+1,$'
-      else
-        return '%'
-      end
-    end
-  })
+  utils.setup_shell_fmt_buf("mdformat --wrap 100 -", {})
 end)
 
 utils.on_ft("sh", function()
