@@ -22,7 +22,6 @@ vim.opt.sessionoptions = {
   "folds",
   "tabpages"
 }
-vim.opt.cmdheight = 0
 vim.opt.signcolumn = "yes"
 vim.opt.winborder = "rounded"
 vim.opt.ignorecase = true
