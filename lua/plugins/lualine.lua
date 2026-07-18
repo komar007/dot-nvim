@@ -104,11 +104,14 @@ return {
               local out = ''
               local added = false
               for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
-                if added then
-                  out = out .. ','
+                -- null-ls is attached everywhere, so no need...
+                if client.name ~= "null-ls" then
+                  if added then
+                    out = out .. ','
+                  end
+                  out = out .. client.name
+                  added = true
                 end
-                out = out .. client.name
-                added = true
               end
               return out
             end,

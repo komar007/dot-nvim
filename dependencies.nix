@@ -20,6 +20,7 @@ with stable;
   direnv
   ripgrep
   shfmt # for shell formatting
+  typos # used by poljar/typos.nvim
 
   # markdown formatting
   (mdformat.withPlugins (
