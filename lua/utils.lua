@@ -173,6 +173,7 @@ end
 ---@param bufnr integer?
 ---@return {client: string, path: string}[]
 function M.lsp_roots(bufnr)
+  local cwd = vim.uv.cwd()
   local file
   if bufnr == nil then
     file = nil
@@ -189,6 +190,9 @@ function M.lsp_roots(bufnr)
       paths = { client.config.root_dir }
     end
     for _, p in ipairs(paths) do
+      if p:find("/", 1, true) ~= 1 then
+        p = vim.fs.normalize(cwd .. "/" .. p)
+      end
       if file == nil or file:find(p, 1, true) == 1 then
         table.insert(workspace_dirs, { client = client, path = p })
       end
