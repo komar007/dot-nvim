@@ -49,6 +49,8 @@ with stable;
   docker-compose-language-service
   # dockerls
   dockerfile-language-server
+  # emmylua_ls
+  emmylua-ls
   # eslint
   eslint
   # fsautocomplete
@@ -63,8 +65,6 @@ with stable;
   unstable.jq-lsp
   # jsonls
   vscode-json-languageserver
-  # lua_ls
-  lua-language-server
   # marksman
   unstable.marksman
   # nixd

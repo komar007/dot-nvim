@@ -89,7 +89,7 @@ require('utils').setup_lsps(
       capabilities = caps_for_jsonls,
       cmd = { "vscode-json-languageserver", "--stdio" },
     },
-    'lua_ls',
+    'emmylua_ls',
     'marksman',
     {
       'nixd',
