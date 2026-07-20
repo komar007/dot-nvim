@@ -12,6 +12,7 @@ return {
   'sotte/presenting.vim',
   'tpope/vim-fugitive',
   'tpope/vim-sleuth',
+  'rpollard00/endofline-club.nvim',
   {
     'lambdalisue/vim-suda',
     -- a very specific commit so that we cannot be compromised when someone hacks
