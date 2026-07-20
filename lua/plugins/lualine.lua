@@ -65,6 +65,27 @@ local function diag_color(color)
   end
 end
 
+local function semantic_tokens_active(bufnr)
+  bufnr = bufnr or 0
+
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr })) do
+    local supports_semantic_tokens =
+      client:supports_method("textDocument/semanticTokens/full", bufnr)
+      or client:supports_method("textDocument/semanticTokens/range", bufnr)
+
+    local enabled = vim.lsp.semantic_tokens.is_enabled({
+      bufnr = bufnr,
+      client_id = client.id,
+    })
+
+    if supports_semantic_tokens and enabled then
+      return true, client
+    end
+  end
+
+  return false, nil
+end
+
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
@@ -239,6 +260,20 @@ return {
           },
         },
         lualine_y = {
+          {
+            function()
+              return semantic_tokens_active(0) and '󰓹' or ''
+            end,
+            color = { fg = '#2753e3' },
+            padding = { left = 1, right = 0 },
+          },
+          {
+            function()
+              return vim.treesitter.get_parser() ~= nil and '' or ''
+            end,
+            color = { fg = colors.green },
+            padding = { left = 1, right = 0 },
+          },
           {
             'filetype',
             padding = { left = 1, right = 1 },
