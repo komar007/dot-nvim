@@ -69,11 +69,11 @@ vim.api.nvim_create_user_command("TmuxUpdateEnvironment", function()
     local msg = ""
     for _, update in ipairs(updated) do
       if update.from == nil then
-        msg = msg .. string.format("%s = \"%s\"\n", update[1], update.to)
+        msg = msg .. string.format("%s:❌➡ \"%s\"\n", update[1], update.to)
       elseif update.to == nil then
-        msg = msg .. string.format("%s = ❌\n", update[1], update.to)
+        msg = msg .. string.format("%s: \"%s\" ➡ ❌\n", update[1], update.from)
       else
-        msg = msg .. string.format("%s = \"%s\" ➡ \"%s\"\n", update[1], update.from, update.to)
+        msg = msg .. string.format("%s: \"%s\" ➡ \"%s\"\n", update[1], update.from, update.to)
       end
     end
     vim.notify(string.format("Updated environment from tmux:\n%s", msg), vim.log.levels.INFO)
