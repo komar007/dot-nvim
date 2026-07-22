@@ -7,6 +7,9 @@ return {
   },
   config = function()
     require('nvim-treesitter').install({
+      "awk",
+      "bash",
+      "c",
       "css",
       "diff",
       "dockerfile",
@@ -25,9 +28,12 @@ return {
       "json",
       "kotlin",
       "nix",
+      "proto",
       "python",
       "regex",
+      "requirements",
       "rust",
+      "scss",
       "toml",
       "xml",
       "yaml",
