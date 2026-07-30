@@ -45,7 +45,7 @@ with stable;
   clang-tools
   # cssls
   vscode-css-languageserver
-  # docker-compose-language-service
+  # docker_compose_language_service
   docker-compose-language-service
   # dockerls
   dockerfile-language-server
