@@ -137,6 +137,9 @@
         formatter = treefmtEval.config.build.wrapper;
         checks = {
           formatting = treefmtEval.config.build.check self;
+          typos = stable.runCommand "typos-check" {
+            nativeBuildInputs = [ stable.typos ];
+          } "cd ${self} && typos . && touch $out";
         };
       }
     );
