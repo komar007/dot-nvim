@@ -58,91 +58,95 @@ M.on_attach = function(client)
   end
 end
 
+vim.lsp.config("*", { capabilities = M.capabilities, on_attach = M.on_attach })
+
+vim.lsp.config('clangd', {
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+})
+
+vim.lsp.config('eslint', {
+  cmd = { "eslint", "--stdio" },
+})
+
+vim.lsp.config('gopls', {
+  settings = {
+    gopls = {
+      codelenses = {
+        test = true,
+      },
+    },
+  },
+})
+
 local caps_for_jsonls = base_capabilities()
 caps_for_jsonls.textDocument.completion.completionItem.snippetSupport = true
+vim.lsp.config('jsonls', {
+  capabilities = caps_for_jsonls,
+  cmd = { "vscode-json-languageserver", "--stdio" },
+})
 
-require('utils').setup_lsps(
-  { capabilities = M.capabilities, on_attach = M.on_attach },
-  {
-    'bashls',
-    {
-      'clangd',
-      filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
-    },
-    'cssls',
-    'docker_compose_language_service',
-    'dockerls',
-    {
-      'eslint',
-      cmd = { "eslint", "--stdio" },
-    },
-    'fsautocomplete',
-    {
-      'gopls',
-      settings = {
-        gopls = {
-          codelenses = {
-            test = true,
-          },
-        },
+vim.lsp.config('emmylua_ls', {
+  -- the following config is based on
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#emmylua_ls
+  on_init = function(client)
+    if client.workspace_folders then
+      local path = client.workspace_folders[1].name
+      if path ~= vim.fn.stdpath('config') and
+          (vim.uv.fs_stat(path .. '/.emmyrc.json') or vim.uv.fs_stat(path .. '/.luarc.json'))
+      then
+        client.config.settings = {}
+      end
+    end
+  end,
+  settings = {
+    emmylua = {
+      runtime = { version = 'LuaJIT' },
+      diagnostics = { globals = { 'vim' } },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
       },
     },
-    'hls',
-    'jqls',
-    {
-      'jsonls',
-      capabilities = caps_for_jsonls,
-      cmd = { "vscode-json-languageserver", "--stdio" },
-    },
-    {
-      'emmylua_ls',
-      -- the following config is based on
-      -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#emmylua_ls
-      on_init = function(client)
-        if client.workspace_folders then
-          local path = client.workspace_folders[1].name
-          if
-            path ~= vim.fn.stdpath('config')
-            and (vim.uv.fs_stat(path .. '/.emmyrc.json') or vim.uv.fs_stat(path .. '/.luarc.json'))
-          then
-            client.config.settings = {}
-          end
-        end
-      end,
-      settings = {
-        emmylua = {
-          runtime = { version = 'LuaJIT' },
-          diagnostics = { globals = { 'vim' } },
-          workspace = {
-            library = vim.api.nvim_get_runtime_file('', true),
-          },
-        },
+  },
+})
+
+vim.lsp.config('nixd', {
+  settings = {
+    nixd = {
+      formatting = {
+        command = { "nixfmt" },
       },
     },
-    'marksman',
-    {
-      'nixd',
-      settings = {
-        nixd = {
-          formatting = {
-            command = { "nixfmt" },
-          },
-        },
-      }
-    },
-    'postgres_lsp',
-    {
-      'protols',
-      root_markers = { "protols.toml", ".git" },
-    },
-    'pyright',
-    'ruff',
-    'taplo',
-    'ts_ls',
-    'vacuum',
-    'vimls',
-    'yamlls',
-  }
-)
+  },
+})
+
+vim.lsp.config('protols', {
+  root_markers = { "protols.toml", ".git" },
+})
+
+vim.lsp.enable({
+  'bashls',
+  'clangd',
+  'cssls',
+  'docker_compose_language_service',
+  'dockerls',
+  'eslint',
+  'fsautocomplete',
+  'gopls',
+  'hls',
+  'jqls',
+  'jsonls',
+  'emmylua_ls',
+  'marksman',
+  'nixd',
+  'postgres_lsp',
+  'protols',
+  'pyright',
+  'ruff',
+  'taplo',
+  'ts_ls',
+  'vacuum',
+  'vimls',
+  'yamlls',
+})
 
 return M
