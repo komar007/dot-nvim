@@ -7,7 +7,12 @@ local lsp_float_opts = {
   max_width = 100,
 }
 
-M.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+--- @return lsp.ClientCapabilities
+local function base_capabilities()
+  return require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+end
+
+M.capabilities = base_capabilities()
 M.keymap_opts = { buffer = true, noremap = true, silent = true }
 
 M.on_attach = function(client)
@@ -53,7 +58,7 @@ M.on_attach = function(client)
   end
 end
 
-local caps_for_jsonls = vim.lsp.protocol.make_client_capabilities()
+local caps_for_jsonls = base_capabilities()
 caps_for_jsonls.textDocument.completion.completionItem.snippetSupport = true
 
 require('utils').setup_lsps(
