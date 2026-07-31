@@ -51,6 +51,14 @@ with stable;
   dockerfile-language-server
   # emmylua_ls
   emmylua-ls
+  (writeShellApplication {
+    name = "CodeFormat";
+    runtimeInputs = [
+      coreutils
+      emmy-lua-code-style
+    ];
+    text = builtins.readFile ./codeformat_wrapper.sh;
+  })
   # eslint
   eslint
   # fsautocomplete

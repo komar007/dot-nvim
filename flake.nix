@@ -28,7 +28,7 @@
           inherit system;
         };
         neovim = stable.neovim;
-        dependencies = import ./dependencies.nix { inherit stable unstable; };
+        dependencies = import ./dependencies { inherit stable unstable; };
         treefmtEval = inputs.treefmt-nix.lib.evalModule stable ./treefmt.nix;
         getExe = stable.lib.getExe;
       in

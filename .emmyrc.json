@@ -6,5 +6,32 @@
       "nvim/**",
       "result/**"
     ]
+  },
+  "format": {
+    "externalTool": {
+      "program": "CodeFormat",
+      "args": [
+        "format",
+        "--stdin",
+        "--file",
+        "${file}",
+        "--detect-config"
+      ],
+      "timeout": 5000
+    },
+    "externalToolRangeFormat": {
+      "program": "CodeFormat",
+      "args": [
+        "rangeformat",
+        "--stdin",
+        "--file",
+        "${file}",
+        "--detect-config",
+        "--complete-output",
+        "--range-offset",
+        "${start_offset}:${end_offset}"
+      ],
+      "timeout": 5000
+    }
   }
 }
