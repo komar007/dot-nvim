@@ -13,23 +13,24 @@ local function base_capabilities()
 end
 
 M.capabilities = base_capabilities()
+
 -- TODO: are we sure "current buffer" is always well defined when adding these keymaps?
 -- could an LSP be attached to non-current buffer?
-M.keymap_opts = { buf = 0, silent = true }
+local keymap_opts = { buf = 0, silent = true }
 
 M.on_attach = function(client)
   local snacks = require('snacks')
   -- code navigation shortcuts
-  vim.keymap.set('n', 'gd', snacks.picker.lsp_definitions, M.keymap_opts)
-  vim.keymap.set('n', 'gD', snacks.picker.lsp_declarations, M.keymap_opts)
-  vim.keymap.set('n', 'gr', snacks.picker.lsp_references, M.keymap_opts)
-  vim.keymap.set('n', 'gi', snacks.picker.lsp_implementations, M.keymap_opts)
+  vim.keymap.set('n', 'gd', snacks.picker.lsp_definitions, keymap_opts)
+  vim.keymap.set('n', 'gD', snacks.picker.lsp_declarations, keymap_opts)
+  vim.keymap.set('n', 'gr', snacks.picker.lsp_references, keymap_opts)
+  vim.keymap.set('n', 'gi', snacks.picker.lsp_implementations, keymap_opts)
   -- docs and info
-  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover(lsp_float_opts) end, M.keymap_opts)
-  vim.keymap.set({ 'n', 'v', 'i' }, '<C-l>', function() vim.lsp.buf.signature_help(lsp_float_opts) end, M.keymap_opts)
-  vim.keymap.set('n', 'gt', snacks.picker.lsp_type_definitions, M.keymap_opts)
+  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover(lsp_float_opts) end, keymap_opts)
+  vim.keymap.set({ 'n', 'v', 'i' }, '<C-l>', function() vim.lsp.buf.signature_help(lsp_float_opts) end, keymap_opts)
+  vim.keymap.set('n', 'gt', snacks.picker.lsp_type_definitions, keymap_opts)
   -- action shortcuts (code actions are implemented in actions_preview.lua
-  vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, M.keymap_opts)
+  vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, keymap_opts)
   -- executing code lenses is implemented via smart-codelens-run.nvim
 
   if client.server_capabilities.documentHighlightProvider then
@@ -123,6 +124,44 @@ vim.lsp.config('nixd', {
 
 vim.lsp.config('protols', {
   root_markers = { "protols.toml", ".git" },
+})
+
+vim.lsp.config("rust-analyzer", {
+  capabilities = M.capabilities,
+  on_attach = function(client)
+    M.on_attach(client)
+    vim.keymap.set('n', 'gl', function()
+      vim.cmd.RustLsp('renderDiagnostic', 'current')
+    end, keymap_opts)
+    vim.keymap.set('n', 'gL', function()
+      vim.cmd.RustLsp('explainError', 'current')
+    end, keymap_opts)
+    vim.keymap.set("n", "<leader>c", function()
+      vim.cmd.RustLsp('openCargo')
+    end, { buf = 0, desc = "Go to Cargo.toml" })
+  end,
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = true,
+        disabled = { "unresolved-proc-macro" },
+        enableExperimental = false,
+      },
+      hover = {
+        show = {
+          traitAssocItems = 5,
+        },
+      },
+      signatureInfo = {
+        -- "full" causes the whole signature to be in one line and it becomes a mess,
+        -- showing just parameters is a workaround.
+        detail = "parameters",
+      },
+      check = {
+        command = "clippy",
+      },
+    },
+  },
 })
 
 vim.lsp.enable({
