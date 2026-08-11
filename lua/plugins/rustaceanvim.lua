@@ -69,7 +69,7 @@ return {
           end, lsp.keymap_opts)
           vim.keymap.set("n", "<leader>c", function()
             vim.cmd.RustLsp('openCargo')
-          end, { buffer = true, desc = "Go to Cargo.toml" })
+          end, { buf = 0, desc = "Go to Cargo.toml" })
         end,
         settings = {
           ['rust-analyzer'] = {

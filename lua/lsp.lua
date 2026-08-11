@@ -13,7 +13,9 @@ local function base_capabilities()
 end
 
 M.capabilities = base_capabilities()
-M.keymap_opts = { buffer = true, noremap = true, silent = true }
+-- TODO: are we sure "current buffer" is always well defined when adding these keymaps?
+-- could an LSP be attached to non-current buffer?
+M.keymap_opts = { buf = 0, silent = true }
 
 M.on_attach = function(client)
   local snacks = require('snacks')
