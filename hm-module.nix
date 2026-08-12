@@ -56,6 +56,7 @@ in
           "legacy.vim"
           "snippets/"
           "lua/"
+          "after/"
         ])
         (pkgs.writeTextFile {
           name = "quirks.lua";

@@ -61,7 +61,7 @@ require('filetypes')
 require('commands')
 require('highlight_past_textwidth')
 require('playgrounds')
-require('lsp')
+require('lsp').setup()
 vim.cmd("source " .. vim.fn.stdpath("config") .. "/legacy.vim")
 
 vim.opt.exrc = true
