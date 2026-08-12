@@ -2,17 +2,17 @@ local lsp = require('lsp')
 
 return {
   capabilities = lsp.base_capabilities(),
-  on_attach = function(client)
-    lsp.on_attach(client)
+  on_attach = function(client, bufnr)
+    lsp.on_attach(client, bufnr)
     vim.keymap.set('n', 'gl', function()
       vim.cmd.RustLsp('renderDiagnostic', 'current')
-    end, lsp.keymap_opts)
+    end, { buf = bufnr, silent = true })
     vim.keymap.set('n', 'gL', function()
       vim.cmd.RustLsp('explainError', 'current')
-    end, lsp.keymap_opts)
+    end, { buf = bufnr, silent = true })
     vim.keymap.set("n", "<leader>c", function()
       vim.cmd.RustLsp('openCargo')
-    end, { buf = 0, desc = "Go to Cargo.toml" })
+    end, { buf = bufnr, desc = "Go to Cargo.toml" })
   end,
   settings = {
     ['rust-analyzer'] = {

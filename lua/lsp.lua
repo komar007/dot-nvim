@@ -10,24 +10,27 @@ function M.base_capabilities()
   return require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 end
 
--- TODO: are we sure "current buffer" is always well defined when adding these keymaps?
--- could an LSP be attached to non-current buffer?
-M.keymap_opts = { buf = 0, silent = true }
-
-M.on_attach = function(client)
+M.on_attach = function(client, bufnr)
   local snacks = require('snacks')
+
+  local keymap_opts = { buf = bufnr, silent = true };
   -- code navigation shortcuts
-  vim.keymap.set('n', 'gd', snacks.picker.lsp_definitions, M.keymap_opts)
-  vim.keymap.set('n', 'gD', snacks.picker.lsp_declarations, M.keymap_opts)
-  vim.keymap.set('n', 'gr', snacks.picker.lsp_references, M.keymap_opts)
-  vim.keymap.set('n', 'gi', snacks.picker.lsp_implementations, M.keymap_opts)
+  vim.keymap.set('n', 'gd', snacks.picker.lsp_definitions, keymap_opts)
+  vim.keymap.set('n', 'gD', snacks.picker.lsp_declarations, keymap_opts)
+  vim.keymap.set('n', 'gr', snacks.picker.lsp_references, keymap_opts)
+  vim.keymap.set('n', 'gi', snacks.picker.lsp_implementations, keymap_opts)
+  vim.keymap.set('n', 'gt', snacks.picker.lsp_type_definitions, keymap_opts)
   -- docs and info
-  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover(lsp_float_opts) end, M.keymap_opts)
-  vim.keymap.set({ 'n', 'v', 'i' }, '<C-l>', function() vim.lsp.buf.signature_help(lsp_float_opts) end, M.keymap_opts)
-  vim.keymap.set('n', 'gt', snacks.picker.lsp_type_definitions, M.keymap_opts)
-  -- action shortcuts (code actions are implemented in actions_preview.lua
-  vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, M.keymap_opts)
-  -- executing code lenses is implemented via smart-codelens-run.nvim
+  vim.keymap.set('n', 'K', function()
+    vim.lsp.buf.hover(lsp_float_opts)
+  end, keymap_opts)
+  vim.keymap.set({ 'n', 'v', 'i' }, '<C-l>', function()
+    vim.lsp.buf.signature_help(lsp_float_opts)
+  end, keymap_opts)
+  -- action shortcuts
+  vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, keymap_opts)
+  -- code actions are implemented in code_actions_preview.lua
+  -- executing code lenses is implemented via codelens.lua
 
   if client.server_capabilities.documentHighlightProvider then
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
