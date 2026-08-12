@@ -12,7 +12,7 @@
   "crates.nvim": { "branch": "main", "commit": "7039bc1d130e424232a7aa64ceddb170a154ff5b" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "direnv.nvim": { "branch": "main", "commit": "9258f9f10c4c729d8296fce0e3ecb12543daad06" },
-  "endofline-club.nvim": { "branch": "main", "commit": "de17ed5b5b5fcbf6c0e3866bc3eb60a5f90aea4a" },
+  "endofline-club.nvim": { "branch": "main", "commit": "603f3d11ed4a18b58b8988c3a06a953a08d254fe" },
   "fidget.nvim": { "branch": "main", "commit": "9e0201673e08e997e7cf52afca5565c70bd117f3" },
   "file-line": { "branch": "main", "commit": "067ebe45dd3da0344d543b09441ee9b7fd886851" },
   "firenvim": { "branch": "master", "commit": "302c105ff79c51d3d362eb37210f95f65285926d" },
