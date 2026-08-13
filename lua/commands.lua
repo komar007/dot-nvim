@@ -1,10 +1,3 @@
-vim.api.nvim_create_user_command('EditConfig', function()
-  local config_dir = vim.fn.stdpath('config')
-  assert(type(config_dir) == 'string', 'Expected string')
-  vim.fn.chdir(config_dir)
-  vim.api.nvim_cmd({ cmd = "edit", args = { "init.lua" } }, { output = false })
-end, {})
-
 local function linked_to(parent)
   local r = {}
   for name, hl in pairs(vim.api.nvim_get_hl(0, {})) do
