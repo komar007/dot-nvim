@@ -114,14 +114,6 @@ function M.define_text_object_inside_around(char)
   M.define_text_object("a" .. char, "F" .. char .. "vf" .. char)
 end
 
-function M.on_ft(ft, callback)
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = ft,
-    callback = callback,
-    group = "FileTypeSettings",
-  })
-end
-
 ---@param range string
 local function process_buffer_with_shell(cmd, range)
   local current_line = vim.fn.line('.')
