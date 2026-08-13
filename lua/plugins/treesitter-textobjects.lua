@@ -29,11 +29,23 @@ local function tsto_goto_previous_end(obj)
   end
 end
 
+local function disable_ftplugin_maps_for_treesitter_enabled_fts()
+  for lang in pairs(require('nvim-treesitter.parsers')) do
+    if #vim.treesitter.query.get_files(lang, 'textobjects') > 0 then
+      for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
+        vim.g['no_' .. ft .. '_maps'] = true
+      end
+    end
+  end
+end
+
 return {
   'nvim-treesitter/nvim-treesitter-textobjects',
   lazy = false,
-  init = function()
-    vim.g.no_plugin_maps = true
+  config = function(_, opts)
+    disable_ftplugin_maps_for_treesitter_enabled_fts()
+
+    require('nvim-treesitter-textobjects').setup(opts)
   end,
   opts = {
     select = {
