@@ -1,5 +1,12 @@
 local utils = require("utils")
 
+local ll_filetype = require('lualine.components.filetype'):new({
+  colored = false,
+  icons_enabled = true,
+  icon_only = true,
+  padding = 0
+})
+
 visible_bufnr = 0
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
   callback = function(ev)
@@ -13,7 +20,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
     local title = "nvim"
     if path ~= "" then
       local filename = vim.fs.basename(path)
-      title = title .. ":  " .. filename
+      local icon = ll_filetype:draw("", true)
+      if icon == "" then
+        icon = ""
+      end
+      title = title .. ": " .. icon .. " " .. filename
     end
     title = title .. " in  " .. utils.shorten_path(vim.uv.cwd())
     vim.o.titlestring = title
