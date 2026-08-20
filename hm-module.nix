@@ -57,6 +57,7 @@ in
           "snippets/"
           "lua/"
           "after/"
+          "queries/"
         ])
         (pkgs.writeTextFile {
           name = "quirks.lua";

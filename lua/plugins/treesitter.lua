@@ -24,6 +24,8 @@ return {
       "html",
       "java",
       "javascript",
+      "jinja",
+      "jinja_inline",
       "jq",
       "json",
       "kotlin",
@@ -53,6 +55,31 @@ return {
         end
         vim.treesitter.start(args.buf, lang)
       end,
+    })
+
+    vim.treesitter.query.add_directive(
+      "inject-template-language!",
+      function(_, _, source, _, metadata)
+        if type(source) ~= "number" then
+          return
+        end
+        local name = vim.api.nvim_buf_get_name(source)
+        local lang = name:match("%.([%w_]+)%.jinja$")
+            or name:match("%.([%w_]+)%.jinja2$")
+            or name:match("%.([%w_]+)%.j2$")
+        if lang then
+          metadata["injection.language"] = lang
+        end
+      end,
+      {}
+    )
+
+    vim.filetype.add({
+      extension = {
+        jinja2 = "jinja",
+        jinja = "jinja",
+        j2 = "jinja",
+      },
     })
   end,
 }
