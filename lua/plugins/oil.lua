@@ -29,6 +29,12 @@ return {
       mv = function(src_path, dest_path) return true end,
       rm = function(path) return true end,
     },
+    columns = {
+      "icon",
+      "size",
+      "mtime",
+      "permissions",
+    },
     use_default_keymaps = false,
     keymaps = {
       ["g?"] = { "actions.show_help", mode = "n" },
