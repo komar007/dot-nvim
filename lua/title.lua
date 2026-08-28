@@ -1,11 +1,5 @@
 local utils = require("utils")
-
-local ll_filetype = require('lualine.components.filetype'):new({
-  colored = false,
-  icons_enabled = true,
-  icon_only = true,
-  padding = 0
-})
+local devicons = require('nvim-web-devicons')
 
 local function strip_prefix(str, prefix)
   if str:sub(1, #prefix) == prefix then
@@ -50,10 +44,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
       elseif filetype == "man" then
         icon = ""
       else
-        icon = ll_filetype:draw("", true)
-        if icon == "" then
-          icon = ""
-        end
+        icon = devicons.get_icon_by_filetype(filetype) or ""
       end
       title = title .. ": " .. icon .. " " .. filename
     end
