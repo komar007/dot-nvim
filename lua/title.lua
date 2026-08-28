@@ -43,9 +43,12 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
       end
 
       filename = basename(filename)
+      local filetype = vim.api.nvim_get_option_value("filetype", { buf = ev.buf })
       local icon
       if is_oil then
         icon = "󰙅"
+      elseif filetype == "man" then
+        icon = ""
       else
         icon = ll_filetype:draw("", true)
         if icon == "" then
