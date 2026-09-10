@@ -35,9 +35,9 @@ local function extended_source_config(f)
 end
 
 local common_source_configs = {
-  buffers_files = extended_source_config(function()
+  sorted_lsp_root_first = extended_source_config(function()
     local roots = utils.lsp_roots(0)
-    return require('plugins.snacks.picker.buffers_files').for_roots(roots)
+    return require('plugins.snacks.picker.lsp_root_first').for_roots(roots)
   end),
   git_log_picker = extended_source_config(git.log_config),
 }
@@ -77,8 +77,9 @@ return {
         cwd_bonus = true,
       },
       sources = {
-        buffers = { config = common_source_configs.buffers_files },
-        files = { config = common_source_configs.buffers_files },
+        buffers = { config = common_source_configs.sorted_lsp_root_first },
+        files = { config = common_source_configs.sorted_lsp_root_first },
+        grep = { config = common_source_configs.sorted_lsp_root_first },
         git_status = {
           config = extended_source_config(function()
             local current_file = vim.api.nvim_buf_get_name(0);
