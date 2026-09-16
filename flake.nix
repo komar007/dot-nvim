@@ -27,7 +27,7 @@
         unstable = import inputs.nixpkgs-unstable {
           inherit system;
         };
-        neovim = stable.neovim;
+        neovim = unstable.neovim;
         dependencies = import ./dependencies { inherit stable unstable; };
         treefmtEval = inputs.treefmt-nix.lib.evalModule stable ./treefmt.nix;
         getExe = stable.lib.getExe;
