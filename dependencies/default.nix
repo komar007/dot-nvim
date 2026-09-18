@@ -27,6 +27,7 @@ with stable;
     pkgs: with pkgs; [
       mdformat-gfm
       mdformat-gfm-alerts
+      mdformat-footnote
       mdformat-front-matters
     ]
   ))
