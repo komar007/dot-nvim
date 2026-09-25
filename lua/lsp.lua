@@ -2,7 +2,8 @@ local M = {}
 
 local lsp_float_opts = {
   wrap = true,
-  max_width = 100,
+  width = 80,
+  max_width = 120,
 }
 
 --- @return lsp.ClientCapabilities
