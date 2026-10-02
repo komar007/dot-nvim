@@ -19,7 +19,12 @@ local function root_len(item, root)
   end
 end
 
---- Picker config for buffers and files
+---@param item snacks.picker.Item
+local function is_modified_buffer(item)
+  return item.info ~= nil and item.info.changed == 1
+end
+
+--- Picker config that prefers modified buffers and files under LSP roots.
 ---@param roots { path: string }[] Files under these LSP roots are ranked ahead of files outside the project roots.
 ---@return snacks.picker.Config
 function M.for_roots(roots)
@@ -29,16 +34,18 @@ function M.for_roots(roots)
       sort_empty = true,
     },
     sort = function(a, b)
+      local a_modified, b_modified = is_modified_buffer(a), is_modified_buffer(b)
+      if a_modified ~= b_modified then
+        return a_modified
+      end
+
       local a_max_root, b_max_root = -1, -1
       for _, root in ipairs(roots) do
         a_max_root = math.max(a_max_root, root_len(a, root.path))
         b_max_root = math.max(b_max_root, root_len(b, root.path))
       end
-      if a_max_root > b_max_root then
-        return true
-      end
-      if a_max_root < b_max_root then
-        return false
+      if a_max_root ~= b_max_root then
+        return a_max_root > b_max_root
       end
       return sort(a, b)
     end,
