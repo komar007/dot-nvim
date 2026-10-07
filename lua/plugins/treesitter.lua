@@ -6,7 +6,8 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   config = function()
-    require('nvim-treesitter').install({
+    local timeout_ms = 5 * 60 * 1000
+    local parsers = {
       "awk",
       "bash",
       "c",
@@ -39,7 +40,15 @@ return {
       "toml",
       "xml",
       "yaml",
-    }):wait(300000)
+    }
+    local treesitter = require('nvim-treesitter')
+    treesitter.install(parsers):wait(timeout_ms)
+    treesitter.update(parsers):wait(timeout_ms)
+
+    local stale_parsers = vim.tbl_filter(function(p)
+      return not vim.list_contains(parsers, p)
+    end, treesitter.get_installed())
+    treesitter.uninstall(stale_parsers):wait(timeout_ms)
 
     local group = vim.api.nvim_create_augroup("TreesitterHighlight", { clear = true })
     vim.api.nvim_create_autocmd("FileType", {
