@@ -45,7 +45,7 @@
   "satellite.nvim": { "branch": "main", "commit": "87843c9c8f28b54332497302de380a6d94c9e82b" },
   "screenkey.nvim": { "branch": "main", "commit": "740e238d1f143cb5f3a9d932f9c5142d3581b986" },
   "smart-codelens-run.nvim": { "branch": "main", "commit": "8a64a9ed023c8785e3dc57851f150badd70f8038" },
-  "snacks.nvim": { "branch": "stable_plus", "commit": "16b6beaf949f0b38118bd498d44c62a23c963db8" },
+  "snacks.nvim": { "branch": "v2.31.0_plus", "commit": "c73c6f4b846517739c1b328251bc6c1bd3fd8f68" },
   "tiny-code-action.nvim": { "branch": "main", "commit": "0d040ed81f7953118b81cd12681fcdfcac069803" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "treesitter-indent-object.nvim": { "branch": "master", "commit": "35e5037acd7e16fabfb2b3e506b3bbcf123f615e" },

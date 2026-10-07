@@ -44,7 +44,7 @@ local common_source_configs = {
 
 return {
   "komar007/snacks.nvim",
-  branch = "stable_plus",
+  branch = "v2.31.0_plus",
   priority = 1000,
   lazy = false,
 
