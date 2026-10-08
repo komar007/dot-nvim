@@ -12,10 +12,8 @@ return {
       },
       completion = {
         crates = {
-          enabled = true,
           max_results = 20,
-          min_chars = 3,
-        }
+        },
       },
     }
   end
