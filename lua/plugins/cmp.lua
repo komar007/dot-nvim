@@ -60,6 +60,7 @@ return {
       Constructor = "",
       Field = "",
       Variable = "󰫧",
+      Version = "",
       Class = "",
       Interface = "",
       Module = "",
