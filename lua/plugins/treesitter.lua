@@ -2,10 +2,13 @@ local function declare_parsers(parsers)
   local timeout_ms = 5 * 60 * 1000
 
   local treesitter = require('nvim-treesitter')
+  local ts_config = require('nvim-treesitter.config')
+
+  local parsers_resolved = ts_config.norm_languages(parsers, { unsupported = true })
   treesitter.install(parsers):wait(timeout_ms)
 
   local stale_parsers = vim.tbl_filter(function(p)
-    return not vim.list_contains(parsers, p)
+    return not vim.list_contains(parsers_resolved, p)
   end, treesitter.get_installed())
   treesitter.uninstall(stale_parsers):wait(timeout_ms)
 
