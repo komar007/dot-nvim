@@ -11,10 +11,6 @@ vim.keymap.set('n', '<leader>x', function()
   end
 end)
 
-vim.keymap.set('n', '<leader>y', function()
-  vim.api.nvim_feedkeys([[mY"*yiw`Y]], 'n', true)
-end, { noremap = true })
-
 -- keep conflict region's area under cursor, delete the rest
 vim.keymap.set('n', '<leader>gc',
   [[mc?^\([=><\|]\)\1\{6\}<CR>ld?^<<<<<<<?0<CR>/^\([=><\|]\)\1\{6\}<CR>d/\(^>\)\@<=>>>>>>/0<CR>`c]],
@@ -28,6 +24,17 @@ utils.define_text_object_inside_around('.')
 
 -- last inline changed
 vim.keymap.set({ 'n', 'x', 'o' }, 'gb', ':normal `[v`]<cr>', { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>y", function()
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+  if path == "" then
+    vim.notify("Current buffer has no file path", vim.log.levels.WARN)
+    return
+  end
+  vim.fn.setreg(vim.v.register, path)
+end, {
+  desc = "Yank current buffer relative path",
+})
 
 local nvim_011_new_maps = {
   { k = 'grn', m = 'n' },
