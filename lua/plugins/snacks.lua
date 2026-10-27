@@ -186,6 +186,7 @@ return {
       mode = { 'n', 'x' }
     },
     {
+      -- FIXME: this aliases yank with "gb" operator-pending mapping for `[v`]...
       "ygb",
       function()
         vim.go.operatorfunc = "v:lua.yank_gitbrowse_url"

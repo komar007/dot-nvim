@@ -122,7 +122,7 @@ local function process_buffer_with_shell(cmd, range)
   vim.fn.cursor(current_line, current_col)
 end
 
----@param opts {post_hook: fun(), range: (string | (function))?}
+---@param opts {post_hook: fun()?, range: (string | (function))?}
 function M.setup_shell_fmt_buf(cmd, opts)
   local bufnr = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_create_user_command(bufnr, "Fmt", function()

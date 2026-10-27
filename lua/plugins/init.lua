@@ -17,6 +17,6 @@ return {
     'lambdalisue/vim-suda',
     -- a very specific commit so that we cannot be compromised when someone hacks
     -- the repo and pushes malicious code to it
-    commit = "b97fab52f9cdeabe2bbb5eb98d82356899f30829"
+    commit = "b97fab52f9cdeabe2bbb5eb98d82356899f30829",
   },
 }
